@@ -137,7 +137,17 @@ btn10.pack()
 values = [str(i) + "일" for i in range(1, 32)]
 combobox = ttk.Combobox(root, height=5, values=values)
 combobox.pack()
+combobox.set("카드 결제일")
 
+readonly_combobox = ttk.Combobox(root, height=10, values=values, state="readonly")
+readonly_combobox.pack()
+readonly_combobox.set("카드 결제일")
 
+def btncmd6():
+    print(combobox.get())
+    print(readonly_combobox.get())
+
+btn11 = Button(root, text="선택", command=btncmd6)
+btn11.pack()
 
 root.mainloop()
