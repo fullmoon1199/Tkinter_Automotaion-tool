@@ -130,6 +130,54 @@ class Cont3: # 리스트 뷰 컨테이너
 
         self.list_view = tk.Listbox(self.listviewframe, width=180, height=45)  # 크기 조절은 필요에 따라 수정
         self.list_view.pack(padx=5, pady=3, anchor=tk.NW, side=tk.LEFT)
+        
+class Checklist:
+    def __init__(self, window):
+        global arr
+        arr = {}
+
+        self.checkboxframe = tk.Frame(window, width=300, bg='white')
+        self.checkboxframe.pack(padx=5, fill='y', anchor=tk.NW, side=tk.LEFT)
+
+        self.canvas = tk.Canvas(self.checkboxframe, bg='white', width=300, height=700)
+        self.canvas.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.LEFT)
+
+        vbar = tk.Scrollbar(self.checkboxframe, orient='vertical', command=self.canvas.yview)
+        vbar.pack(side="right", fill='y')
+        self.canvas.config(yscrollcommand=vbar.set)
+
+        f = tk.Frame(self.checkboxframe)
+        self.canvas.create_window((50, 0), window=f, anchor="n")
+
+        # for i in range(1, 51):
+        #     arr[i] = tk.IntVar()
+        #     tk.Checkbutton(f, text=f"Test Case {i}", variable=arr[i]).pack()
+
+        f.update_idletasks()  # f의 크기 업데이트
+
+        self.canvas.config(scrollregion=self.canvas.bbox("all"))
+
+class Textview:
+    def __init__(self, window):
+        global arr
+        arr = {}
+
+        self.textframe = Frame(window, width=300, bg='white')
+        self.textframe.pack(padx=5, fill='y', anchor=tk.NW, side=tk.LEFT)
+
+        self.textview = Text(self.textframe, width=180, height=45, bg="silver")
+        self.textview.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.LEFT)
+
+        self.textview.configure(font=("Courier", 10))
+
+        # Create a vertical scrollbar
+        scrollbar = Scrollbar(self.textframe, command=self.textview.yview)
+        scrollbar.pack(side='right', fill='y')
+
+        # Attach the scrollbar to the Text widget
+        self.textview.config(yscrollcommand=scrollbar.set)
+
+        
 
 class Cont4: #캔버스 컨테이너
     def __init__(self,window):
@@ -163,8 +211,10 @@ class space:
 container1 = Cont1(window)
 container2 = space(window)
 container3 = Cont2(window)
-container4 = Cont3(window)
+container6 = Checklist(window)
+container7 = Textview(window)
 container5 = Cont4(window)
+
 container3.progressbar['value'] = 80
 
 # 윈도우 실행
