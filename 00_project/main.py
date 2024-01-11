@@ -1,13 +1,34 @@
 import tkinter as tk
+import socket
+import serial
+import threading
+import queue
 from tkinter import ttk
 from tkinter import *
 from typing import Any
 from tkinter import Frame, X, N
+from tkinter import Frame, Text, Scrollbar
+
 
 
 def on_search_port():
-    # TODO: Search Port 동작 구현
-    pass
+    start_port = 5000
+    end_port = 6000
+    result_port = None
+
+    for port in range(start_port, end_port + 1):
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(1)
+        result = sock.connect_ex(('localhost', port))
+        sock.close()
+        if result != 0:
+            result_port = port
+            break
+
+    if result_port is not None:
+        print(f"사용 가능한 포트: {result_port}")
+    else:
+        print("사용 가능한 포트를 찾을 수 없습니다.")
 
 def on_open():
     # TODO: Open 동작 구현
