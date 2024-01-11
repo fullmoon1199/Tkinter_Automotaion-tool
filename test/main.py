@@ -149,9 +149,9 @@ class Checklist:
         f = tk.Frame(self.checkboxframe)
         self.canvas.create_window((50, 0), window=f, anchor="n")
 
-        # for i in range(1, 51):
-        #     arr[i] = tk.IntVar()
-        #     tk.Checkbutton(f, text=f"Test Case {i}", variable=arr[i]).pack()
+        for i in range(1, 51):
+            arr[i] = tk.IntVar()
+            tk.Checkbutton(f, text=f"Test Case {i}", variable=arr[i]).pack()
 
         f.update_idletasks()  # f의 크기 업데이트
 
