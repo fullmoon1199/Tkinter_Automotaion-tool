@@ -11,28 +11,22 @@ from tkinter import Frame, Text, Scrollbar
 
 
 
-def on_search_port():
-    start_port = 5000
-    end_port = 6000
-    result_port = None
+def on_search_port(): 
+    import serial.tools.list_ports
+    ports = serial.tools.list_ports.comports()
+    available_ports = []
+    for p in ports:
+        available_ports.append(p.device)
+    return available_ports
 
-    for port in range(start_port, end_port + 1):
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(1)
-        result = sock.connect_ex(('localhost', port))
-        sock.close()
-        if result != 0:
-            result_port = port
-            break
-
-    if result_port is not None:
-        print(f"사용 가능한 포트: {result_port}")
-    else:
-        print("사용 가능한 포트를 찾을 수 없습니다.")
-
-def on_open():
-    # TODO: Open 동작 구현
-    pass
+def on_open(self):
+        selected_port = self.combo.get()
+        if selected_port:
+            try:
+                self.serial_port = serial.Serial(selected_port, baudrate=9600, timeout=1)
+                print(f"Serial port {selected_port} opened successfully.")
+            except Exception as e:
+                print(f"Failed to open serial port {selected_port}. Error: {e}")
 
 def on_close():
     # TODO: Close 동작 구현
@@ -78,11 +72,11 @@ title_label = tk.Label(window, text="V920 SADK Verification Program", font=("Hel
 title_label.pack(pady=10)
 
 class Cont1:
-    def __init__(self,window):
-        self.buttonframe=Frame(window)
+    def __init__(self, window):
+        self.buttonframe = Frame(window)
         self.buttonframe.pack(fill=X, anchor=N)
 
-        self.combo = ttk.Combobox(self.buttonframe, values=[f"COM{i}" for i in range(1, 13)], state="readonly", style="TCombobox")
+        self.combo = ttk.Combobox(self.buttonframe, values=on_search_port(), state="readonly", style="TCombobox")
         self.combo.pack(padx=10, pady=18, anchor=tk.NW, side=tk.LEFT)
 
         self.search_port_button = tk.Button(self.buttonframe, text="Search Port", command=on_search_port, width=15, height=3)
@@ -90,7 +84,6 @@ class Cont1:
 
         self.open_button = tk.Button(self.buttonframe, text="Open", command=on_open, width=15, height=3)
         self.open_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
-
         self.close_button = tk.Button(self.buttonframe, text="Close", command=on_close, width=15, height=3)
         self.close_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
@@ -152,6 +145,7 @@ class Cont3: # 리스트 뷰 컨테이너
         self.list_view = tk.Listbox(self.listviewframe, width=180, height=45)  # 크기 조절은 필요에 따라 수정
         self.list_view.pack(padx=5, pady=3, anchor=tk.NW, side=tk.LEFT)
         
+        
 class Checklist:
     def __init__(self, window):
         global arr
@@ -183,22 +177,33 @@ class Textview:
         global arr
         arr = {}
 
-        self.textframe = Frame(window, width=300, bg='white')
-        self.textframe.pack(padx=5, fill='y', anchor=tk.NW, side=tk.LEFT)
+        self.largeframe = tk.Frame(window, bg='white')
+        self.largeframe.pack(padx=5, pady=5, fill='both', expand=True, anchor=tk.NW, side=tk.LEFT)
 
-        self.textview = Text(self.textframe, width=180, height=45, bg="silver")
-        self.textview.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.LEFT)
+        self.textframe = tk.Frame(self.largeframe,height=600, bg='white')
+        self.textframe.pack(padx=5, pady=5, fill='x', expand=True, anchor=tk.NW, side=tk.TOP)
+        self.textframe.pack_propagate(False) 
+
+        self.textview = tk.Text(self.textframe, bg="silver", state=DISABLED)
+        self.textview.pack(padx=5, pady=5, fill='both', anchor=tk.NW, side=tk.LEFT, expand=True)
 
         self.textview.configure(font=("Courier", 10))
 
-        # Create a vertical scrollbar
-        scrollbar = Scrollbar(self.textframe, command=self.textview.yview)
-        scrollbar.pack(side='right', fill='y')
+        vbar = tk.Scrollbar(self.textframe, orient='vertical', command=self.textview.yview)
+        vbar.pack(side="right", fill='y')
 
-        # Attach the scrollbar to the Text widget
-        self.textview.config(yscrollcommand=scrollbar.set)
+        self.textframe2 = tk.Frame(self.largeframe,height=50, bg='white')
+        self.textframe2.pack(padx=5, pady=5, fill='x', expand=True, anchor=tk.NW, side=tk.BOTTOM)
 
-        
+        self.textview2 = tk.Text(self.textframe2,height=30, bg="silver")
+        self.textview2.pack(padx=5, pady=5, fill='x', anchor=tk.SW, side=tk.LEFT, expand=True)
+
+        self.textview2.configure(font=("Courier", 10))
+
+        vbar = tk.Scrollbar(self.textframe2, orient='vertical', command=self.textview2.yview)
+        vbar.pack(side="right", fill='y')
+
+
 
 class Cont4: #캔버스 컨테이너
     def __init__(self,window):
