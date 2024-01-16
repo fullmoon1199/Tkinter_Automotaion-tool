@@ -1,13 +1,9 @@
 import tkinter as tk
-import socket
 import serial
-import threading
-import queue
 from tkinter import ttk
 from tkinter import *
 from typing import Any
 from tkinter import Frame, X, N
-from tkinter import Frame, Text, Scrollbar
 
 
 
@@ -19,15 +15,17 @@ def on_search_port():
         available_ports.append(p.device)
     return available_ports
 
-def on_open(self):
-        selected_port = self.combo.get()
-        if selected_port:
-            try:
-                self.serial_port = serial.Serial(selected_port, baudrate=9600, timeout=1)
-                print(f"Serial port {selected_port} opened successfully.")
-            except Exception as e:
-                print(f"Failed to open serial port {selected_port}. Error: {e}") #hi
 
+def on_open():
+    selected_port = container1.combo.get()
+    if selected_port:       
+        try:
+            container1.serial_port = serial.Serial(selected_port, baudrate=9600, timeout=1)
+            print(f"Serial port {selected_port} opened successfully.")
+        except Exception as e:
+            print(f"Failed to open serial port {selected_port}. Error: {e}")
+
+            
 def on_close():
     # TODO: Close 동작 구현
     pass
@@ -73,6 +71,7 @@ title_label.pack(pady=10)
 
 class Cont1:
     def __init__(self, window):
+        
         self.buttonframe = Frame(window)
         self.buttonframe.pack(fill=X, anchor=N)
 
