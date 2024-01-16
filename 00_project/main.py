@@ -26,7 +26,7 @@ def on_open(self):
                 self.serial_port = serial.Serial(selected_port, baudrate=9600, timeout=1)
                 print(f"Serial port {selected_port} opened successfully.")
             except Exception as e:
-                print(f"Failed to open serial port {selected_port}. Error: {e}")
+                print(f"Failed to open serial port {selected_port}. Error: {e}") #hi
 
 def on_close():
     # TODO: Close 동작 구현
