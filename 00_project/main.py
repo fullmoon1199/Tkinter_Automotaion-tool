@@ -7,13 +7,15 @@ from tkinter import Frame, X, N
 
 
 
+
 def on_search_port(): 
     import serial.tools.list_ports
     ports = serial.tools.list_ports.comports()
     available_ports = []
     for p in ports:
-        available_ports.append(p.device)
+        available_ports.append(p.description)
     return available_ports
+
 
 
 def on_open():
