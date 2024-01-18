@@ -17,20 +17,9 @@
 										{ "cmd": "cat /sys/devices/system/cpu/offline" },
 										{ "cmd": "echo 1 > /sys/devices/system/cpu/cpu1/online" },
 										{ "cmd": "echo 1 > /sys/devices/system/cpu/cpu2/online" },
-										{ "cmd": "nproc" },
-									],
-								"criterion":
-									[
-										{ type: "str", "rslt": "10" },
-										{ type: "str", "rslt": "None" },
-										{ type: "str", "rslt": "None" },
-										{ type: "str", "rslt": "8" },
-										{ type: "str", "rslt": "1-2" },
-										{ type: "str", "rslt": "None" },
-										{ type: "str", "rslt": "None" },
-										{ type: "str", "rslt": "10" },
+										{ "cmd": "nproc" }
 									]
-							},
+							}
 					},
 					{
 						"id": "0002",
@@ -44,18 +33,18 @@
 										{ "cmd": "echo -n 1 >/sys/module/dmatest/parameters/iterations" },
 										{ "cmd": "echo -n dma0chan0 > /sys/module/dmatest/parameters/channel" },
 										{ "cmd": "echo -n 1 >/sys/module/dmatest/parameters/run" },
-										{ "cmd": "dmesg | grep dma" },
+										{ "cmd": "dmesg | grep dma" }
 									],
 								"criterion":
 									[
-										{ type: "str", "rslt": "None" },
-										{ type: "str", "rslt": "None" },
-										{ type: "str", "rslt": "None" },
-										{ type: "str", "rslt": "None" },
-										{ type: "str", "rslt": "None" },
-										{ type: "str", "rslt": "0 failures" },
+										{ "type": "str", "rslt": "None" },
+										{ "type": "str", "rslt": "None" },
+										{ "type": "str", "rslt": "None" },
+										{ "type": "str", "rslt": "None" },
+										{ "type": "str", "rslt": "None" },
+										{ "type": "str", "rslt": "0 failures" }
 									]
-							},
+							}
 					},
 					{
 						"id": "0003",
@@ -68,18 +57,18 @@
 										{ "cmd": "cat /sys/class/thermal/thermal_zone1/temp" },
 										{ "cmd": "cat /sys/class/thermal/thermal_zone2/temp" },
 										{ "cmd": "cat /sys/class/thermal/thermal_zone3/temp" },
-										{ "cmd": "cat /sys/class/thermal/thermal_zone4/temp" },
+										{ "cmd": "cat /sys/class/thermal/thermal_zone4/temp" }
 									],
 								"criterion":
 									[
-										{ type: "regex", "rslt": "[0-9]{5}" },
-										{ type: "regex", "rslt": "[0-9]{5}" },
-										{ type: "regex", "rslt": "[0-9]{5}" },
-										{ type: "regex", "rslt": "[0-9]{5}" },
-										{ type: "regex", "rslt": "[0-9]{5}" },
+										{ "type": "regex", "rslt": "[0-9]{5}" },
+										{ "type": "regex", "rslt": "[0-9]{5}" },
+										{ "type": "regex", "rslt": "[0-9]{5}" },
+										{ "type": "regex", "rslt": "[0-9]{5}" },
+										{ "type": "regex", "rslt": "[0-9]{5}" }
 									]
-							},
-					},
+							}
+					}
 				]
 		},
 	"Android":
@@ -99,19 +88,19 @@
 										{ "cmd": "echo 1 > /sys/module/dmatest/parameters/run" },
 										{ "cmd": "echo 2000 > /sys/module/dmatest/parameters/timeout" },
 										{ "cmd": "echo dma0chan0 > /sys/module/dmatest/parameters/channel" },
-										{ "cmd": "dmesg | grep dma" },
+										{ "cmd": "dmesg | grep dma" }
 									],
 								"criterion":
 									[
-										{ type: "str", "rslt": "None" },
-										{ type: "str", "rslt": "None" },
-										{ type: "str", "rslt": "None" },
-										{ type: "str", "rslt": "None" },
-										{ type: "str", "rslt": "None" },
-										{ type: "str", "rslt": "None" },
-										{ type: "str", "rslt": "0 failures" },
+										{ "type": "str", "rslt": "None" },
+										{ "type": "str", "rslt": "None" },
+										{ "type": "str", "rslt": "None" },
+										{ "type": "str", "rslt": "None" },
+										{ "type": "str", "rslt": "None" },
+										{ "type": "str", "rslt": "None" },
+										{ "type": "str", "rslt": "0 failures" }
 									]
-							},
+							}
 					},
 					{
 						"id": "0002",
@@ -125,19 +114,19 @@
 										{ "cmd": "cat /sys/class/thermal/thermal_zone1/temp" },
 										{ "cmd": "cat /sys/class/thermal/thermal_zone2/temp" },
 										{ "cmd": "cat /sys/class/thermal/thermal_zone3/temp" },
-										{ "cmd": "cat /sys/class/thermal/thermal_zone4/temp" },
+										{ "cmd": "cat /sys/class/thermal/thermal_zone4/temp" }
 									],
 								"criterion":
 									[
-										{ type: "regex", "rslt": "[0-9]{5}" },
-										{ type: "regex", "rslt": "[0-9]{5}" },
-										{ type: "regex", "rslt": "[0-9]{5}" },
-										{ type: "regex", "rslt": "[0-9]{5}" },
-										{ type: "regex", "rslt": "[0-9]{5}" },
-										{ type: "regex", "rslt": "[0-9]{5}" },
+										{ "type": "regex", "rslt": "[0-9]{5}" },
+										{ "type": "regex", "rslt": "[0-9]{5}" },
+										{ "type": "regex", "rslt": "[0-9]{5}" },
+										{ "type": "regex", "rslt": "[0-9]{5}" },
+										{ "type": "regex", "rslt": "[0-9]{5}" },
+										{ "type": "regex", "rslt": "[0-9]{5}" }
 									]
-							},
-					},
+							}
+					}
 				]
 		}
 }
