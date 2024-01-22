@@ -1,32 +1,17 @@
-Linux
-                 "      Boot",
-                 "        √ TC-BOOT-LIN-0001",
-                 "        √ TC-BOOT-LIN-0002",
-                 "        √ TC-BOOT-LIN-0003",
-                 "        √ TC-BOOT-LIN-0004",
-                 "      Internal Sys",
-                 "        √ TC-INSYS-LIN-0001",
-                 "        √ TC-INSYS-LIN-0002",
-                 "        √ TC-INSYS-LIN-0003",
-                 "        √ TC-INSYS-LIN-0004",
-                 "      External Sys",
-                 "        √ TC-EXIN-LIN-0001",
-                 "        √ TC-EXIN-LIN-0002",
-                 "        √ TC-EXIN-LIN-0003",
-                 "        √ TC-EXIN-LIN-0004",
-                 "      MM",
-                 "        √ TC-MM-LIN-0001",
-                 "        √ TC-MM-LIN-0002",
-                 "        √ TC-MM-LIN-0003",
-                 "        √ TC-MM-LIN-0004",
-Android
-                 "      An)Boot",
-                 "        √ TC-BOOT-AND-0001",
-                 "        √ TC-BOOT-AND-0002",
-                 "        √ TC-BOOT-AND-0003",
-                 "        √ TC-BOOT-AND-0004",
-                 "      An)Internal Sys",
-                 "        √ TC-INSYS-AND-0001",
-                 "        √ TC-INSYS-AND-0002",
-                 "        √ TC-INSYS-AND-0003",
-                 "        √ TC-INSYS-AND-0004"
+item0,1
+item1,0
+    item1.1,0
+    item1.2,0
+item2,0
+    item2.1,1
+    item2.2,0
+        item2.2.1,1
+        item2.2.2,0
+            item2.2.2.1,0
+    item2.3,0
+        item2.3.1,1
+item3,1
+item4,0
+    item4.1,1
+    item4.2,0
+    item4.2.1,0

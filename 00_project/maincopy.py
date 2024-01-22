@@ -4,25 +4,27 @@ from tkinter import ttk
 from tkinter import *
 from typing import Any
 from tkinter import Frame, X, N
+from tkinter import simpledialog
+from ttkwidgets import CheckboxTreeview
+import json
 
 
 
+
+import serial.tools.list_ports
 
 def on_search_port(): 
-    import serial.tools.list_ports
     ports = serial.tools.list_ports.comports()
     available_ports = []
     for p in ports:
         available_ports.append(p.description)
     return available_ports
 
-
-
 def on_open():
     selected_port = container1.combo.get()
     if selected_port:       
         try:
-            container1.serial_port = serial.Serial(selected_port, baudrate=9600, timeout=1)
+            container1.serial_port = serial.Serial(selected_port, baudrate=115200, timeout=1)
             print(f"Serial port {selected_port} opened successfully.")
         except Exception as e:
             print(f"Failed to open serial port {selected_port}. Error: {e}")
@@ -60,12 +62,15 @@ def on_import_json():
     # TODO: Import Json 동작 구현
     pass
 
+
+
+
 # Tkinter 윈도우 생성
 window = tk.Tk()
 window.title("V920 SADK Verification Program")
 
 # 윈도우 크기 설정
-window.geometry("1550x900")
+window.geometry("1550x900+100+50")
 
 # 상단 텍스트 추가
 title_label = tk.Label(window, text="V920 SADK Verification Program", font=("Helvetica", 16, "bold"))
@@ -135,6 +140,9 @@ class Cont2: # 진행바 컨테이너
         self.progressbar['value'] = value
         self.progress_label.config(text=f"진행률: {value}%")
 
+# Usage example:
+  # Update progress to 50%
+
 class Cont3: # 리스트 뷰 컨테이너
     def __init__(self,window):
         self.listviewframe=Frame(window)
@@ -149,31 +157,51 @@ class Cont3: # 리스트 뷰 컨테이너
         
 class Checklist:
     def __init__(self, window):
-        global arr
-        arr = {}
 
-        self.checkboxframe = tk.Frame(window, width=300, bg='white')
-        self.checkboxframe.pack(padx=5, fill='y', anchor=tk.NW, side=tk.LEFT)
+        Checklist_LargeFrame = tk.Frame(window, bg = 'blue')
+        Checklist_LargeFrame.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.LEFT)
+        # Create a frame to hold the CheckboxTreeview and scrollbar
+        frame = tk.Frame(Checklist_LargeFrame, bg='')
+        frame.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.TOP)
 
-        self.canvas = tk.Canvas(self.checkboxframe, bg='white', width=300, height=700)
-        self.canvas.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.LEFT)
+        frame2 = tk.Frame(Checklist_LargeFrame)
+        frame2.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.BOTTOM)
 
-        vbar = tk.Scrollbar(self.checkboxframe, orient='vertical', command=self.canvas.yview)
-        vbar.pack(side="right", fill='y')
-        self.canvas.config(yscrollcommand=vbar.set)
+        # Create the CheckboxTreeview
+        tree = CheckboxTreeview(frame)
+        tree.pack(side=tk.LEFT, fill='y')
 
-        f = tk.Frame(self.checkboxframe)
-        self.canvas.create_window((50, 0), window=f, anchor="n")
+        tree2 = CheckboxTreeview(frame2)
+        tree2.pack(side=tk.LEFT, fill='y')
 
-        for i in range(1, 51):
-            arr[i] = tk.IntVar()
-            tk.Checkbutton(f, text=f"Test Case {i}", variable=arr[i]).pack()
+        # Create the scrollbar
+        scrollbar = tk.Scrollbar(frame, orient='vertical', command=tree.yview)
+        scrollbar.pack(side=tk.RIGHT, fill='y')
 
-        f.update_idletasks()  # f의 크기 업데이트
+        scrollbar2 = tk.Scrollbar(frame2, orient='vertical', command=tree2.yview)
+        scrollbar2.pack(side=tk.RIGHT, fill='y')
 
-        self.canvas.config(scrollregion=self.canvas.bbox("all"))
+        # Configure the CheckboxTreeview to use the scrollbar
+        tree.configure(yscrollcommand=scrollbar.set)
+        for i in range(1, 11):
+            parent_id = "" if i % 2 == 1 else str(i // 2)
+            Linux = str(i)
+            tree.insert(parent_id, "end", Linux, text='Linux')
+            tree.insert(Linux, "end", f"{i}1", text=(str(i), f'Item {i}1'))
+            tree.insert(Linux, "end", f"{i}2", text=(str(i), f'Item {i}2'))
+            tree.insert(f"{i}2", "end", f"{i}21", text=(str(i), f'Item {i}21'))
 
+        tree2.configure(yscrollcommand=scrollbar.set)
+        for i in range(1, 11):
+            parent_id = "" if i % 2 == 1 else str(i // 2)
+            Linux = str(i)
+            tree2.insert(parent_id, "end", Linux, text='Linux')
+            tree2.insert(Linux, "end", f"{i}1", text=(str(i), f'Item {i}1'))
+            tree2.insert(Linux, "end", f"{i}2", text=(str(i), f'Item {i}2'))
+            tree2.insert(f"{i}2", "end", f"{i}21", text=(str(i), f'Item {i}21'))
+        
 class Textview:
+    
     def __init__(self, window):
         global arr
         arr = {}
@@ -181,29 +209,51 @@ class Textview:
         self.largeframe = tk.Frame(window, bg='white')
         self.largeframe.pack(padx=5, pady=5, fill='both', expand=True, anchor=tk.NW, side=tk.LEFT)
 
-        self.textframe = tk.Frame(self.largeframe,height=600, bg='white')
+        self.textframe = tk.Frame(self.largeframe, height=600, bg='white')
         self.textframe.pack(padx=5, pady=5, fill='x', expand=True, anchor=tk.NW, side=tk.TOP)
         self.textframe.pack_propagate(False) 
 
-        self.textview = tk.Text(self.textframe, bg="silver", state=DISABLED)
+        self.textview = tk.Text(self.textframe, bg="silver", state=tk.DISABLED)
         self.textview.pack(padx=5, pady=5, fill='both', anchor=tk.NW, side=tk.LEFT, expand=True)
 
+        # Add scrollbar to textview1
+        vbar1 = tk.Scrollbar(self.textframe, orient='vertical', command=self.textview.yview)
+        vbar1.pack(side="right", fill='y')
+        self.textview.configure(yscrollcommand=vbar1.set)
+
+        # Change state to NORMAL, insert text, then change back to DISABLED
+        self.textview.config(state=tk.NORMAL)
+        self.textview.insert(tk.END, " ")
+        self.textview.config(state=tk.DISABLED)
+
+        self.textview.bind('<Control-f>', self.search_text)
         self.textview.configure(font=("Courier", 10))
 
-        vbar = tk.Scrollbar(self.textframe, orient='vertical', command=self.textview.yview)
-        vbar.pack(side="right", fill='y')
-
-        self.textframe2 = tk.Frame(self.largeframe,height=50, bg='white')
+        self.textframe2 = tk.Frame(self.largeframe, height=50, bg='white')
         self.textframe2.pack(padx=5, pady=5, fill='x', expand=True, anchor=tk.NW, side=tk.BOTTOM)
 
-        self.textview2 = tk.Text(self.textframe2,height=30, bg="silver")
+        self.textview2 = tk.Text(self.textframe2, height=30, bg="silver")
         self.textview2.pack(padx=5, pady=5, fill='x', anchor=tk.SW, side=tk.LEFT, expand=True)
 
+        # Add scrollbar to textview2
+        vbar2 = tk.Scrollbar(self.textframe2, orient='vertical', command=self.textview2.yview)
+        vbar2.pack(side="right", fill='y')
+        self.textview2.configure(yscrollcommand=vbar2.set)
+
         self.textview2.configure(font=("Courier", 10))
-
-        vbar = tk.Scrollbar(self.textframe2, orient='vertical', command=self.textview2.yview)
-        vbar.pack(side="right", fill='y')
-
+    
+    def search_text(self, event):
+        search_term = simpledialog.askstring("Search", "Enter text to search")
+        if search_term:
+            start = "1.0"
+            while True:
+                start = self.textview.search(search_term, start, stopindex=tk.END)
+                if not start:
+                    break
+                end = f"{start}+{len(search_term)}c"
+                self.textview.tag_add("search", start, end)
+                self.textview.tag_config("search", background="yellow")
+                start = end
 
 
 class Cont4: #캔버스 컨테이너
@@ -238,12 +288,13 @@ class space:
 container1 = Cont1(window)
 container2 = space(window)
 container3 = Cont2(window)
+container3.update_progress(80)
 container6 = Checklist(window)
 container7 = Textview(window)
 container5 = Cont4(window)
 
-container3.progressbar['value'] = 80
 
 # 윈도우 실행
 window.mainloop()
+
 

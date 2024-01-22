@@ -1,132 +1,191 @@
 {
-	"Linux":
+	"Linux": {
+	  "boot": [
 		{
-			"items":
-				[
-					{
-						"id": "0001",
-						"name": "TC-INSYS-LIN-0003",
-						"tc":
-							{
-								"list":
-									[
-										{ "cmd": "nproc" },
-										{ "cmd": "echo 0 > /sys/devices/system/cpu/cpu2/online" },
-										{ "cmd": "echo 0 > /sys/devices/system/cpu/cpu1/online" },
-										{ "cmd": "nproc" },
-										{ "cmd": "cat /sys/devices/system/cpu/offline" },
-										{ "cmd": "echo 1 > /sys/devices/system/cpu/cpu1/online" },
-										{ "cmd": "echo 1 > /sys/devices/system/cpu/cpu2/online" },
-										{ "cmd": "nproc" }
-									]
-							}
-					},
-					{
-						"id": "0002",
-						"name": "TC-INSYS-LIN-0007",
-						"tc":
-							{
-								"list":
-									[
-										{ "cmd": "modprobe dmatest" },
-										{ "cmd": "echo -n 2000 >/sys/module/dmatest/parameters/timeout" },
-										{ "cmd": "echo -n 1 >/sys/module/dmatest/parameters/iterations" },
-										{ "cmd": "echo -n dma0chan0 > /sys/module/dmatest/parameters/channel" },
-										{ "cmd": "echo -n 1 >/sys/module/dmatest/parameters/run" },
-										{ "cmd": "dmesg | grep dma" }
-									],
-								"criterion":
-									[
-										{ "type": "str", "rslt": "None" },
-										{ "type": "str", "rslt": "None" },
-										{ "type": "str", "rslt": "None" },
-										{ "type": "str", "rslt": "None" },
-										{ "type": "str", "rslt": "None" },
-										{ "type": "str", "rslt": "0 failures" }
-									]
-							}
-					},
-					{
-						"id": "0003",
-						"name": "TC-INSYS-LIN-0008",
-						"tc":
-							{
-								"list":
-									[
-										{ "cmd": "cat /sys/class/thermal/thermal_zone0/temp" },
-										{ "cmd": "cat /sys/class/thermal/thermal_zone1/temp" },
-										{ "cmd": "cat /sys/class/thermal/thermal_zone2/temp" },
-										{ "cmd": "cat /sys/class/thermal/thermal_zone3/temp" },
-										{ "cmd": "cat /sys/class/thermal/thermal_zone4/temp" }
-									],
-								"criterion":
-									[
-										{ "type": "regex", "rslt": "[0-9]{5}" },
-										{ "type": "regex", "rslt": "[0-9]{5}" },
-										{ "type": "regex", "rslt": "[0-9]{5}" },
-										{ "type": "regex", "rslt": "[0-9]{5}" },
-										{ "type": "regex", "rslt": "[0-9]{5}" }
-									]
-							}
-					}
-				]
+		  "id": "0001",
+		  "name": "TC-INSYS-LIN-0003",
+		  "mode" : "auto",
+		  "tc": {
+			"list": [
+			  { "cmd": "nproc" },
+			  { "cmd": "echo 0 > /sys/devices/system/cpu/cpu2/online" },
+			  { "cmd": "echo 0 > /sys/devices/system/cpu/cpu1/online" },
+			  { "cmd": "nproc" },
+			  { "cmd": "cat /sys/devices/system/cpu/offline" },
+			  { "cmd": "echo 1 > /sys/devices/system/cpu/cpu1/online" },
+			  { "cmd": "echo 1 > /sys/devices/system/cpu/cpu2/online" },
+			  { "cmd": "nproc" }
+			],
+			"criterion": [
+				{ "type": "str", "rslt": "None" },
+				{ "type": "str", "rslt": "None" },
+				{ "type": "str", "rslt": "None" },
+				{ "type": "str", "rslt": "None" },
+				{ "type": "str", "rslt": "None" },
+				{ "type": "str", "rslt": "0 failures" }
+			]
+		  }
 		},
-	"Android":
 		{
-			"items":
-				[
-					{
-						"id": "0001",
-						"name": "TC-INSYS-AND-0006",
-						"tc":
-							{
-								"list":
-									[
-										{ "cmd": "su" },
-										{ "cmd": "modprobe -d /vendor/lib/modules dmatest.ko" },
-										{ "cmd": "echo 1 > /sys/module/dmatest/parameters/iterations" },
-										{ "cmd": "echo 1 > /sys/module/dmatest/parameters/run" },
-										{ "cmd": "echo 2000 > /sys/module/dmatest/parameters/timeout" },
-										{ "cmd": "echo dma0chan0 > /sys/module/dmatest/parameters/channel" },
-										{ "cmd": "dmesg | grep dma" }
-									],
-								"criterion":
-									[
-										{ "type": "str", "rslt": "None" },
-										{ "type": "str", "rslt": "None" },
-										{ "type": "str", "rslt": "None" },
-										{ "type": "str", "rslt": "None" },
-										{ "type": "str", "rslt": "None" },
-										{ "type": "str", "rslt": "None" },
-										{ "type": "str", "rslt": "0 failures" }
-									]
-							}
-					},
-					{
-						"id": "0002",
-						"name": "TC-INSYS-AND-0007",
-						"tc":
-							{
-								"list":
-									[
-										{ "cmd": "su" },
-										{ "cmd": "cat /sys/class/thermal/thermal_zone0/temp" },
-										{ "cmd": "cat /sys/class/thermal/thermal_zone1/temp" },
-										{ "cmd": "cat /sys/class/thermal/thermal_zone2/temp" },
-										{ "cmd": "cat /sys/class/thermal/thermal_zone3/temp" },
-										{ "cmd": "cat /sys/class/thermal/thermal_zone4/temp" }
-									],
-								"criterion":
-									[
-										{ "type": "regex", "rslt": "[0-9]{5}" },
-										{ "type": "regex", "rslt": "[0-9]{5}" },
-										{ "type": "regex", "rslt": "[0-9]{5}" },
-										{ "type": "regex", "rslt": "[0-9]{5}" },
-										{ "type": "regex", "rslt": "[0-9]{5}" },
-										{ "type": "regex", "rslt": "[0-9]{5}" }
-									]
-							}
-					}
-				]
+		  "id": "0002",
+		  "name": "TC-INSYS-LIN-0007",
+		  "mode" : "auto",
+		  "tc": {
+			"list": [
+			  { "cmd": "modprobe dmatest" },
+			  { "cmd": "echo -n 2000 >/sys/module/dmatest/parameters/timeout" },
+			  { "cmd": "echo -n 1 >/sys/module/dmatest/parameters/iterations" },
+			  { "cmd": "echo -n dma0chan0 > /sys/module/dmatest/parameters/channel" },
+			  { "cmd": "echo -n 1 >/sys/module/dmatest/parameters/run" },
+			  { "cmd": "dmesg | grep dma" }
+			],
+			"criterion": [
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "0 failures" }
+			]
+		  }
+		},
+		{
+		  "id": "0003",
+		  "name": "TC-INSYS-LIN-0008",
+		  "mode" : "manual",
+		  "tc": {
+			"list": [
+			  { "cmd": "cat /sys/class/thermal/thermal_zone0/temp" },
+			  { "cmd": "cat /sys/class/thermal/thermal_zone1/temp" },
+			  { "cmd": "cat /sys/class/thermal/thermal_zone2/temp" },
+			  { "cmd": "cat /sys/class/thermal/thermal_zone3/temp" },
+			  { "cmd": "cat /sys/class/thermal/thermal_zone4/temp" }
+			],
+			"criterion": [
+			  { "type": "regex", "rslt": "[0-9]{5}" },
+			  { "type": "regex", "rslt": "[0-9]{5}" },
+			  { "type": "regex", "rslt": "[0-9]{5}" },
+			  { "type": "regex", "rslt": "[0-9]{5}" },
+			  { "type": "regex", "rslt": "[0-9]{5}" }
+			]
+		  }
 		}
-}
+	  ],
+	  "secure": [
+		{
+		  "id": "0001",
+		  "name": "TC-INSYS-LIN-0003",
+		  "mode" : "auto",
+		  "tc": {
+			"list": [
+			  { "cmd": "nproc" },
+			  { "cmd": "echo 0 > /sys/devices/system/cpu/cpu2/online" },
+			  { "cmd": "echo 0 > /sys/devices/system/cpu/cpu1/online" },
+			  { "cmd": "nproc" },
+			  { "cmd": "cat /sys/devices/system/cpu/offline" },
+			  { "cmd": "echo 1 > /sys/devices/system/cpu/cpu1/online" },
+			  { "cmd": "echo 1 > /sys/devices/system/cpu/cpu2/online" },
+			  { "cmd": "nproc" }
+			]
+		  }
+		},
+		{
+		  "id": "0002",
+		  "name": "TC-INSYS-LIN-0007",
+		  "mode" : "manual",
+		  "tc": {
+			"list": [
+			  { "cmd": "modprobe dmatest" },
+			  { "cmd": "echo -n 2000 >/sys/module/dmatest/parameters/timeout" },
+			  { "cmd": "echo -n 1 >/sys/module/dmatest/parameters/iterations" },
+			  { "cmd": "echo -n dma0chan0 > /sys/module/dmatest/parameters/channel" },
+			  { "cmd": "echo -n 1 >/sys/module/dmatest/parameters/run" },
+			  { "cmd": "dmesg | grep dma" }
+			],
+			"criterion": [
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "0 failures" }
+			]
+		  }
+		},
+		{
+		  "id": "0003",
+		  "name": "TC-INSYS-LIN-0008",
+		  "mode" : "auto",
+		  "tc": {
+			"list": [
+			  { "cmd": "cat /sys/class/thermal/thermal_zone0/temp" },
+			  { "cmd": "cat /sys/class/thermal/thermal_zone1/temp" },
+			  { "cmd": "cat /sys/class/thermal/thermal_zone2/temp" },
+			  { "cmd": "cat /sys/class/thermal/thermal_zone3/temp" },
+			  { "cmd": "cat /sys/class/thermal/thermal_zone4/temp" }
+			],
+			"criterion": [
+			  { "type": "regex", "rslt": "[0-9]{5}" },
+			  { "type": "regex", "rslt": "[0-9]{5}" },
+			  { "type": "regex", "rslt": "[0-9]{5}" },
+			  { "type": "regex", "rslt": "[0-9]{5}" },
+			  { "type": "regex", "rslt": "[0-9]{5}" }
+			]
+		  }
+		}
+	  ]
+	},
+	
+	"Android": {
+	  "secure": [
+		{
+		  "id": "0001",
+		  "name": "TC-INSYS-AND-0006",
+		  "tc": {
+			"list": [
+			  { "cmd": "su" },
+			  { "cmd": "modprobe -d /vendor/lib/modules dmatest.ko" },
+			  { "cmd": "echo 1 > /sys/module/dmatest/parameters/iterations" },
+			  { "cmd": "echo 1 > /sys/module/dmatest/parameters/run" },
+			  { "cmd": "echo 2000 > /sys/module/dmatest/parameters/timeout" },
+			  { "cmd": "echo dma0chan0 > /sys/module/dmatest/parameters/channel" },
+			  { "cmd": "dmesg | grep dma" }
+			],
+			"criterion": [
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "0 failures" }
+			]
+		  }
+		},
+		{
+		  "id": "0002",
+		  "name": "TC-INSYS-AND-0007",
+		  "tc": {
+			"list": [
+			  { "cmd": "su" },
+			  { "cmd": "cat /sys/class/thermal/thermal_zone0/temp" },
+			  { "cmd": "cat /sys/class/thermal/thermal_zone1/temp" },
+			  { "cmd": "cat /sys/class/thermal/thermal_zone2/temp" },
+			  { "cmd": "cat /sys/class/thermal/thermal_zone3/temp" },
+			  { "cmd": "cat /sys/class/thermal/thermal_zone4/temp" }
+			],
+			"criterion": [
+			  { "type": "regex", "rslt": "[0-9]{5}" },
+			  { "type": "regex", "rslt": "[0-9]{5}" },
+			  { "type": "regex", "rslt": "[0-9]{5}" },
+			  { "type": "regex", "rslt": "[0-9]{5}" },
+			  { "type": "regex", "rslt": "[0-9]{5}" },
+			  { "type": "regex", "rslt": "[0-9]{5}" }
+			]
+		  }
+		}
+	  ]
+	}
+  }
+  
+  
