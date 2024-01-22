@@ -197,14 +197,17 @@ class Checklist:
         tree.insert(parent_id, "end", Linux, text='Linux')
         tree.insert(parent_id, "end", Android, text='Android')
         sub_linuxfeature = linux_feature
-        #linux 부분
+        
+        #linux 부분 확인 필요
         for i in range(0, linux_feature.__len__()):
-            tree.insert(Linux, "end", f"{i}1", text=linux_feature[i])
+            node_id = f"{i}1"
+            tree.insert(Linux, "end", node_id, text=linux_feature[i])
+
             sublist = datas['Linux'][linux_feature[i]]
-            json_test = [linux_feature[i]['name'] for linux_feature[i] in sublist]
-            #여기부터 다시 시작해야함 01/22
-        print(json_test)
-        print(type(linux_feature))
+            json_test = [boot['name'] for boot in sublist]
+
+            for j in range(len(json_test)):
+                tree.insert(node_id, "end", f"{i}2_{j}", text=json_test[j])
       
         
         #수동 추가 부분

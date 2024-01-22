@@ -21,7 +21,7 @@ description_label = tk.Label(root, text="")
 description_label.pack()
 
 # 마우스가 위에 올라왔을 때와 나갔을 때의 이벤트 바인딩
-button1.bind("<Enter>", on_enter)
+button1.bind("<Enter>", lambda event: root.after(500, on_enter, event))
 button1.bind("<Leave>", on_leave)
 
 root.mainloop()

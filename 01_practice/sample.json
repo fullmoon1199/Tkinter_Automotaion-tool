@@ -74,7 +74,7 @@
 	  "secure": [
 		{
 		  "id": "0001",
-		  "name": "TC-INSYS-LIN-0003",
+		  "name": "TC-INSYS-LIN-0001",
 		  "mode" : "auto",
 		  "tc": {
 			"list": [
@@ -91,7 +91,7 @@
 		},
 		{
 		  "id": "0002",
-		  "name": "TC-INSYS-LIN-0007",
+		  "name": "TC-INSYS-LIN-0002",
 		  "mode" : "manual",
 		  "tc": {
 			"list": [
@@ -114,7 +114,7 @@
 		},
 		{
 		  "id": "0003",
-		  "name": "TC-INSYS-LIN-0008",
+		  "name": "TC-INSYS-LIN-0004",
 		  "mode" : "auto",
 		  "tc": {
 			"list": [
