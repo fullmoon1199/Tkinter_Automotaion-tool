@@ -161,25 +161,25 @@ class Checklist:
         Checklist_LargeFrame = tk.Frame(window, bg = 'blue')
         Checklist_LargeFrame.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.LEFT)
         # Create a frame to hold the CheckboxTreeview and scrollbar
-        frame = tk.Frame(Checklist_LargeFrame, bg='')
-        frame.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.TOP)
+        frame = tk.Frame(Checklist_LargeFrame)
+        frame.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.LEFT)
 
-        frame2 = tk.Frame(Checklist_LargeFrame)
-        frame2.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.BOTTOM)
+        # frame2 = tk.Frame(Checklist_LargeFrame)
+        # frame2.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.BOTTOM)
 
         # Create the CheckboxTreeview
         tree = CheckboxTreeview(frame)
         tree.pack(side=tk.LEFT, fill='y')
 
-        tree2 = CheckboxTreeview(frame2)
-        tree2.pack(side=tk.LEFT, fill='y')
+        # tree2 = CheckboxTreeview(frame2)
+        # tree2.pack(side=tk.LEFT, fill='y')
 
         # Create the scrollbar
         scrollbar = tk.Scrollbar(frame, orient='vertical', command=tree.yview)
         scrollbar.pack(side=tk.RIGHT, fill='y')
 
-        scrollbar2 = tk.Scrollbar(frame2, orient='vertical', command=tree2.yview)
-        scrollbar2.pack(side=tk.RIGHT, fill='y')
+        # scrollbar2 = tk.Scrollbar(frame2, orient='vertical', command=tree2.yview)
+        # scrollbar2.pack(side=tk.RIGHT, fill='y')
 
         with open('F:\\tkinter\\01_practice\\sample.json') as file:
             datas = json.load(file)
@@ -197,7 +197,7 @@ class Checklist:
         tree.insert(parent_id, "end", Linux, text='Linux')
         tree.insert(parent_id, "end", Android, text='Android')
         sub_linuxfeature = linux_feature
-        
+
         #linux 부분 확인 필요
         for i in range(0, linux_feature.__len__()):
             node_id = f"{i}1"
@@ -206,7 +206,7 @@ class Checklist:
             sublist = datas['Linux'][linux_feature[i]]
             json_test = [boot['name'] for boot in sublist]
 
-            for j in range(len(json_test)):
+            for j in range(json_test.__len__()):
                 tree.insert(node_id, "end", f"{i}2_{j}", text=json_test[j])
       
         
