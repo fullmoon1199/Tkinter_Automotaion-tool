@@ -27,8 +27,7 @@ def on_open():
             print(f"Serial port {selected_port} opened successfully.")
         except Exception as e:
             print(f"Failed to open serial port {selected_port}. Error: {e}")
-
-            
+   
 def on_close():
     # TODO: Close 동작 구현
     pass
@@ -68,22 +67,25 @@ def on_leave(widget):
     widget.config(bg='white')
 
 # Tkinter 윈도우 생성
-window = tk.Tk(bg='white')
+window = tk.Tk()
 window.title("V920 SADK Verification Program")
 
 # 윈도우 크기 설정
-window.geometry("1550x900+100+50")
-
+window.geometry("1650x900+30+30")
 # 상단 텍스트 추가
-title_label = tk.Label(window, text="V920 SADK Verification Program", font=("Helvetica", 16, "bold"))
-title_label.pack(pady=10)
+title_frame = tk.Frame(window)
+title_frame.pack(fill=X, anchor=N)
+title_label1 = tk.Label(title_frame, text="V920 SADK Verification Program", font=("Calibri", 16, "bold"))
+title_label2 = tk.Label(title_label1, text="Ver.0.0.1", font=("Helvetica", 10,))
+title_label1.pack(pady=12 ,fill=X)
+title_label2.pack(side=tk.RIGHT)
 
 class Cont1:
     def __init__(self, window):
         self.buttonframe = Frame(window)
         self.buttonframe.pack(fill=X, anchor=N)
 
-        self.combo = ttk.Combobox(self.buttonframe, values=on_search_port(), state="readonly", style="TCombobox")
+        self.combo = ttk.Combobox(self.buttonframe,width=30, values=on_search_port(), state="readonly", style="TCombobox")
         self.combo.pack(padx=10, pady=18, anchor=tk.NW, side=tk.LEFT)
 
         self.search_port_button = tk.Button(self.buttonframe, text="Search Port", command=on_search_port, width=15, height=3)
@@ -127,13 +129,16 @@ class Cont1:
 
         self.import_json_button = tk.Button(self.buttonframe, text="Import Json", command=on_import_json, width=15, height=3)
         self.import_json_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
+
+        self.exit_button = tk.Button(self.buttonframe, text="Exit", command=window.quit, width=5, height=3, bg='red', fg='white',font=("Helvetica", 8, "bold"))
+        self.exit_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
         
 class Cont2: # 진행바 컨테이너
     def __init__(self, window):
         self.progressframe = Frame(window)
         self.progressframe.pack(fill=X, anchor=N)
 
-        self.progressbar = ttk.Progressbar(self.progressframe, maximum=100, length=1400)
+        self.progressbar = ttk.Progressbar(self.progressframe, maximum=100, length=1500)
         self.progressbar.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
         self.progress_label = tk.Label(self.progressframe, text="진행률: 0%", font=("Helvetica", 12))
@@ -192,34 +197,55 @@ class Checklist:
             datas = json.load(file)
             linux_feature = list(datas['Linux'].keys())
             android_feature = list(datas['Android'].keys())
+            la_feature = list(datas['LinuxAndroid'].keys())
         # Configure the CheckboxTreeview to use the scrollbar
         self.tree.configure(yscrollcommand=scrollbar.set)
+        self.tree2.configure(yscrollcommand=scrollbar2.set)
         self.tree.bind("<Double-1>", self.on_double_click)
 
         parent_id = ""
         #insert root node
         Linux = str(1)
         Android = str(2)
+        LA = str(3)
 
         #tree node insert
         self.tree.insert(parent_id, "end", Linux, text='Linux')
         self.tree.insert(parent_id, "end", Android, text='Android')
+        self.tree.insert(parent_id, "end", LA, text='LinuxAndroid')
 
         #linux 부분 확인 필요
         for i in range(0, linux_feature.__len__()):
             node_id = f"{i}1"
             self.tree.insert(Linux, "end", node_id, text=linux_feature[i])
-
             sublist = datas['Linux'][linux_feature[i]]
             json_test = [feature['name'] for feature in sublist]
 
             for j in range(json_test.__len__()):
                 self.tree.insert(node_id, "end", f"{i}2_{j}", text=json_test[j])
+        
+        for i in range(0, android_feature.__len__()):
+            node_id2 = f"{i}2"
+            self.tree.insert(Android, "end", node_id2, text=android_feature[i])
+            sublist2 = datas['Android'][android_feature[i]]
+            json_test2 = [feature['name'] for feature in sublist2]
+            
+            for j in range(json_test2.__len__()):
+                self.tree.insert(node_id2, "end", f"{i}3_{j}", text=json_test2[j])
+        
+        for i in range(0, la_feature.__len__()):
+            node_id3 = f"{i}3"
+            self.tree.insert(LA, "end", node_id3, text=la_feature[i])
+            sublist3 = datas['LinuxAndroid'][la_feature[i]]
+            json_test3 = [feature['name'] for feature in sublist3]
+            
+            for j in range(json_test3.__len__()):
+                self.tree.insert(node_id3, "end", f"{i}4_{j}", text=json_test3[j])
+
       
         
         #수동 추가 부분
-        for i in range(0, android_feature.__len__()):
-            self.tree.insert(Android, "end", f"{i}2", text=android_feature[i])
+
 
     def on_double_click(self, event):
         item_id = self.tree.selection()
@@ -287,16 +313,16 @@ class Cont4: #캔버스 컨테이너
     def __init__(self,window):
 
         canvas = tk.Canvas(window,width=2, height= 70, bg="silver")
-        canvas.place(x=178,y=40)
+        canvas.place(x=248,y=40)
 
         canvas = tk.Canvas(window,width=2, height= 70, bg="silver")
-        canvas.place(x=570,y=40)
+        canvas.place(x=640,y=40)
 
         canvas = tk.Canvas(window,width=2, height= 70, bg="silver")
-        canvas.place(x=845,y=40)
+        canvas.place(x=915,y=40)
 
         canvas = tk.Canvas(window,width=2, height= 70, bg="silver")
-        canvas.place(x=1375,y=40)
+        canvas.place(x=1445,y=40)
 
         canvas = tk.Canvas(window,width=2000, height=2, bg="silver")
         canvas.place(x=0,y=40)
