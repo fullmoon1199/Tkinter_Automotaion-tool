@@ -133,6 +133,69 @@
 			]
 		  }
 		}
+	  ],
+	  "SFI": [
+		{
+		  "id": "0001",
+		  "name": "TC-INSYS-SFI-0001",
+		  "mode" : "auto",
+		  "tc": {
+			"list": [
+			  { "cmd": "nproc" },
+			  { "cmd": "echo 0 > /sys/devices/system/cpu/cpu2/online" },
+			  { "cmd": "echo 0 > /sys/devices/system/cpu/cpu1/online" },
+			  { "cmd": "nproc" },
+			  { "cmd": "cat /sys/devices/system/cpu/offline" },
+			  { "cmd": "echo 1 > /sys/devices/system/cpu/cpu1/online" },
+			  { "cmd": "echo 1 > /sys/devices/system/cpu/cpu2/online" },
+			  { "cmd": "nproc" }
+			]
+		  }
+		},
+		{
+		  "id": "0002",
+		  "name": "TC-INSYS-SFI-0002",
+		  "mode" : "manual",
+		  "tc": {
+			"list": [
+			  { "cmd": "modprobe dmatest" },
+			  { "cmd": "echo -n 2000 >/sys/module/dmatest/parameters/timeout" },
+			  { "cmd": "echo -n 1 >/sys/module/dmatest/parameters/iterations" },
+			  { "cmd": "echo -n dma0chan0 > /sys/module/dmatest/parameters/channel" },
+			  { "cmd": "echo -n 1 >/sys/module/dmatest/parameters/run" },
+			  { "cmd": "dmesg | grep dma" }
+			],
+			"criterion": [
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "None" },
+			  { "type": "str", "rslt": "0 failures" }
+			]
+		  }
+		},
+		{
+		  "id": "0003",
+		  "name": "TC-INSYS-SFI-0004",
+		  "mode" : "auto",
+		  "tc": {
+			"list": [
+			  { "cmd": "cat /sys/class/thermal/thermal_zone0/temp" },
+			  { "cmd": "cat /sys/class/thermal/thermal_zone1/temp" },
+			  { "cmd": "cat /sys/class/thermal/thermal_zone2/temp" },
+			  { "cmd": "cat /sys/class/thermal/thermal_zone3/temp" },
+			  { "cmd": "cat /sys/class/thermal/thermal_zone4/temp" }
+			],
+			"criterion": [
+			  { "type": "regex", "rslt": "[0-9]{5}" },
+			  { "type": "regex", "rslt": "[0-9]{5}" },
+			  { "type": "regex", "rslt": "[0-9]{5}" },
+			  { "type": "regex", "rslt": "[0-9]{5}" },
+			  { "type": "regex", "rslt": "[0-9]{5}" }
+			]
+		  }
+		}
 	  ]
 	},
 	

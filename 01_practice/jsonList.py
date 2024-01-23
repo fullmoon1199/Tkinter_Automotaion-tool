@@ -1,33 +1,43 @@
-import tkinter as tk
-from tkinter import ttk
 import json
 
-# JSON 파일로부터 데이터 읽기
-with open("F:\\tkinter\\01_practice\\data.json", encoding="utf-8") as file:
-    tree_data = json.load(file)
-
-# Tkinter 윈도우 생성
-window = tk.Tk()
-window.title("JSON에서 TreeView 만들기")
-
-# Treeview 생성
-tree = ttk.Treeview(window)
-tree.pack()
-
-# 트리에 아이템 추가하는 재귀적인 함수
-def populate_tree(parent, items):
-    for item in items:
-        if isinstance(item, dict):
-            for key, value in item.items():
-                item_id = tree.insert(parent, "end", text=key)
-                if value:
-                    populate_tree(item_id, value)
-        elif isinstance(item, list):
-            populate_tree(parent, item)
+try:
+    with open('F:\\tkinter\\01_practice\\sample.json') as file:
+        datas = json.load(file)
+        boot_data = datas['Linux']['boot']
+        for entry in boot_data:
+                print(entry)
+                # Access other properties as needed
+                print(entry['id'])
+                print(entry['name'])
+                print(entry['tc'])
+                # Access the 'list' and 'criterion' arrays if needed
+                if 'list' in entry['tc']:
+                    print(entry['tc']['list'])
+                if 'criterion' in entry['tc']:
+                    print(entry['tc']['criterion'])
         else:
-            item_id = tree.insert(parent, "end", text=str(item))
+            print("Invalid JSON structure. Missing 'Linux' or 'boot' key.")
+except json.JSONDecodeError as e:
+    print(f"JSON decoding error: {e}")
+except FileNotFoundError:
+    print("File not found.")
 
-# 함수 호출을 통해 트리 채우기
-populate_tree("", tree_data)
+# import json
 
-window.mainloop()
+# # 주어진 JSON 데이터
+
+# with open('F:\\tkinter\\01_practice\\sample.json') as file:
+#         datas = json.load(file)
+
+# # Linux의 모든 하위 항목의 이름 가져오기
+# linux_subitems = datas.get("Linux", {})
+# subitem_names = []
+
+# # boot와 secure 아이템들을 가져와서 이름 추출
+# for category, items in linux_subitems.items():
+#     if isinstance(items, list):
+#         for item in items:
+#             subitem_names.append(item.get("name", ""))
+            
+# # 결과 출력
+# print(subitem_names)
