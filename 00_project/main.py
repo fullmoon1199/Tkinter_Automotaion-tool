@@ -242,7 +242,7 @@ class Checklist:
             for j in range(json_test3.__len__()):
                 self.tree.insert(node_id3, "end", f"{i}4_{j}", text=json_test3[j])
 
-      
+       
         
         #수동 추가 부분
 

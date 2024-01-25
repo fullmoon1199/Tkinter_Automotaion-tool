@@ -5,8 +5,9 @@
 				"id": "0004",
 				"name": "TC-INSYS-LIN-0009",
 				"mode": "manual",
-
-				"LA" : "TURE",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /etc" },
@@ -28,6 +29,9 @@
 				"id": "0005",
 				"name": "TC-INSYS-LIN-0010",
 				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "uname -a" },
@@ -48,7 +52,10 @@
 			{
 				"id": "0006",
 				"name": "TC-INSYS-LIN-0011",
-				"mode": "manual",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /usr/local" },
@@ -70,6 +77,9 @@
 				"id": "0007",
 				"name": "TC-INSYS-LIN-0012",
 				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /proc" },
@@ -93,6 +103,9 @@
 				"id": "0004",
 				"name": "TC-INSYS-LIN-0009",
 				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /etc" },
@@ -114,6 +127,9 @@
 				"id": "0005",
 				"name": "TC-INSYS-LIN-0010",
 				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "uname -a" },
@@ -135,6 +151,9 @@
 				"id": "0006",
 				"name": "TC-INSYS-LIN-0011",
 				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /usr/local" },
@@ -156,6 +175,9 @@
 				"id": "0007",
 				"name": "TC-INSYS-LIN-0012",
 				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /proc" },
@@ -179,6 +201,9 @@
 				"id": "0004",
 				"name": "TC-INSYS-LIN-0009",
 				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /etc" },
@@ -200,6 +225,9 @@
 				"id": "0005",
 				"name": "TC-INSYS-LIN-0010",
 				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "uname -a" },
@@ -221,6 +249,9 @@
 				"id": "0006",
 				"name": "TC-INSYS-LIN-0011",
 				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /usr/local" },
@@ -242,6 +273,9 @@
 				"id": "0007",
 				"name": "TC-INSYS-LIN-0012",
 				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /proc" },
@@ -265,6 +299,9 @@
 				"id": "0004",
 				"name": "TC-INSYS-LIN-0005",
 				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /etc" },
@@ -279,6 +316,9 @@
 				"id": "0005",
 				"name": "TC-INSYS-LIN-0006",
 				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "uname -a" },
@@ -300,6 +340,9 @@
 				"id": "0006",
 				"name": "TC-INSYS-LIN-0013",
 				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /usr/local" },
@@ -321,6 +364,9 @@
 				"id": "0007",
 				"name": "TC-INSYS-LIN-0014",
 				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /proc" },
@@ -344,6 +390,9 @@
 				"id": "0004",
 				"name": "TC-INSYS-LIN-0009",
 				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /etc" },
@@ -365,6 +414,9 @@
 				"id": "0005",
 				"name": "TC-INSYS-LIN-0010",
 				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "uname -a" },
@@ -386,6 +438,9 @@
 				"id": "0006",
 				"name": "TC-INSYS-LIN-0011",
 				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /usr/local" },
@@ -407,6 +462,9 @@
 				"id": "0007",
 				"name": "TC-INSYS-LIN-0012",
 				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /proc" },
@@ -430,6 +488,9 @@
 				"id": "0004",
 				"name": "TC-INSYS-SFI-0005",
 				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /etc" },
@@ -444,6 +505,9 @@
 				"id": "0005",
 				"name": "TC-INSYS-SFI-0006",
 				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "uname -a" },
@@ -465,6 +529,9 @@
 				"id": "0006",
 				"name": "TC-INSYS-SFI-0013",
 				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /usr/local" },
@@ -486,6 +553,9 @@
 				"id": "0007",
 				"name": "TC-INSYS-SFI-0014",
 				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /proc" },
@@ -514,6 +584,9 @@
 				"id": "0004",
 				"name": "TC-INSYS-LIN-0009",
 				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /etc" },
@@ -535,6 +608,9 @@
 				"id": "0005",
 				"name": "TC-INSYS-LIN-0010",
 				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "uname -a" },
@@ -556,6 +632,9 @@
 				"id": "0006",
 				"name": "TC-INSYS-LIN-0011",
 				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /usr/local" },
@@ -577,6 +656,9 @@
 				"id": "0007",
 				"name": "TC-INSYS-LIN-0012",
 				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /proc" },
@@ -602,8 +684,9 @@
 				"id": "0004",
 				"name": "TC-INSYS-LIN-0009",
 				"mode": "manual",
-
-				"LA" : "TURE",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /etc" },
@@ -625,6 +708,9 @@
 				"id": "0005",
 				"name": "TC-INSYS-LIN-0010",
 				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "uname -a" },
@@ -646,6 +732,9 @@
 				"id": "0006",
 				"name": "TC-INSYS-LIN-0011",
 				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /usr/local" },
@@ -667,6 +756,9 @@
 				"id": "0007",
 				"name": "TC-INSYS-LIN-0012",
 				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /proc" },
@@ -690,6 +782,9 @@
 				"id": "0004",
 				"name": "TC-INSYS-LIN-0009",
 				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /etc" },
@@ -711,6 +806,9 @@
 				"id": "0005",
 				"name": "TC-INSYS-LIN-0010",
 				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "uname -a" },
@@ -732,6 +830,9 @@
 				"id": "0006",
 				"name": "TC-INSYS-LIN-0011",
 				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /usr/local" },
@@ -753,6 +854,9 @@
 				"id": "0007",
 				"name": "TC-INSYS-LIN-0012",
 				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /proc" },
@@ -776,6 +880,9 @@
 				"id": "0004",
 				"name": "TC-INSYS-LIN-0009",
 				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /etc" },
@@ -797,6 +904,9 @@
 				"id": "0005",
 				"name": "TC-INSYS-LIN-0010",
 				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "uname -a" },
@@ -818,6 +928,9 @@
 				"id": "0006",
 				"name": "TC-INSYS-LIN-0011",
 				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /usr/local" },
@@ -839,6 +952,9 @@
 				"id": "0007",
 				"name": "TC-INSYS-LIN-0012",
 				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /proc" },
@@ -862,6 +978,9 @@
 				"id": "0004",
 				"name": "TC-INSYS-LIN-0005",
 				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /etc" },
@@ -876,6 +995,9 @@
 				"id": "0005",
 				"name": "TC-INSYS-LIN-0006",
 				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "uname -a" },
@@ -897,6 +1019,9 @@
 				"id": "0006",
 				"name": "TC-INSYS-LIN-0013",
 				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /usr/local" },
@@ -918,6 +1043,9 @@
 				"id": "0007",
 				"name": "TC-INSYS-LIN-0014",
 				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /proc" },
@@ -941,6 +1069,9 @@
 				"id": "0004",
 				"name": "TC-INSYS-LIN-0009",
 				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /etc" },
@@ -962,6 +1093,9 @@
 				"id": "0005",
 				"name": "TC-INSYS-LIN-0010",
 				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "uname -a" },
@@ -983,6 +1117,9 @@
 				"id": "0006",
 				"name": "TC-INSYS-LIN-0011",
 				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /usr/local" },
@@ -1004,6 +1141,9 @@
 				"id": "0007",
 				"name": "TC-INSYS-LIN-0012",
 				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /proc" },
@@ -1027,6 +1167,9 @@
 				"id": "0004",
 				"name": "TC-INSYS-SFI-0005",
 				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /etc" },
@@ -1041,6 +1184,9 @@
 				"id": "0005",
 				"name": "TC-INSYS-SFI-0006",
 				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
 				"tc": {
 					"list": [
 						{ "cmd": "uname -a" },
@@ -1062,6 +1208,9 @@
 				"id": "0006",
 				"name": "TC-INSYS-SFI-0013",
 				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /usr/local" },
@@ -1083,6 +1232,9 @@
 				"id": "0007",
 				"name": "TC-INSYS-SFI-0014",
 				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "FLASE",
 				"tc": {
 					"list": [
 						{ "cmd": "ls /proc" },
