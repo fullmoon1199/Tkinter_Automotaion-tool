@@ -1,15 +1,1259 @@
-import json
+{
+	"Linux": {
+		"boot": [
+			{
+				"id": "0004",
+				"name": "TC-INSYS-LIN-0009",
+				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /etc" },
+						{ "cmd": "ls /var" },
+						{ "cmd": "ls /usr" },
+						{ "cmd": "ls /lib" },
+						{ "cmd": "ls /bin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "passwd" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "bin" },
+						{ "type": "str", "rslt": "lib64" },
+						{ "type": "str", "rslt": "bash" }
+					]
+				}
+			},
+			{
+				"id": "0005",
+				"name": "TC-INSYS-LIN-0010",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "uname -a" },
+						{ "cmd": "df -h" },
+						{ "cmd": "free -m" },
+						{ "cmd": "ps aux" },
+						{ "cmd": "lsblk" }
+					],
+					"criterion": [
+						{ "type": "regex", "rslt": "Linux" },
+						{ "type": "regex", "rslt": "[0-9]+G" },
+						{ "type": "regex", "rslt": "[0-9]+M" },
+						{ "type": "str", "rslt": "PID" },
+						{ "type": "str", "rslt": "sda" }
+					]
+				}
+			},
+			{
+				"id": "0006",
+				"name": "TC-INSYS-LIN-0011",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /usr/local" },
+						{ "cmd": "ls /opt" },
+						{ "cmd": "ls /etc/init.d" },
+						{ "cmd": "ls /var/log" },
+						{ "cmd": "ls /sbin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "local" },
+						{ "type": "str", "rslt": "opt" },
+						{ "type": "str", "rslt": "init.d" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "sbin" }
+					]
+				}
+			},
+			{
+				"id": "0007",
+				"name": "TC-INSYS-LIN-0012",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /proc" },
+						{ "cmd": "ls /sys" },
+						{ "cmd": "ls /dev" },
+						{ "cmd": "ls /tmp" },
+						{ "cmd": "ls /var/run" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "proc" },
+						{ "type": "str", "rslt": "sys" },
+						{ "type": "str", "rslt": "dev" },
+						{ "type": "str", "rslt": "tmp" },
+						{ "type": "str", "rslt": "run" }
+					]
+				}
+			}
+		],
+		"Audio": [
+			{
+				"id": "0004",
+				"name": "TC-INSYS-LIN-0009",
+				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /etc" },
+						{ "cmd": "ls /var" },
+						{ "cmd": "ls /usr" },
+						{ "cmd": "ls /lib" },
+						{ "cmd": "ls /bin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "passwd" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "bin" },
+						{ "type": "str", "rslt": "lib64" },
+						{ "type": "str", "rslt": "bash" }
+					]
+				}
+			},
+			{
+				"id": "0005",
+				"name": "TC-INSYS-LIN-0010",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "uname -a" },
+						{ "cmd": "df -h" },
+						{ "cmd": "free -m" },
+						{ "cmd": "ps aux" },
+						{ "cmd": "lsblk" }
+					],
+					"criterion": [
+						{ "type": "regex", "rslt": "Linux" },
+						{ "type": "regex", "rslt": "[0-9]+G" },
+						{ "type": "regex", "rslt": "[0-9]+M" },
+						{ "type": "str", "rslt": "PID" },
+						{ "type": "str", "rslt": "sda" }
+					]
+				}
+			},
+			{
+				"id": "0006",
+				"name": "TC-INSYS-LIN-0011",
+				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /usr/local" },
+						{ "cmd": "ls /opt" },
+						{ "cmd": "ls /etc/init.d" },
+						{ "cmd": "ls /var/log" },
+						{ "cmd": "ls /sbin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "local" },
+						{ "type": "str", "rslt": "opt" },
+						{ "type": "str", "rslt": "init.d" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "sbin" }
+					]
+				}
+			},
+			{
+				"id": "0007",
+				"name": "TC-INSYS-LIN-0012",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /proc" },
+						{ "cmd": "ls /sys" },
+						{ "cmd": "ls /dev" },
+						{ "cmd": "ls /tmp" },
+						{ "cmd": "ls /var/run" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "proc" },
+						{ "type": "str", "rslt": "sys" },
+						{ "type": "str", "rslt": "dev" },
+						{ "type": "str", "rslt": "tmp" },
+						{ "type": "str", "rslt": "run" }
+					]
+				}
+			}
+		],
+		"ethernet": [
+			{
+				"id": "0004",
+				"name": "TC-INSYS-LIN-0009",
+				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /etc" },
+						{ "cmd": "ls /var" },
+						{ "cmd": "ls /usr" },
+						{ "cmd": "ls /lib" },
+						{ "cmd": "ls /bin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "passwd" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "bin" },
+						{ "type": "str", "rslt": "lib64" },
+						{ "type": "str", "rslt": "bash" }
+					]
+				}
+			},
+			{
+				"id": "0005",
+				"name": "TC-INSYS-LIN-0010",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "uname -a" },
+						{ "cmd": "df -h" },
+						{ "cmd": "free -m" },
+						{ "cmd": "ps aux" },
+						{ "cmd": "lsblk" }
+					],
+					"criterion": [
+						{ "type": "regex", "rslt": "Linux" },
+						{ "type": "regex", "rslt": "[0-9]+G" },
+						{ "type": "regex", "rslt": "[0-9]+M" },
+						{ "type": "str", "rslt": "PID" },
+						{ "type": "str", "rslt": "sda" }
+					]
+				}
+			},
+			{
+				"id": "0006",
+				"name": "TC-INSYS-LIN-0011",
+				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /usr/local" },
+						{ "cmd": "ls /opt" },
+						{ "cmd": "ls /etc/init.d" },
+						{ "cmd": "ls /var/log" },
+						{ "cmd": "ls /sbin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "local" },
+						{ "type": "str", "rslt": "opt" },
+						{ "type": "str", "rslt": "init.d" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "sbin" }
+					]
+				}
+			},
+			{
+				"id": "0007",
+				"name": "TC-INSYS-LIN-0012",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /proc" },
+						{ "cmd": "ls /sys" },
+						{ "cmd": "ls /dev" },
+						{ "cmd": "ls /tmp" },
+						{ "cmd": "ls /var/run" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "proc" },
+						{ "type": "str", "rslt": "sys" },
+						{ "type": "str", "rslt": "dev" },
+						{ "type": "str", "rslt": "tmp" },
+						{ "type": "str", "rslt": "run" }
+					]
+				}
+			}
+		],
+		"secure": [
+			{
+				"id": "0004",
+				"name": "TC-INSYS-LIN-0005",
+				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /etc" },
+						{ "cmd": "ls /var" },
+						{ "cmd": "ls /usr" },
+						{ "cmd": "ls /lib" },
+						{ "cmd": "ls /bin" }
+					]
+				}
+			},
+			{
+				"id": "0005",
+				"name": "TC-INSYS-LIN-0006",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "uname -a" },
+						{ "cmd": "df -h" },
+						{ "cmd": "free -m" },
+						{ "cmd": "ps aux" },
+						{ "cmd": "lsblk" }
+					],
+					"criterion": [
+						{ "type": "regex", "rslt": "Linux" },
+						{ "type": "regex", "rslt": "[0-9]+G" },
+						{ "type": "regex", "rslt": "[0-9]+M" },
+						{ "type": "str", "rslt": "PID" },
+						{ "type": "str", "rslt": "sda" }
+					]
+				}
+			},
+			{
+				"id": "0006",
+				"name": "TC-INSYS-LIN-0013",
+				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /usr/local" },
+						{ "cmd": "ls /opt" },
+						{ "cmd": "ls /etc/init.d" },
+						{ "cmd": "ls /var/log" },
+						{ "cmd": "ls /sbin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "local" },
+						{ "type": "str", "rslt": "opt" },
+						{ "type": "str", "rslt": "init.d" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "sbin" }
+					]
+				}
+			},
+			{
+				"id": "0007",
+				"name": "TC-INSYS-LIN-0014",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /proc" },
+						{ "cmd": "ls /sys" },
+						{ "cmd": "ls /dev" },
+						{ "cmd": "ls /tmp" },
+						{ "cmd": "ls /var/run" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "proc" },
+						{ "type": "str", "rslt": "sys" },
+						{ "type": "str", "rslt": "dev" },
+						{ "type": "str", "rslt": "tmp" },
+						{ "type": "str", "rslt": "run" }
+					]
+				}
+			}
+		],
+		"otp": [
+			{
+				"id": "0004",
+				"name": "TC-INSYS-LIN-0009",
+				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /etc" },
+						{ "cmd": "ls /var" },
+						{ "cmd": "ls /usr" },
+						{ "cmd": "ls /lib" },
+						{ "cmd": "ls /bin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "passwd" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "bin" },
+						{ "type": "str", "rslt": "lib64" },
+						{ "type": "str", "rslt": "bash" }
+					]
+				}
+			},
+			{
+				"id": "0005",
+				"name": "TC-INSYS-LIN-0010",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "uname -a" },
+						{ "cmd": "df -h" },
+						{ "cmd": "free -m" },
+						{ "cmd": "ps aux" },
+						{ "cmd": "lsblk" }
+					],
+					"criterion": [
+						{ "type": "regex", "rslt": "Linux" },
+						{ "type": "regex", "rslt": "[0-9]+G" },
+						{ "type": "regex", "rslt": "[0-9]+M" },
+						{ "type": "str", "rslt": "PID" },
+						{ "type": "str", "rslt": "sda" }
+					]
+				}
+			},
+			{
+				"id": "0006",
+				"name": "TC-INSYS-LIN-0011",
+				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /usr/local" },
+						{ "cmd": "ls /opt" },
+						{ "cmd": "ls /etc/init.d" },
+						{ "cmd": "ls /var/log" },
+						{ "cmd": "ls /sbin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "local" },
+						{ "type": "str", "rslt": "opt" },
+						{ "type": "str", "rslt": "init.d" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "sbin" }
+					]
+				}
+			},
+			{
+				"id": "0007",
+				"name": "TC-INSYS-LIN-0012",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /proc" },
+						{ "cmd": "ls /sys" },
+						{ "cmd": "ls /dev" },
+						{ "cmd": "ls /tmp" },
+						{ "cmd": "ls /var/run" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "proc" },
+						{ "type": "str", "rslt": "sys" },
+						{ "type": "str", "rslt": "dev" },
+						{ "type": "str", "rslt": "tmp" },
+						{ "type": "str", "rslt": "run" }
+					]
+				}
+			}
+		],
+		"SFI": [
+			{
+				"id": "0004",
+				"name": "TC-INSYS-SFI-0005",
+				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /etc" },
+						{ "cmd": "ls /var" },
+						{ "cmd": "ls /usr" },
+						{ "cmd": "ls /lib" },
+						{ "cmd": "ls /bin" }
+					]
+				}
+			},
+			{
+				"id": "0005",
+				"name": "TC-INSYS-SFI-0006",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "uname -a" },
+						{ "cmd": "df -h" },
+						{ "cmd": "free -m" },
+						{ "cmd": "ps aux" },
+						{ "cmd": "lsblk" }
+					],
+					"criterion": [
+						{ "type": "regex", "rslt": "Linux" },
+						{ "type": "regex", "rslt": "[0-9]+G" },
+						{ "type": "regex", "rslt": "[0-9]+M" },
+						{ "type": "str", "rslt": "PID" },
+						{ "type": "str", "rslt": "sda" }
+					]
+				}
+			},
+			{
+				"id": "0006",
+				"name": "TC-INSYS-SFI-0013",
+				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /usr/local" },
+						{ "cmd": "ls /opt" },
+						{ "cmd": "ls /etc/init.d" },
+						{ "cmd": "ls /var/log" },
+						{ "cmd": "ls /sbin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "local" },
+						{ "type": "str", "rslt": "opt" },
+						{ "type": "str", "rslt": "init.d" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "sbin" }
+					]
+				}
+			},
+			{
+				"id": "0007",
+				"name": "TC-INSYS-SFI-0014",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "FALSE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /proc" },
+						{ "cmd": "ls /sys" },
+						{ "cmd": "ls /dev" },
+						{ "cmd": "ls /tmp" },
+						{ "cmd": "ls /var/run" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "proc" },
+						{ "type": "str", "rslt": "sys" },
+						{ "type": "str", "rslt": "dev" },
+						{ "type": "str", "rslt": "tmp" },
+						{ "type": "str", "rslt": "run" }
+					]
+				}
+			}
+		]
+	},
 
-try:
-    with open('F:\\tkinter\\01_practice\\sample.json') as file:
-        datas = json.load(file)
-        boot_list = datas['Linux']['boot']
-        
-        # 각 boot의 name 값을 가져와 리스트로 만듭니다.
-        json_test = [boot['name'] for boot in boot_list]
-        
-        print(json_test)
-except json.JSONDecodeError as e:
-    print(f"JSON decoding error: {e}")
-except FileNotFoundError:
-    print("File not found.")
+
+
+	"Android": {
+		"boot": [
+			{
+				"id": "0004",
+				"name": "TC-INSYS-LIN-0009",
+				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /etc" },
+						{ "cmd": "ls /var" },
+						{ "cmd": "ls /usr" },
+						{ "cmd": "ls /lib" },
+						{ "cmd": "ls /bin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "passwd" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "bin" },
+						{ "type": "str", "rslt": "lib64" },
+						{ "type": "str", "rslt": "bash" }
+					]
+				}
+			},
+			{
+				"id": "0005",
+				"name": "TC-INSYS-LIN-0010",
+				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "uname -a" },
+						{ "cmd": "df -h" },
+						{ "cmd": "free -m" },
+						{ "cmd": "ps aux" },
+						{ "cmd": "lsblk" }
+					],
+					"criterion": [
+						{ "type": "regex", "rslt": "Linux" },
+						{ "type": "regex", "rslt": "[0-9]+G" },
+						{ "type": "regex", "rslt": "[0-9]+M" },
+						{ "type": "str", "rslt": "PID" },
+						{ "type": "str", "rslt": "sda" }
+					]
+				}
+			},
+			{
+				"id": "0006",
+				"name": "TC-INSYS-LIN-0011",
+				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /usr/local" },
+						{ "cmd": "ls /opt" },
+						{ "cmd": "ls /etc/init.d" },
+						{ "cmd": "ls /var/log" },
+						{ "cmd": "ls /sbin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "local" },
+						{ "type": "str", "rslt": "opt" },
+						{ "type": "str", "rslt": "init.d" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "sbin" }
+					]
+				}
+			},
+			{
+				"id": "0007",
+				"name": "TC-INSYS-LIN-0012",
+				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /proc" },
+						{ "cmd": "ls /sys" },
+						{ "cmd": "ls /dev" },
+						{ "cmd": "ls /tmp" },
+						{ "cmd": "ls /var/run" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "proc" },
+						{ "type": "str", "rslt": "sys" },
+						{ "type": "str", "rslt": "dev" },
+						{ "type": "str", "rslt": "tmp" },
+						{ "type": "str", "rslt": "run" }
+					]
+				}
+			}
+		]
+	},
+	"LinuxAndroid": {
+		"boot": [
+			{
+				"id": "0004",
+				"name": "TC-INSYS-LIN-0009",
+				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /etc" },
+						{ "cmd": "ls /var" },
+						{ "cmd": "ls /usr" },
+						{ "cmd": "ls /lib" },
+						{ "cmd": "ls /bin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "passwd" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "bin" },
+						{ "type": "str", "rslt": "lib64" },
+						{ "type": "str", "rslt": "bash" }
+					]
+				}
+			},
+			{
+				"id": "0005",
+				"name": "TC-INSYS-LIN-0010",
+				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "uname -a" },
+						{ "cmd": "df -h" },
+						{ "cmd": "free -m" },
+						{ "cmd": "ps aux" },
+						{ "cmd": "lsblk" }
+					],
+					"criterion": [
+						{ "type": "regex", "rslt": "Linux" },
+						{ "type": "regex", "rslt": "[0-9]+G" },
+						{ "type": "regex", "rslt": "[0-9]+M" },
+						{ "type": "str", "rslt": "PID" },
+						{ "type": "str", "rslt": "sda" }
+					]
+				}
+			},
+			{
+				"id": "0006",
+				"name": "TC-INSYS-LIN-0011",
+				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /usr/local" },
+						{ "cmd": "ls /opt" },
+						{ "cmd": "ls /etc/init.d" },
+						{ "cmd": "ls /var/log" },
+						{ "cmd": "ls /sbin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "local" },
+						{ "type": "str", "rslt": "opt" },
+						{ "type": "str", "rslt": "init.d" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "sbin" }
+					]
+				}
+			},
+			{
+				"id": "0007",
+				"name": "TC-INSYS-LIN-0012",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /proc" },
+						{ "cmd": "ls /sys" },
+						{ "cmd": "ls /dev" },
+						{ "cmd": "ls /tmp" },
+						{ "cmd": "ls /var/run" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "proc" },
+						{ "type": "str", "rslt": "sys" },
+						{ "type": "str", "rslt": "dev" },
+						{ "type": "str", "rslt": "tmp" },
+						{ "type": "str", "rslt": "run" }
+					]
+				}
+			}
+		],
+		"Audio": [
+			{
+				"id": "0004",
+				"name": "TC-INSYS-LIN-0009",
+				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /etc" },
+						{ "cmd": "ls /var" },
+						{ "cmd": "ls /usr" },
+						{ "cmd": "ls /lib" },
+						{ "cmd": "ls /bin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "passwd" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "bin" },
+						{ "type": "str", "rslt": "lib64" },
+						{ "type": "str", "rslt": "bash" }
+					]
+				}
+			},
+			{
+				"id": "0005",
+				"name": "TC-INSYS-LIN-0010",
+				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "uname -a" },
+						{ "cmd": "df -h" },
+						{ "cmd": "free -m" },
+						{ "cmd": "ps aux" },
+						{ "cmd": "lsblk" }
+					],
+					"criterion": [
+						{ "type": "regex", "rslt": "Linux" },
+						{ "type": "regex", "rslt": "[0-9]+G" },
+						{ "type": "regex", "rslt": "[0-9]+M" },
+						{ "type": "str", "rslt": "PID" },
+						{ "type": "str", "rslt": "sda" }
+					]
+				}
+			},
+			{
+				"id": "0006",
+				"name": "TC-INSYS-LIN-0011",
+				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /usr/local" },
+						{ "cmd": "ls /opt" },
+						{ "cmd": "ls /etc/init.d" },
+						{ "cmd": "ls /var/log" },
+						{ "cmd": "ls /sbin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "local" },
+						{ "type": "str", "rslt": "opt" },
+						{ "type": "str", "rslt": "init.d" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "sbin" }
+					]
+				}
+			},
+			{
+				"id": "0007",
+				"name": "TC-INSYS-LIN-0012",
+				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /proc" },
+						{ "cmd": "ls /sys" },
+						{ "cmd": "ls /dev" },
+						{ "cmd": "ls /tmp" },
+						{ "cmd": "ls /var/run" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "proc" },
+						{ "type": "str", "rslt": "sys" },
+						{ "type": "str", "rslt": "dev" },
+						{ "type": "str", "rslt": "tmp" },
+						{ "type": "str", "rslt": "run" }
+					]
+				}
+			}
+		],
+		"ethernet": [
+			{
+				"id": "0004",
+				"name": "TC-INSYS-LIN-0009",
+				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /etc" },
+						{ "cmd": "ls /var" },
+						{ "cmd": "ls /usr" },
+						{ "cmd": "ls /lib" },
+						{ "cmd": "ls /bin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "passwd" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "bin" },
+						{ "type": "str", "rslt": "lib64" },
+						{ "type": "str", "rslt": "bash" }
+					]
+				}
+			},
+			{
+				"id": "0005",
+				"name": "TC-INSYS-LIN-0010",
+				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "uname -a" },
+						{ "cmd": "df -h" },
+						{ "cmd": "free -m" },
+						{ "cmd": "ps aux" },
+						{ "cmd": "lsblk" }
+					],
+					"criterion": [
+						{ "type": "regex", "rslt": "Linux" },
+						{ "type": "regex", "rslt": "[0-9]+G" },
+						{ "type": "regex", "rslt": "[0-9]+M" },
+						{ "type": "str", "rslt": "PID" },
+						{ "type": "str", "rslt": "sda" }
+					]
+				}
+			},
+			{
+				"id": "0006",
+				"name": "TC-INSYS-LIN-0011",
+				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /usr/local" },
+						{ "cmd": "ls /opt" },
+						{ "cmd": "ls /etc/init.d" },
+						{ "cmd": "ls /var/log" },
+						{ "cmd": "ls /sbin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "local" },
+						{ "type": "str", "rslt": "opt" },
+						{ "type": "str", "rslt": "init.d" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "sbin" }
+					]
+				}
+			},
+			{
+				"id": "0007",
+				"name": "TC-INSYS-LIN-0012",
+				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /proc" },
+						{ "cmd": "ls /sys" },
+						{ "cmd": "ls /dev" },
+						{ "cmd": "ls /tmp" },
+						{ "cmd": "ls /var/run" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "proc" },
+						{ "type": "str", "rslt": "sys" },
+						{ "type": "str", "rslt": "dev" },
+						{ "type": "str", "rslt": "tmp" },
+						{ "type": "str", "rslt": "run" }
+					]
+				}
+			}
+		],
+		"secure": [
+			{
+				"id": "0004",
+				"name": "TC-INSYS-LIN-0005",
+				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /etc" },
+						{ "cmd": "ls /var" },
+						{ "cmd": "ls /usr" },
+						{ "cmd": "ls /lib" },
+						{ "cmd": "ls /bin" }
+					]
+				}
+			},
+			{
+				"id": "0005",
+				"name": "TC-INSYS-LIN-0006",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "uname -a" },
+						{ "cmd": "df -h" },
+						{ "cmd": "free -m" },
+						{ "cmd": "ps aux" },
+						{ "cmd": "lsblk" }
+					],
+					"criterion": [
+						{ "type": "regex", "rslt": "Linux" },
+						{ "type": "regex", "rslt": "[0-9]+G" },
+						{ "type": "regex", "rslt": "[0-9]+M" },
+						{ "type": "str", "rslt": "PID" },
+						{ "type": "str", "rslt": "sda" }
+					]
+				}
+			},
+			{
+				"id": "0006",
+				"name": "TC-INSYS-LIN-0013",
+				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /usr/local" },
+						{ "cmd": "ls /opt" },
+						{ "cmd": "ls /etc/init.d" },
+						{ "cmd": "ls /var/log" },
+						{ "cmd": "ls /sbin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "local" },
+						{ "type": "str", "rslt": "opt" },
+						{ "type": "str", "rslt": "init.d" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "sbin" }
+					]
+				}
+			},
+			{
+				"id": "0007",
+				"name": "TC-INSYS-LIN-0014",
+				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /proc" },
+						{ "cmd": "ls /sys" },
+						{ "cmd": "ls /dev" },
+						{ "cmd": "ls /tmp" },
+						{ "cmd": "ls /var/run" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "proc" },
+						{ "type": "str", "rslt": "sys" },
+						{ "type": "str", "rslt": "dev" },
+						{ "type": "str", "rslt": "tmp" },
+						{ "type": "str", "rslt": "run" }
+					]
+				}
+			}
+		],
+		"otp": [
+			{
+				"id": "0004",
+				"name": "TC-INSYS-LIN-0009",
+				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /etc" },
+						{ "cmd": "ls /var" },
+						{ "cmd": "ls /usr" },
+						{ "cmd": "ls /lib" },
+						{ "cmd": "ls /bin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "passwd" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "bin" },
+						{ "type": "str", "rslt": "lib64" },
+						{ "type": "str", "rslt": "bash" }
+					]
+				}
+			},
+			{
+				"id": "0005",
+				"name": "TC-INSYS-LIN-0010",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "uname -a" },
+						{ "cmd": "df -h" },
+						{ "cmd": "free -m" },
+						{ "cmd": "ps aux" },
+						{ "cmd": "lsblk" }
+					],
+					"criterion": [
+						{ "type": "regex", "rslt": "Linux" },
+						{ "type": "regex", "rslt": "[0-9]+G" },
+						{ "type": "regex", "rslt": "[0-9]+M" },
+						{ "type": "str", "rslt": "PID" },
+						{ "type": "str", "rslt": "sda" }
+					]
+				}
+			},
+			{
+				"id": "0006",
+				"name": "TC-INSYS-LIN-0011",
+				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /usr/local" },
+						{ "cmd": "ls /opt" },
+						{ "cmd": "ls /etc/init.d" },
+						{ "cmd": "ls /var/log" },
+						{ "cmd": "ls /sbin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "local" },
+						{ "type": "str", "rslt": "opt" },
+						{ "type": "str", "rslt": "init.d" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "sbin" }
+					]
+				}
+			},
+			{
+				"id": "0007",
+				"name": "TC-INSYS-LIN-0012",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /proc" },
+						{ "cmd": "ls /sys" },
+						{ "cmd": "ls /dev" },
+						{ "cmd": "ls /tmp" },
+						{ "cmd": "ls /var/run" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "proc" },
+						{ "type": "str", "rslt": "sys" },
+						{ "type": "str", "rslt": "dev" },
+						{ "type": "str", "rslt": "tmp" },
+						{ "type": "str", "rslt": "run" }
+					]
+				}
+			}
+		],
+		"SFI": [
+			{
+				"id": "0004",
+				"name": "TC-INSYS-SFI-0005",
+				"mode": "manual",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /etc" },
+						{ "cmd": "ls /var" },
+						{ "cmd": "ls /usr" },
+						{ "cmd": "ls /lib" },
+						{ "cmd": "ls /bin" }
+					]
+				}
+			},
+			{
+				"id": "0005",
+				"name": "TC-INSYS-SFI-0006",
+				"mode": "auto",
+				"BL" : "FALSE",
+				"BA" : "TRUE",
+				"LA" : "FALSE",
+				"tc": {
+					"list": [
+						{ "cmd": "uname -a" },
+						{ "cmd": "df -h" },
+						{ "cmd": "free -m" },
+						{ "cmd": "ps aux" },
+						{ "cmd": "lsblk" }
+					],
+					"criterion": [
+						{ "type": "regex", "rslt": "Linux" },
+						{ "type": "regex", "rslt": "[0-9]+G" },
+						{ "type": "regex", "rslt": "[0-9]+M" },
+						{ "type": "str", "rslt": "PID" },
+						{ "type": "str", "rslt": "sda" }
+					]
+				}
+			},
+			{
+				"id": "0006",
+				"name": "TC-INSYS-SFI-0013",
+				"mode": "manual",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "TRUE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /usr/local" },
+						{ "cmd": "ls /opt" },
+						{ "cmd": "ls /etc/init.d" },
+						{ "cmd": "ls /var/log" },
+						{ "cmd": "ls /sbin" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "local" },
+						{ "type": "str", "rslt": "opt" },
+						{ "type": "str", "rslt": "init.d" },
+						{ "type": "str", "rslt": "log" },
+						{ "type": "str", "rslt": "sbin" }
+					]
+				}
+			},
+			{
+				"id": "0007",
+				"name": "TC-INSYS-SFI-0014",
+				"mode": "auto",
+				"BL" : "TRUE",
+				"BA" : "TRUE",
+				"LA" : "FLASE",
+				"tc": {
+					"list": [
+						{ "cmd": "ls /proc" },
+						{ "cmd": "ls /sys" },
+						{ "cmd": "ls /dev" },
+						{ "cmd": "ls /tmp" },
+						{ "cmd": "ls /var/run" }
+					],
+					"criterion": [
+						{ "type": "str", "rslt": "proc" },
+						{ "type": "str", "rslt": "sys" },
+						{ "type": "str", "rslt": "dev" },
+						{ "type": "str", "rslt": "tmp" },
+						{ "type": "str", "rslt": "run" }
+					]
+				}
+			}
+		]
+	}
+  }
+  
+  
