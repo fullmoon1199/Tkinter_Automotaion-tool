@@ -6,10 +6,9 @@ from tkinter import Frame, X, N
 from tkinter import simpledialog
 from ttkwidgets import CheckboxTreeview
 import json
-
-
-
-
+import openpyxl
+from collections import OrderedDict
+from tkinter import filedialog
 import serial.tools.list_ports
 
 def on_search_port(): 
@@ -56,9 +55,52 @@ def on_shift_f3():
     # TODO: Shift+F3 동작 구현
     pass
 
-def on_import_json():
-    # TODO: Import Json 동작 구현
-    pass
+def on_open_excel():
+    file_path = filedialog.askopenfilename()
+    excel_file_path = file_path
+
+    wb = openpyxl.load_workbook(excel_file_path)
+    sheet = wb['Validation Result']
+
+    data_list = []
+
+    for rownum in range(6, 223):
+        data = OrderedDict()
+        column_value = [cell.value for cell in sheet[rownum]]
+        data['Number'] = column_value[0]
+        data['TC Number'] = column_value[1]
+        data['Category'] = column_value[2]
+        data['BL'] = column_value[9]
+        data['BA'] = column_value[10]
+        data['LA'] = column_value[11]
+        Command = column_value[25]
+        Criterion = column_value[26]
+
+        if Command:
+            Command = Command.split('\n')
+        else:
+            Command = []
+
+        if Criterion:
+            Criterion = Criterion.split('\n')
+        else:
+            Criterion = []
+        
+        data['Command'] = Command
+        data['Criterion'] = Criterion
+
+        data_list.append(data)
+
+    for i in range(len(data_list)):
+        print(data_list[i])
+
+    json_file_path = 'F:\\tkinter\\test.json'
+    with open(json_file_path, 'w', encoding='utf-8') as json_file:
+        json.dump(data_list, json_file, indent=4, ensure_ascii=False)
+
+    print(f"JSON 파일이 성공적으로 저장되었습니다: {json_file_path}")
+
+
 
 #hover 색상변경 기능5
 def on_enter(widget):
@@ -128,8 +170,8 @@ class Cont1:
         self.layout = tk.Label(self.buttonframe)
         self.layout.pack(padx=15 ,anchor=tk.NW, side=tk.LEFT)
 
-        self.import_json_button = tk.Button(self.buttonframe, text="Import Json", command=on_import_json, width=15, height=3)
-        self.import_json_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
+        self.open_excel_button = tk.Button(self.buttonframe, text="Open Excel", command=on_open_excel, width=15, height=3)
+        self.open_excel_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
         self.exit_button = tk.Button(self.buttonframe, text="Exit", command=window.quit, width=5, height=3, bg='red', fg='white',font=("Helvetica", 8, "bold"))
         self.exit_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
@@ -205,9 +247,6 @@ class Checklist:
         # Configure the CheckboxTreeview to use the scrollbar
         self.tree.configure(yscrollcommand=scrollbar.set)
         self.tree2.configure(yscrollcommand=scrollbar2.set)
-        self.tree.bind("<Double-1>", self.on_double_click)
-
-
 
         parent_id = ""
         #insert root node
@@ -284,19 +323,8 @@ class Checklist:
             title_label.config(text=f"Auto TC : # {len(get_checked)}개 / {auto}개")
             title_label2.config(text=f"Maunal TC : # {len(get_checked2)}개 / {manual}개")  
         
-
-                #수동 추가 부분
         button = tk.Button(frame2, text="Click Me", command=get_checked_bind)
         button.pack()
-
-        #수동 추가 부분
-
-
-    def on_double_click(self, event):
-        item_id = self.tree.selection()
-        if item_id:
-            item_text = self.tree.item(item_id, "text")
-            print(f"Double-clicked on item: {item_text}")
         
 class Textview:
     

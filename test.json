@@ -1,0 +1,2212 @@
+[
+    {
+        "Number": 1,
+        "TC Number": "TC-BOOT-LK-0001",
+        "Category": "Boot",
+        "BL": "O",
+        "BA": "X",
+        "LA": "X",
+        "Command": [
+            "nproc",
+            "echo 0 > /sys/devices/system/cpu/cpu2/online",
+            "echo 0 > /sys/devices/system/cpu/cpu1/online",
+            "nproc",
+            "cat /sys/devices/system/cpu/offline\t\t",
+            "echo 1 > /sys/devices/system/cpu/cpu1/online",
+            "echo 1 > /sys/devices/system/cpu/cpu2/online\"",
+            "nproc\""
+        ],
+        "Criterion": [
+            "10",
+            "None",
+            "None",
+            "8",
+            "1-2",
+            "None",
+            "None",
+            "10"
+        ]
+    },
+    {
+        "Number": 2,
+        "TC Number": "TC-BOOT-LK-0002",
+        "Category": "Boot",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [
+            "modprobe dmatest",
+            "echo -n 2000 >/sys/module/dmatest/parameters/timeout\" ",
+            "echo -n 1 >/sys/module/dmatest/parameters/iterations\" ",
+            "echo -n dma0chan0 > /sys/module/dmatest/parameters/channel",
+            "echo -n 1 >/sys/module/dmatest/parameters/run",
+            "dmesg | grep "
+        ],
+        "Criterion": []
+    },
+    {
+        "Number": 3,
+        "TC Number": "TC-BOOT-LK-0003",
+        "Category": "Boot",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [
+            "cat /sys/class/thermal/thermal_zone0/temp",
+            "cat /sys/class/thermal/thermal_zone1/temp",
+            "cat /sys/class/thermal/thermal_zone2/temp",
+            "cat /sys/class/thermal/thermal_zone3/temp",
+            "cat /sys/class/thermal/thermal_zone4/temp"
+        ],
+        "Criterion": [
+            "[0-9]{5}",
+            "[0-9]{5}",
+            "[0-9]{5}",
+            "[0-9]{5}",
+            "[0-9]{5}"
+        ]
+    },
+    {
+        "Number": 4,
+        "TC Number": "TC-BOOT-LIN-0001",
+        "Category": "Boot",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 5,
+        "TC Number": "TC-BOOT-AND-0001",
+        "Category": "Boot",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 6,
+        "TC Number": "TC-BOOT-LIN-0002",
+        "Category": "Boot",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 7,
+        "TC Number": "TC-BOOT-AND-0002",
+        "Category": "Boot",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 8,
+        "TC Number": "TC-BOOT-LIN-0003",
+        "Category": "Boot",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 9,
+        "TC Number": "TC-INSYS-LIN-0001",
+        "Category": "Internal System",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 10,
+        "TC Number": "TC-INSYS-AND-0001",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 11,
+        "TC Number": "TC-INSYS-LIN-0002",
+        "Category": "Internal System",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 12,
+        "TC Number": "TC-INSYS-LIN-0003",
+        "Category": "Internal System",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 13,
+        "TC Number": "TC-INSYS-AND-0002",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 14,
+        "TC Number": "TC-INSYS-LIN-0004",
+        "Category": "Internal System",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 15,
+        "TC Number": "TC-INSYS-AND-0003",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 16,
+        "TC Number": "TC-INSYS-LIN-0005",
+        "Category": "Internal System",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 17,
+        "TC Number": "TC-INSYS-AND-0004",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 18,
+        "TC Number": "TC-INSYS-LIN-0006",
+        "Category": "Internal System",
+        "BL": "O",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": null,
+        "TC Number": "TC-INSYS-LIN-0013",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 19,
+        "TC Number": "TC-INSYS-AND-0005",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 20,
+        "TC Number": "TC-INSYS-LIN-0007",
+        "Category": "Internal System",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 21,
+        "TC Number": "TC-INSYS-AND-0006",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 22,
+        "TC Number": "TC-INSYS-LIN-0008",
+        "Category": "Internal System",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 23,
+        "TC Number": "TC-INSYS-AND-0007",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 24,
+        "TC Number": "TC-INSYS-LIN-0009",
+        "Category": "Internal System",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 25,
+        "TC Number": "TC-INSYS-AND-0008",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 26,
+        "TC Number": "TC-INSYS-LIN-0010",
+        "Category": "Internal System",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 27,
+        "TC Number": "TC-INSYS-AND-0009",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 28,
+        "TC Number": "TC-INSYS-LIN-0011",
+        "Category": "Internal System",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 29,
+        "TC Number": "TC-INSYS-LIN-0012",
+        "Category": "Internal System",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 30,
+        "TC Number": "TC-INSYS-AND-0010",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 31,
+        "TC Number": "TC-INSYS-AND-0011",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 32,
+        "TC Number": "TC-EXIN-LIN-0001",
+        "Category": "External Interface",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 33,
+        "TC Number": "TC-EXIN-AND-0001",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 34,
+        "TC Number": "TC-EXIN-LIN-0002",
+        "Category": "External Interface",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 35,
+        "TC Number": "TC-EXIN-AND-0002",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 36,
+        "TC Number": "TC-EXIN-LIN-0003",
+        "Category": "External Interface",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 37,
+        "TC Number": "TC-EXIN-AND-0003",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 38,
+        "TC Number": "TC-EXIN-LIN-0004",
+        "Category": "External Interface",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 39,
+        "TC Number": "TC-EXIN-AND-0004",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 40,
+        "TC Number": "TC-EXIN-LIN-0005",
+        "Category": "External Interface",
+        "BL": "O",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": null,
+        "TC Number": "TC-EXIN-AND-0016",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 41,
+        "TC Number": "TC-EXIN-LIN-0006",
+        "Category": "External Interface",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 42,
+        "TC Number": "TC-EXIN-AND-0005",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 43,
+        "TC Number": "TC-EXIN-AND-0015",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 44,
+        "TC Number": "TC-EXIN-LIN-0007",
+        "Category": "External Interface",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 45,
+        "TC Number": "TC-EXIN-AND-0006",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 46,
+        "TC Number": "TC-EXIN-LIN-0008",
+        "Category": "External Interface",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 47,
+        "TC Number": "TC-EXIN-AND-0007",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 48,
+        "TC Number": "TC-EXIN-LIN-0009",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 49,
+        "TC Number": "TC-EXIN-LIN-0010",
+        "Category": "External Interface",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 50,
+        "TC Number": "TC-EXIN-AND-0008",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 51,
+        "TC Number": "TC-EXIN-LIN-0011",
+        "Category": "External Interface",
+        "BL": "O",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 52,
+        "TC Number": "TC-EXIN-AND-0009",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 53,
+        "TC Number": "TC-EXIN-LIN-0012",
+        "Category": "External Interface",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 54,
+        "TC Number": "TC-EXIN-AND-0010",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 55,
+        "TC Number": "TC-EXIN-LIN-0013",
+        "Category": "External Interface",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 56,
+        "TC Number": "TC-EXIN-AND-0011",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 57,
+        "TC Number": "TC-EXIN-LIN-0014",
+        "Category": "External Interface",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 58,
+        "TC Number": "TC-EXIN-AND-0012",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 59,
+        "TC Number": "TC-EXIN-VM-0001",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 60,
+        "TC Number": "TC-EXIN-VM-0002",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 61,
+        "TC Number": "TC-EXIN-LIN-0015",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 62,
+        "TC Number": "TC-EXIN-AND-0013",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 63,
+        "TC Number": "TC-EXIN-LIN-0016",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 64,
+        "TC Number": "TC-EXIN-AND-0014",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 65,
+        "TC Number": "TC-MM-LIN-0001",
+        "Category": "Graphic",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 66,
+        "TC Number": "TC-MM-AND-0001",
+        "Category": "Graphic",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 67,
+        "TC Number": "TC-MM-LIN-0002",
+        "Category": "Video",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 68,
+        "TC Number": "TC-MM-AND-0002",
+        "Category": "Video",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 69,
+        "TC Number": "TC-MM-LIN-0003",
+        "Category": "Video",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 70,
+        "TC Number": "TC-MM-AND-0003",
+        "Category": "Video",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 71,
+        "TC Number": "TC-MM-LIN-0004",
+        "Category": "Audio",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 72,
+        "TC Number": "TC-MM-AND-0004",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 73,
+        "TC Number": "TC-MM-LIN-0012",
+        "Category": "Audio",
+        "BL": "O",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 74,
+        "TC Number": "TC-MM-LIN-0013",
+        "Category": "Audio",
+        "BL": "O",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 75,
+        "TC Number": "TC-MM-LIN-0014",
+        "Category": "Audio",
+        "BL": "O",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 76,
+        "TC Number": "TC-MM-LIN-0015",
+        "Category": "Audio",
+        "BL": "O",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 77,
+        "TC Number": "TC-MM-LIN-0016",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 78,
+        "TC Number": "TC-MM-LIN-0017",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 79,
+        "TC Number": "TC-MM-AND-0009",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 80,
+        "TC Number": "TC-MM-AND-0010",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 81,
+        "TC Number": "TC-MM-AND-0011",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 82,
+        "TC Number": "TC-MM-AND-0012",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 83,
+        "TC Number": "TC-MM-AND-0013",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 84,
+        "TC Number": "TC-MM-AND-0014",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 85,
+        "TC Number": "TC-MM-LIN-0006",
+        "Category": "Audio",
+        "BL": "O",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 86,
+        "TC Number": "TC-MM-AND-0015",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 87,
+        "TC Number": "TC-MM-AND-0016",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 88,
+        "TC Number": "TC-MM-LIN-0007",
+        "Category": "Audio",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 89,
+        "TC Number": "TC-MM-AND-0007",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 91,
+        "TC Number": "TC-MM-LIN-0018",
+        "Category": "Audio",
+        "BL": "O",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 92,
+        "TC Number": "TC-MM-LIN-0019",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 93,
+        "TC Number": "TC-MM-AND-0008",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 94,
+        "TC Number": "TC-MM-LIN-0009",
+        "Category": "Audio",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 95,
+        "TC Number": "TC-MM-LIN-0010",
+        "Category": "Audio",
+        "BL": "O",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 96,
+        "TC Number": "TC-MM-LIN-0011",
+        "Category": "Audio",
+        "BL": "O",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 97,
+        "TC Number": "TC-HYP-LIN-0001",
+        "Category": "Hypervisor",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 98,
+        "TC Number": "TC-HYP-AND-0001",
+        "Category": "Hypervisor",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 99,
+        "TC Number": "TC-HYP-AND-0002",
+        "Category": "Hypervisor",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 100,
+        "TC Number": "TC-HYP-LIN-0002",
+        "Category": "Hypervisor",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 101,
+        "TC Number": "TC-HYP-AND-0003",
+        "Category": "Hypervisor",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 102,
+        "TC Number": "TC-HYP-LIN-0003",
+        "Category": "Hypervisor",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 103,
+        "TC Number": "TC-HYP-AND-0004",
+        "Category": "Hypervisor",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 104,
+        "TC Number": "TC-HYP-LIN-0004",
+        "Category": "Hypervisor",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 105,
+        "TC Number": "TC-HYP-AND-0005",
+        "Category": "Hypervisor",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 106,
+        "TC Number": "TC-CAM-LIN-0001",
+        "Category": "Camera",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 107,
+        "TC Number": "TC-CAM-AND-0001",
+        "Category": "Camera",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 108,
+        "TC Number": "TC-NPU-AND-0001",
+        "Category": "NPU",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 109,
+        "TC Number": "TC-SEC-LIN-0001",
+        "Category": "Security",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 110,
+        "TC Number": "TC-SEC-AND-0001",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 111,
+        "TC Number": "TC-SEC-AND-0002",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 112,
+        "TC Number": "TC-SEC-AND-0003",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 113,
+        "TC Number": "TC-SEC-AND-0004",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 114,
+        "TC Number": "TC-SEC-LIN-0002",
+        "Category": "Security",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 115,
+        "TC Number": "TC-SEC-LK-0001",
+        "Category": "Security",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 116,
+        "TC Number": "TC-SEC-LK-0002",
+        "Category": "Security",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 117,
+        "TC Number": "TC-SEC-LIN-0003",
+        "Category": "Security",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 118,
+        "TC Number": "TC-SEC-AND-0005",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 119,
+        "TC Number": "TC-SEC-AND-0006",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 120,
+        "TC Number": "TC-SEC-LIN-0004",
+        "Category": "Security",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 121,
+        "TC Number": "TC-SEC-AND-0007",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 122,
+        "TC Number": "TC-SEC-LIN-0005",
+        "Category": "Security",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 123,
+        "TC Number": "TC-SEC-AND-0008",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 124,
+        "TC Number": "TC-SEC-AND-0009",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 125,
+        "TC Number": "TC-SEC-LIN-0006",
+        "Category": "Security",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 126,
+        "TC Number": "TC-SEC-AND-0010",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 127,
+        "TC Number": "TC-SEC-AND-0011",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 128,
+        "TC Number": "TC-SEC-AND-0012",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 129,
+        "TC Number": "TC-SEC-LIN-0007",
+        "Category": "Security",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 130,
+        "TC Number": "TC-SEC-AND-0013",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 131,
+        "TC Number": "TC-SEC-LIN-0008",
+        "Category": "Security",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 132,
+        "TC Number": "TC-SEC-LK-0003",
+        "Category": "Security",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 133,
+        "TC Number": "TC-SEC-LK-0004",
+        "Category": "Security",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 134,
+        "TC Number": "TC-SEC-LIN-0009",
+        "Category": "Security",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 135,
+        "TC Number": "TC-SEC-AND-0014",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 136,
+        "TC Number": "TC-SFI-LIN-0001",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 136,
+        "TC Number": "TC-SFI-LIN-0001",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 137,
+        "TC Number": "TC-SFI-AND-0001",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 138,
+        "TC Number": "TC-SFI-LIN-0002",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 139,
+        "TC Number": "TC-SFI-AND-0002",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 140,
+        "TC Number": "TC-SFI-LIN-0003",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 141,
+        "TC Number": "TC-SFI-AND-0003",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 142,
+        "TC Number": "TC-SFI-LIN-0004",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 143,
+        "TC Number": "TC-SFI-AND-0004",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 144,
+        "TC Number": "TC-SFI-LIN-0005",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 145,
+        "TC Number": "TC-SFI-AND-0005",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 146,
+        "TC Number": "TC-SFI-LIN-0006",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 147,
+        "TC Number": "TC-SFI-AND-0006",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 148,
+        "TC Number": "TC-SFI-LIN-0007",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 149,
+        "TC Number": "TC-SFI-AND-0007",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 150,
+        "TC Number": "TC-SFI-LIN-0008",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 151,
+        "TC Number": "TC-SFI-AND-0008",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 152,
+        "TC Number": "TC-SFI-LIN-0009",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 153,
+        "TC Number": "TC-SFI-AND-0009",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 154,
+        "TC Number": "TC-SFI-LIN-0010",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 155,
+        "TC Number": "TC-SFI-AND-0010",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 156,
+        "TC Number": "TC-SFI-LIN-0011",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 157,
+        "TC Number": "TC-SFI-AND-0011",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 158,
+        "TC Number": "TC-SFI-LIN-0012",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 159,
+        "TC Number": "TC-SFI-AND-0012",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 160,
+        "TC Number": "TC-SFI-LIN-0013",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 161,
+        "TC Number": "TC-SFI-AND-0013",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 162,
+        "TC Number": "TC-SFI-LIN-0014",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 163,
+        "TC Number": "TC-SFI-AND-0014",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 164,
+        "TC Number": "TC-SFI-LIN-0015",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 165,
+        "TC Number": "TC-SFI-AND-0015",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 166,
+        "TC Number": "TC-SFI-LIN-0016",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 167,
+        "TC Number": "TC-SFI-AND-0016",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 168,
+        "TC Number": "TC-SFI-LIN-0017",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 169,
+        "TC Number": "TC-SFI-AND-0017",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 170,
+        "TC Number": "TC-SFI-LIN-0018",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 171,
+        "TC Number": "TC-SFI-AND-0018",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 172,
+        "TC Number": "TC-SFI-LIN-0019",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 173,
+        "TC Number": "TC-SFI-AND-0019",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 174,
+        "TC Number": "TC-SFI-LIN-0020",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 175,
+        "TC Number": "TC-SFI-AND-0020",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 176,
+        "TC Number": "TC-SFI-LIN-0021",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 177,
+        "TC Number": "TC-SFI-AND-0021",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 178,
+        "TC Number": "TC-SFI-LIN-0022",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 179,
+        "TC Number": "TC-SFI-AND-0022",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 180,
+        "TC Number": "TC-SFI-LIN-0023",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 181,
+        "TC Number": "TC-SFI-AND-0023",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 182,
+        "TC Number": "TC-SFI-LIN-0024",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 183,
+        "TC Number": "TC-SFI-AND-0024",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 184,
+        "TC Number": "TC-SFI-LIN-0025",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 185,
+        "TC Number": "TC-SFI-AND-0025",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 186,
+        "TC Number": "TC-SFI-LIN-0026",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 187,
+        "TC Number": "TC-SFI-AND-0026",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 194,
+        "TC Number": "TC-SFI-LIN-0030",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 195,
+        "TC Number": "TC-SFI-AND-0030",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 196,
+        "TC Number": "TC-SFI-LIN-0031",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 197,
+        "TC Number": "TC-SFI-AND-0031",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 198,
+        "TC Number": "TC-SFI-LIN-0032",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 199,
+        "TC Number": "TC-SFI-AND-0032",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 200,
+        "TC Number": "TC-SFI-LIN-0033",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 201,
+        "TC Number": "TC-SFI-AND-0033",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 202,
+        "TC Number": "TC-SFI-LIN-0034",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 203,
+        "TC Number": "TC-SFI-AND-0034",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 204,
+        "TC Number": "TC-SFI-LIN-0035",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": [
+            "sficli gpt 1us",
+            "dmesg | grep CR-52"
+        ]
+    },
+    {
+        "Number": 205,
+        "TC Number": "TC-SFI-AND-0035",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 206,
+        "TC Number": "TC-SFI-LIN-0036",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 207,
+        "TC Number": "TC-SFI-AND-0036",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 208,
+        "TC Number": "TC-SFI-LIN-0037",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 209,
+        "TC Number": "TC-SFI-AND-0037",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 210,
+        "TC Number": "TC-SFI-LIN-0038",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 211,
+        "TC Number": "TC-SFI-AND-0038",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 212,
+        "TC Number": "TC-SFI-LIN-0039",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 213,
+        "TC Number": "TC-SFI-LIN-0040",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 214,
+        "TC Number": "TC-SFI-LIN-0041",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 215,
+        "TC Number": "TC-SFI-LIN-0042",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 216,
+        "TC Number": "TC-SFI-AND-0039",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 217,
+        "TC Number": "TC-SFI-LIN-0043",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 218,
+        "TC Number": "TC-SFI-AND-0040",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 219,
+        "TC Number": "TC-SFI-LIN-0044",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 220,
+        "TC Number": "TC-SFI-AND-0041",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "X",
+        "LA": "X",
+        "Command": [],
+        "Criterion": []
+    },
+    {
+        "Number": 221,
+        "TC Number": "TC-SFI-LIN-0045",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Command": [],
+        "Criterion": []
+    }
+]
