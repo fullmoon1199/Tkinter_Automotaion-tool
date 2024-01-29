@@ -55,7 +55,7 @@ def on_shift_f3():
     # TODO: Shift+F3 동작 구현
     pass
 
-def on_open_excel(container6):
+def on_open_excel():
     file_path = filedialog.askopenfilename()
     excel_file_path = file_path
 
@@ -73,8 +73,9 @@ def on_open_excel(container6):
         data['BL'] = column_value[9]
         data['BA'] = column_value[10]
         data['LA'] = column_value[11]
-        Command = column_value[25]
-        Criterion = column_value[26]
+        data['Mode'] = column_value[25]
+        Command = column_value[26]
+        Criterion = column_value[27]
 
         if Command:
             Command = Command.split('\n')
@@ -100,8 +101,10 @@ def on_open_excel(container6):
 
     print(f"JSON 파일이 성공적으로 저장되었습니다: {json_file_path}")
 
-    container6.add_node_callback1()
+    add_node_callback()
 
+def add_node_callback():
+    container6.add_node()   
 
 #hover 색상변경 기능5
 def on_enter(widget):
@@ -171,7 +174,7 @@ class Cont1:
         self.layout = tk.Label(self.buttonframe)
         self.layout.pack(padx=15 ,anchor=tk.NW, side=tk.LEFT)
 
-        self.open_excel_button = tk.Button(self.buttonframe, text="Open Excel", command=lambda: add_node_callback(container6), width=15, height=3)
+        self.open_excel_button = tk.Button(self.buttonframe, text="Open Excel", command=on_open_excel, width=15, height=3)
         self.open_excel_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
         self.exit_button = tk.Button(self.buttonframe, text="Exit", command=window.quit, width=5, height=3, bg='red', fg='white',font=("Helvetica", 8, "bold"))
@@ -208,10 +211,11 @@ class Cont3: # 리스트 뷰 컨테이너
         
         
 class Checklist:
+    auto = 0
+    manual = 0
     def __init__(self, window):
 
-        auto = 0
-        manual = 0
+
     
         Checklist_LargeFrame = tk.Frame(window, bg = 'white')
         Checklist_LargeFrame.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.LEFT)
@@ -223,12 +227,12 @@ class Checklist:
         frame2.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.LEFT)
 
         # Create the CheckboxTreeview
-        title_label = tk.Label(frame, text=f"Auto TC : # 선택개수 / {auto}개", font=("Helvetica", 10, "bold"),bg='white')
+        title_label = tk.Label(frame, text=f"Auto TC : # 선택개수 / {self.auto}개", font=("Helvetica", 10, "bold"),bg='white')
         title_label.pack()
         self.tree = CheckboxTreeview(frame)
         self.tree.pack(side=tk.LEFT, fill='y')
 
-        title_label2 = tk.Label(frame2, text=f"Manual TC : # 선택개수 / {manual}개", font=("Helvetica", 10, "bold"),bg='white')
+        title_label2 = tk.Label(frame2, text=f"Manual TC : # 선택개수 / {self.manual}개", font=("Helvetica", 10, "bold"),bg='white')
         title_label2.pack()
         self.tree2 = CheckboxTreeview(frame2)
         self.tree2.pack(side=tk.LEFT, fill='y')
@@ -239,97 +243,121 @@ class Checklist:
 
         scrollbar2 = tk.Scrollbar(frame2, orient='vertical', command=self.tree2.yview)
         scrollbar2.pack(side=tk.RIGHT, fill='y')
-        title_label.config(text=f"Auto TC : # 선택개수 / {auto}개")
-        title_label2.config(text=f"Auto TC : # 선택개수 / {manual}개")       
+
+        self.tree.configure(yscrollcommand=scrollbar.set)
+        self.tree2.configure(yscrollcommand=scrollbar2.set)
+        title_label.config(text=f"Auto TC : # 선택개수 / {self.auto}개")
+        title_label2.config(text=f"Man TC : # 선택개수 / {self.manual}개")       
 
         def get_checked_bind():   
             get_checked = self.tree.get_checked()
             get_checked2 = self.tree2.get_checked()
             print(len(get_checked))
             print(len(get_checked2))
-            title_label.config(text=f"Auto TC : # {len(get_checked)}개 / {auto}개")
-            title_label2.config(text=f"Maunal TC : # {len(get_checked2)}개 / {manual}개")  
+            title_label.config(text=f"Auto TC : # {len(get_checked)}개 / {self.auto}개")
+            title_label2.config(text=f"Maunal TC : # {len(get_checked2)}개 / {self.manual}개")  
         
         button = tk.Button(frame2, text="Click Me", command=get_checked_bind)
         button.pack()
 
-        def add_node(self):
+    def add_node(self):
+        with open('F:\\tkinter\\test.json') as file:
+            datas = json.load(file)
 
-            with open('F:\\tkinter\\01_practice\\sample2.json') as file:
-                datas = json.load(file)
-                linux_feature = list(datas['Linux'].keys())
-                android_feature = list(datas['Android'].keys())
-                la_feature = list(datas['LinuxAndroid'].keys())
-        # Configure the CheckboxTreeview to use the scrollbar
-            self.tree.configure(yscrollcommand=scrollbar.set)
-            self.tree2.configure(yscrollcommand=scrollbar2.set)
-
-            parent_id = ""
-        #insert root node
-            Linux = str(1)
-            Android = str(2)
-            LA = str(3)
-
+        parent_id = ""
+        Linux = str(1)
+        Android = str(2)
+        LA = str(3)
         #tree node insert
-            self.tree.insert(parent_id, "end", Linux, text='Linux')
-            self.tree.insert(parent_id, "end", Android, text='Android')
-            self.tree.insert(parent_id, "end", LA, text='LinuxAndroid')
-            self.tree2.insert(parent_id, "end", Linux, text='Linux')
-            self.tree2.insert(parent_id, "end", Android, text='Android')
-            self.tree2.insert(parent_id, "end", LA, text='LinuxAndroid')
+        self.tree.insert(parent_id, "end", Linux, text='Linux')
+        self.tree.insert(parent_id, "end", Android, text='Android')
+        self.tree.insert(parent_id, "end", LA, text='LinuxAndroid')
+        self.tree2.insert(parent_id, "end", Linux, text='Linux')
+        self.tree2.insert(parent_id, "end", Android, text='Android')
+        self.tree2.insert(parent_id, "end", LA, text='LinuxAndroid')
 
-        #하위 nood insert
-            for i in range(0, linux_feature.__len__()):
-                node_id = f"{i}1"
-                self.tree.insert(Linux, "end", node_id, text=linux_feature[i])
-                self.tree2.insert(Linux, "end", node_id, text=linux_feature[i])
-                sublist = datas['Linux'][linux_feature[i]]
-                json_test = [feature['name'] for feature in sublist]
-
-                for j in range(json_test.__len__()):
-                    find_mode = [feature['mode'] for feature in sublist]
-                    if find_mode[j] == 'auto':
-                        self.tree.insert(node_id, "end", f"{i}2_{j}", text=json_test[j])
-                        auto += 1
-                    else:
-                        self.tree2.insert(node_id, "end", f"{i}2_{j}", text=json_test[j])
-                        manual += 1
-
-            for i in range(0, android_feature.__len__()):
-                node_id2 = f"{i}2"
-                self.tree.insert(Android, "end", node_id2, text=android_feature[i])
-                self.tree2.insert(Android, "end", node_id2, text=android_feature[i])
-                sublist2 = datas['Android'][android_feature[i]]
-                json_test2 = [feature['name'] for feature in sublist2]
+        Category_list = list(set([item["Category"] for item in datas]))
+        for i in range(0, len(Category_list)):
+            auto_node_id = f"{i}1"   
+            self.tree.insert(Linux, "end", auto_node_id, text=Category_list[i])
+            self.tree.insert(auto_node_id, "end", f"{i}2", text=[item["TC Number"] for item in datas if item["BL"] == "O" and item["Mode"] == "auto" and item["Category"] == f"{i}"])
+        # for i in range(0, len(Category_list)):
+        #     auto_node_id = f"{i}2"   
+        #     self.tree.insert(Android, "end", auto_node_id, text=Category_list[i])
+        # for i in range(0, len(Category_list)):
+        #     auto_node_id = f"{i}3"   
+        #     self.tree.insert(LA, "end", auto_node_id, text=Category_list[i])
             
-                for j in range(json_test2.__len__()):
-                    find_mode = [feature['mode'] for feature in sublist]
-                    if find_mode[j] == 'auto':
-                        self.tree.insert(node_id2, "end", f"{i}3_{j}", text=json_test2[j])
-                        auto += 1
-                    else:
-                        self.tree2.insert(node_id2, "end", f"{i}3_{j}", text=json_test2[j])
-                        manual += 1
+        for i in Category_list: 
+            print([item["TC Number"] for item in datas if item["BL"] == "O" and item["Mode"] == "auto" and item["Category"] == f"{i}"] )
+            print([item["TC Number"] for item in datas if item["BA"] == "O" and item["Mode"] == "auto" and item["Category"] == f"{i}"])
+            print([item["TC Number"] for item in datas if item["LA"] == "O" and item["Mode"] == "auto" and item["Category"] == f"{i}"])
+            
+        print(Category_list)
 
             
-            for i in range(0, la_feature.__len__()):
-                node_id3 = f"{i}3"
-                self.tree.insert(LA, "end", node_id3, text=la_feature[i])
-                self.tree2.insert(LA, "end", node_id3, text=la_feature[i])
-                sublist3 = datas['LinuxAndroid'][la_feature[i]]
-                json_test3 = [feature['name'] for feature in sublist3]
-            
-                for j in range(json_test3.__len__()):
-                    find_mode = [feature['mode'] for feature in sublist]
-                    if find_mode[j] == 'auto':
-                        self.tree.insert(node_id3, "end", f"{i}4_{j}", text=json_test3[j])
-                        auto += 1
-                    else:
-                        self.tree2.insert(node_id3, "end", f"{i}4_{j}", text=json_test3[j])
-                        manual += 1
-    def add_node_callback(checklist_instance):
-        checklist_instance.add_node()
 
+
+
+        # # Configure the CheckboxTreeview to use the scrollbar
+        # parent_id = ""
+        # #insert root node
+        # Linux = str(1)
+        # Android = str(2)
+        # LA = str(3)
+        # #tree node insert
+        # self.tree.insert(parent_id, "end", Linux, text='Linux')
+        # self.tree.insert(parent_id, "end", Android, text='Android')
+        # self.tree.insert(parent_id, "end", LA, text='LinuxAndroid')
+        # self.tree2.insert(parent_id, "end", Linux, text='Linux')
+        # self.tree2.insert(parent_id, "end", Android, text='Android')
+        # self.tree2.insert(parent_id, "end", LA, text='LinuxAndroid')
+        # #하위 nood insert
+        # for i in range(0, linux_feature.__len__()):
+        #     node_id = f"{i}1"
+        #     self.tree.insert(Linux, "end", node_id, text=linux_feature[i])
+        #     self.tree2.insert(Linux, "end", node_id, text=linux_feature[i])
+        #     sublist = datas['Linux'][linux_feature[i]]
+        #     json_test = [feature['name'] for feature in sublist]
+        #     for j in range(json_test.__len__()):
+        #         find_mode = [feature['mode'] for feature in sublist]
+        #         if find_mode[j] == 'auto':
+        #             self.tree.insert(node_id, "end", f"{i}2_{j}", text=json_test[j])
+        #             self.auto += 1
+        #         else:
+        #             self.tree2.insert(node_id, "end", f"{i}2_{j}", text=json_test[j])
+        #             self.manual += 1
+        # for i in range(0, android_feature.__len__()):
+        #     node_id2 = f"{i}2"
+        #     self.tree.insert(Android, "end", node_id2, text=android_feature[i])
+        #     self.tree2.insert(Android, "end", node_id2, text=android_feature[i])
+        #     sublist2 = datas['Android'][android_feature[i]]
+        #     json_test2 = [feature['name'] for feature in sublist2]
+        #     for j in range(json_test2.__len__()):
+        #         find_mode = [feature['mode'] for feature in sublist]
+        #         if find_mode[j] == 'auto':
+        #             self.tree.insert(node_id2, "end", f"{i}3_{j}", text=json_test2[j])
+        #             self.auto += 1
+        #         else:
+        #             self.tree2.insert(node_id2, "end", f"{i}3_{j}", text=json_test2[j])
+        #             self.manual += 1
+        
+        # for i in range(0, la_feature.__len__()):
+        #     node_id3 = f"{i}3"
+        #     self.tree.insert(LA, "end", node_id3, text=la_feature[i])
+        #     self.tree2.insert(LA, "end", node_id3, text=la_feature[i])
+        #     sublist3 = datas['LinuxAndroid'][la_feature[i]]
+        #     json_test3 = [feature['name'] for feature in sublist3]
+            
+        #     for j in range(json_test3.__len__()):
+        #         find_mode = [feature['mode'] for feature in sublist]
+        #         if find_mode[j] == 'auto':
+        #             self.tree.insert(node_id3, "end", f"{i}4_{j}", text=json_test3[j])
+        #             self.auto += 1
+        #         else:
+        #             self.tree2.insert(node_id3, "end", f"{i}4_{j}", text=json_test3[j])
+        #             self.manual += 1
+        
 class Textview:
     
     def __init__(self, window):

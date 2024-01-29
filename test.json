@@ -6,6 +6,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [
             "nproc",
             "echo 0 > /sys/devices/system/cpu/cpu2/online",
@@ -34,6 +35,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "auto",
         "Command": [
             "modprobe dmatest",
             "echo -n 2000 >/sys/module/dmatest/parameters/timeout\" ",
@@ -51,6 +53,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [
             "cat /sys/class/thermal/thermal_zone0/temp",
             "cat /sys/class/thermal/thermal_zone1/temp",
@@ -73,6 +76,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -83,6 +87,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -93,6 +98,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -103,6 +109,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -113,6 +120,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -123,6 +131,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -133,6 +142,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -143,6 +153,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -153,6 +164,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -163,6 +175,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -173,6 +186,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -183,6 +197,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -193,6 +208,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -203,6 +219,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -213,6 +230,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -223,6 +241,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -233,6 +252,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -243,6 +263,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -253,6 +274,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -263,6 +285,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -273,6 +296,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -283,6 +307,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -293,6 +318,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -303,6 +329,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -313,6 +340,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -323,6 +351,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -333,6 +362,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -343,6 +373,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -353,6 +384,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -363,6 +395,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -373,6 +406,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -383,6 +417,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -393,6 +428,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -403,6 +439,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -413,6 +450,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -423,6 +461,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -433,6 +472,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -443,6 +483,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -453,6 +494,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -463,6 +505,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -473,6 +516,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -483,6 +527,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -493,6 +538,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -503,6 +549,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -513,6 +560,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -523,6 +571,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -533,6 +582,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -543,6 +593,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -553,6 +604,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -563,6 +615,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -573,6 +626,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -583,6 +637,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -593,6 +648,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -603,6 +659,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -613,6 +670,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -623,6 +681,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -633,6 +692,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -643,6 +703,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -653,6 +714,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -663,6 +725,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -673,6 +736,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -683,6 +747,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -693,6 +758,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -703,6 +769,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -713,6 +780,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -723,6 +791,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -733,6 +802,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -743,6 +813,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -753,6 +824,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -763,6 +835,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -773,6 +846,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -783,6 +857,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -793,6 +868,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -803,6 +879,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -813,6 +890,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -823,6 +901,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -833,6 +912,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -843,6 +923,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -853,6 +934,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -863,6 +945,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -873,6 +956,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -883,6 +967,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -893,6 +978,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -903,6 +989,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -913,6 +1000,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -923,6 +1011,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -933,6 +1022,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -943,6 +1033,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -953,6 +1044,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -963,6 +1055,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -973,6 +1066,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -983,6 +1077,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -993,6 +1088,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1003,6 +1099,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1013,6 +1110,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1023,6 +1121,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1033,6 +1132,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1043,6 +1143,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1053,6 +1154,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1063,6 +1165,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1073,6 +1176,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1083,6 +1187,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1093,6 +1198,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1103,6 +1209,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1113,6 +1220,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1123,6 +1231,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1133,6 +1242,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1143,6 +1253,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1153,6 +1264,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1163,6 +1275,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1173,6 +1286,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1183,6 +1297,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1193,6 +1308,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1203,6 +1319,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1213,6 +1330,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1223,6 +1341,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1233,6 +1352,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1243,6 +1363,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1253,6 +1374,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1263,6 +1385,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1273,6 +1396,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1283,6 +1407,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1293,6 +1418,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1303,6 +1429,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1313,6 +1440,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1323,6 +1451,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1333,6 +1462,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1343,6 +1473,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1353,6 +1484,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1363,6 +1495,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1373,6 +1506,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1383,6 +1517,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1393,6 +1528,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1403,6 +1539,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1413,6 +1550,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1423,6 +1561,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1433,6 +1572,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1443,6 +1583,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1453,6 +1594,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1463,6 +1605,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1473,6 +1616,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1483,6 +1627,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": null,
         "Command": [],
         "Criterion": []
     },
@@ -1493,6 +1638,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1503,6 +1649,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1513,6 +1660,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1523,6 +1671,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1533,6 +1682,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1543,6 +1693,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1553,6 +1704,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1563,6 +1715,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1573,6 +1726,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1583,6 +1737,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1593,6 +1748,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1603,6 +1759,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1613,6 +1770,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1623,6 +1781,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1633,6 +1792,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1643,6 +1803,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1653,6 +1814,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1663,6 +1825,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1673,6 +1836,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1683,6 +1847,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1693,6 +1858,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1703,6 +1869,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1713,6 +1880,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1723,6 +1891,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1733,6 +1902,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1743,6 +1913,7 @@
         "BL": "X",
         "BA": "O",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1753,6 +1924,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1763,6 +1935,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1773,6 +1946,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1783,6 +1957,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1793,6 +1968,7 @@
         "BL": "O",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1803,6 +1979,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1813,6 +1990,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1823,6 +2001,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1833,6 +2012,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1843,6 +2023,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1853,6 +2034,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1863,6 +2045,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1873,6 +2056,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1883,6 +2067,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1893,6 +2078,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1903,6 +2089,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1913,6 +2100,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1923,6 +2111,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1933,6 +2122,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1943,6 +2133,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1953,6 +2144,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1963,6 +2155,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1973,6 +2166,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -1983,6 +2177,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -1993,6 +2188,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -2003,6 +2199,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -2013,6 +2210,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -2023,6 +2221,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -2033,6 +2232,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": [
             "sficli gpt 1us",
@@ -2046,6 +2246,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -2056,6 +2257,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -2066,6 +2268,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -2076,6 +2279,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -2086,6 +2290,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -2096,6 +2301,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -2106,6 +2312,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -2116,6 +2323,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -2126,6 +2334,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -2136,6 +2345,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -2146,6 +2356,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -2156,6 +2367,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -2166,6 +2378,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -2176,6 +2389,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     },
@@ -2186,6 +2400,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -2196,6 +2411,7 @@
         "BL": "X",
         "BA": "X",
         "LA": "X",
+        "Mode": "auto",
         "Command": [],
         "Criterion": []
     },
@@ -2206,6 +2422,7 @@
         "BL": "O",
         "BA": "O",
         "LA": "O",
+        "Mode": "manual",
         "Command": [],
         "Criterion": []
     }

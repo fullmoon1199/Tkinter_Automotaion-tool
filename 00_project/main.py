@@ -324,8 +324,6 @@ class Checklist:
                 else:
                     self.tree2.insert(node_id3, "end", f"{i}4_{j}", text=json_test3[j])
                     self.manual += 1
-
-
         
 class Textview:
     
