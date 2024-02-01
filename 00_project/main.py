@@ -75,7 +75,7 @@ def on_open_excel():
         data['LinuxAndroid'] = column_value[11]
         data['Mode'] = column_value[25]
         Command = column_value[7]
-        Criterion = column_value[27]
+        Criterion = column_value[5]
 
         if Command:
             Command = Command.split('\n')
@@ -103,7 +103,7 @@ def on_open_excel():
 def add_node_callback():
     container6.add_node()   
 
-#hover 색상변경 기능5
+#hover color change function
 def on_enter(widget):
     widget.config(bg='lightblue')
 def on_leave(widget):
@@ -124,6 +124,7 @@ title_label2 = tk.Label(title_label1, text="Ver.0.0.1", font=("Helvetica", 10,))
 title_label1.pack(pady=12 ,fill=X)
 title_label2.pack(side=tk.RIGHT)
 
+#button GUI 
 class Cont1:
     def __init__(self, window):
         self.buttonframe = Frame(window)
@@ -176,8 +177,9 @@ class Cont1:
 
         self.exit_button = tk.Button(self.buttonframe, text="Exit", command=window.quit, width=5, height=3, bg='red', fg='white',font=("Helvetica", 8, "bold"))
         self.exit_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
-        
-class Cont2: # 진행바 컨테이너
+
+# progress bar GUI  
+class Cont2: 
     def __init__(self, window):
         self.progressframe = Frame(window)
         self.progressframe.pack(fill=X, anchor=N)
@@ -192,28 +194,12 @@ class Cont2: # 진행바 컨테이너
         self.progressbar['value'] = value
         self.progress_label.config(text=f"진행률: {value}%")
 
-# Usage example:
-  # Update progress to 50%
-
-class Cont3: # 리스트 뷰 컨테이너
-    def __init__(self,window):
-        self.listviewframe=Frame(window)
-        self.listviewframe.pack(fill=X, anchor=N)
-
-        self.list_view = tk.Listbox(self.listviewframe, width=40, height=45)  # 크기 조절은 필요에 따라 수정
-        self.list_view.pack(padx=5, pady=3, anchor=tk.NW, side=tk.LEFT)
-
-        self.list_view = tk.Listbox(self.listviewframe, width=180, height=45)  # 크기 조절은 필요에 따라 수정
-        self.list_view.pack(padx=5, pady=3, anchor=tk.NW, side=tk.LEFT)
-        
-        
+#checkbox GUI 
 class Checklist:
     auto = 0
     manual = 0
     def __init__(self, window):
-
-
-    
+        
         Checklist_LargeFrame = tk.Frame(window, bg = 'white')
         Checklist_LargeFrame.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.LEFT)
         # Create a frame to hold the CheckboxTreeview and scrollbar
@@ -244,19 +230,31 @@ class Checklist:
         self.tree.configure(yscrollcommand=scrollbar.set)
         self.tree2.configure(yscrollcommand=scrollbar2.set)
         title_label.config(text=f"Auto TC : # 선택개수 / {self.auto}개")
-        title_label2.config(text=f"Man TC : # 선택개수 / {self.manual}개")       
+        title_label2.config(text=f"Man TC : # 선택개수 / {self.manual}개")      
 
-        def get_checked_bind():   
+        def get_checked_bind():
+            # Get checked items from the CheckboxTreeviews
             get_checked = self.tree.get_checked()
             get_checked2 = self.tree2.get_checked()
-            print(len(get_checked))
-            print(len(get_checked2))
-            title_label.config(text=f"Auto TC : # {len(get_checked)}개 / {self.auto}개")
-            title_label2.config(text=f"Maunal TC : # {len(get_checked2)}개 / {self.manual}개")  
-        
+
+            # Filter items with level 2
+            level_2_checked = [item for item in get_checked if self.tree.parent(item) != ""]
+            level_2_checked2 = [item for item in get_checked2 if self.tree2.parent(item) != ""]
+
+            # Print and update labels with the count of level 2 checked items
+            print(len(level_2_checked))
+            print(len(level_2_checked2))
+
+            title_label.config(text=f"Auto TC : # {len(level_2_checked)}개 / {self.auto}개")
+            title_label2.config(text=f"Manual TC : # {len(level_2_checked2)}개 / {self.manual}개")
+
+
+# ...
+
         button = tk.Button(frame2, text="Click Me", command=get_checked_bind)
         button.pack()
 
+    #checkbox node insert
     def add_node(self):
         with open('F:\\tkinter\\test.json') as file:
             datas = json.load(file)
@@ -314,19 +312,16 @@ class Checklist:
                         self.tree2.insert(f"{Category_list[j]}_{i}", "end", f"{Category_list[j]}_{i}_{z}", text=sublist[k]["TC Number"])
                         z += 1
 
+#textview GUI 
 
 class Textview:
-    
     def __init__(self, window):
-        global arr
-        arr = {}
-
         self.largeframe = tk.Frame(window, bg='white')
         self.largeframe.pack(padx=5, pady=5, fill='both', expand=True, anchor=tk.NW, side=tk.LEFT)
 
         self.textframe = tk.Frame(self.largeframe, height=600, bg='white')
         self.textframe.pack(padx=5, pady=5, fill='x', expand=True, anchor=tk.NW, side=tk.TOP)
-        self.textframe.pack_propagate(False) 
+        self.textframe.pack_propagate(False)
 
         self.textview = tk.Text(self.textframe, bg="silver", state=tk.DISABLED)
         self.textview.pack(padx=5, pady=5, fill='both', anchor=tk.NW, side=tk.LEFT, expand=True)
@@ -342,6 +337,7 @@ class Textview:
         self.textview.config(state=tk.DISABLED)
 
         self.textview.bind('<Control-f>', self.search_text)
+        self.textview.bind('<Down>', self.next_occurrence)  # Bind Down arrow key
         self.textview.configure(font=("Courier", 10))
 
         self.textframe2 = tk.Frame(self.largeframe, height=50, bg='white')
@@ -356,10 +352,35 @@ class Textview:
         self.textview2.configure(yscrollcommand=vbar2.set)
 
         self.textview2.configure(font=("Courier", 10))
-    
+
+        # Bind a function to handle textview2 input
+        self.textview2.bind('<Return>', self.update_textview)
+
+        self.search_results = []
+        self.current_search_index = 0
+
+    def update_textview(self, event):
+        # Get the text from textview2
+        new_text = self.textview2.get("1.0", tk.END)
+
+        self.textview2.delete("1.0", tk.END)  # Clear existing text
+
+        # Remove the trailing newline character
+        new_text = new_text.strip()
+
+        # Insert the text into textview1
+        self.textview.config(state=tk.NORMAL)
+        if new_text == "clear":
+            self.textview.delete("1.0", tk.END)
+        else:
+            self.textview.insert(tk.END, new_text + '\n')
+        self.textview.config(state=tk.DISABLED)
+
+    # Search text function
     def search_text(self, event):
         search_term = simpledialog.askstring("Search", "Enter text to search")
         if search_term:
+            self.search_results = []  # Clear previous search results
             start = "1.0"
             while True:
                 start = self.textview.search(search_term, start, stopindex=tk.END)
@@ -367,11 +388,36 @@ class Textview:
                     break
                 end = f"{start}+{len(search_term)}c"
                 self.textview.tag_add("search", start, end)
-                self.textview.tag_config("search", background="yellow")
+                self.search_results.append(start)
                 start = end
 
+            if self.search_results:
+                self.current_search_index = 0
+                self.show_next_search_result()
 
-class Cont4: #캔버스 컨테이너
+    # Show next search result
+    def show_next_search_result(self):
+        if self.search_results:
+            index = self.current_search_index % len(self.search_results)
+            self.textview.tag_remove("search", "1.0", tk.END)
+            self.textview.tag_add("search", self.search_results[index], f"{self.search_results[index]}+{len(self.search_results[index])}c")
+            self.textview.tag_config("search", background="yellow")
+            self.textview.see(self.search_results[index])
+            self.current_search_index += 1
+
+    # Color reset function
+    def reset_search_color(self, start, end):
+        self.textview.tag_remove("search", start, end)
+        self.textview.tag_config("search", background="")
+
+    # Move to the next occurrence on Down arrow key press
+    def next_occurrence(self, event):
+        if self.search_results:
+            self.show_next_search_result()
+
+
+#캔버스 컨테이너
+class Cont4: 
     def __init__(self,window):
 
         canvas = tk.Canvas(window,width=2, height= 70, bg="silver")
