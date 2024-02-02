@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import scrolledtext
 import serial
 import threading
+import chardet
 
 class SerialCommunicationApp:
     def __init__(self, master):
@@ -17,7 +18,7 @@ class SerialCommunicationApp:
         self.send_button.pack()
 
         # 스크롤 텍스트 상자 (로그 표시)
-        self.log_text = scrolledtext.ScrolledText(master, wrap=tk.WORD, width=100, height=101)
+        self.log_text = scrolledtext.ScrolledText(master, wrap=tk.WORD, width=40, height=10)
         self.log_text.pack(pady=10)
 
         # 시리얼 통신 설정
@@ -33,9 +34,15 @@ class SerialCommunicationApp:
     def receive_data(self):
         while True:
             if self.ser.in_waiting > 0:
-                data = self.ser.readline().decode('utf-8')
+                received_data = self.ser.readline()
+                detected_encoding = self.detect_encoding(received_data)
+                data = received_data.decode(detected_encoding)
                 self.log_text.insert(tk.END, data)
                 self.log_text.yview(tk.END)  # 로그 표시 업데이트
+
+    def detect_encoding(self, data):
+        result = chardet.detect(data)
+        return result['encoding']
 
     def on_close(self):
         self.ser.close()
