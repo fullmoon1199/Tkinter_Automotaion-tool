@@ -27,9 +27,9 @@ async def user_input(serial):
     while True:
         user_input = await asyncio.to_thread(input, "송신할 데이터 입력 (종료하려면 'exit' 입력): ")
         # if user_input.lower() == 'next':
-            
         serial.write(user_input.encode('utf-8'))
-        readThread(ser)
+        # readThread(ser)
+
 # 본 쓰레드
 def readThread(ser):
     global line

@@ -10,6 +10,8 @@ import openpyxl
 from collections import OrderedDict
 from tkinter import filedialog
 import serial.tools.list_ports
+import serial
+import threading
 
 def on_search_port(): 
     ports = serial.tools.list_ports.comports()
@@ -43,9 +45,14 @@ def on_su():
     # TODO: SU 동작 구현
     pass
 
-def on_root():
-    # TODO: Root 동작 구현
-    pass
+
+def on_root(Textview):
+    def send_command(self):
+        if self.serial_port:
+            command = 'root\n'
+            self.input_entry.delete(0, tk.END)
+            self.serial_port.write(command.encode())
+            print(f"Sent: {command}")
 
 def on_shift_f2():
     # TODO: Shift+F2 동작 구현
@@ -75,7 +82,7 @@ def on_open_excel():
         data['LinuxAndroid'] = column_value[11]
         data['Mode'] = column_value[25]
         Command = column_value[7]
-        Criterion = column_value[27]
+        Criterion = column_value[5]
 
         if Command:
             Command = Command.split('\n')
@@ -103,7 +110,7 @@ def on_open_excel():
 def add_node_callback():
     container6.add_node()   
 
-#hover 색상변경 기능5
+#hover color change function
 def on_enter(widget):
     widget.config(bg='lightblue')
 def on_leave(widget):
@@ -124,6 +131,7 @@ title_label2 = tk.Label(title_label1, text="Ver.0.0.1", font=("Helvetica", 10,))
 title_label1.pack(pady=12 ,fill=X)
 title_label2.pack(side=tk.RIGHT)
 
+#button GUI 
 class Cont1:
     def __init__(self, window):
         self.buttonframe = Frame(window)
@@ -176,8 +184,9 @@ class Cont1:
 
         self.exit_button = tk.Button(self.buttonframe, text="Exit", command=window.quit, width=5, height=3, bg='red', fg='white',font=("Helvetica", 8, "bold"))
         self.exit_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
-        
-class Cont2: # 진행바 컨테이너
+
+# progress bar GUI  
+class Cont2: 
     def __init__(self, window):
         self.progressframe = Frame(window)
         self.progressframe.pack(fill=X, anchor=N)
@@ -192,28 +201,12 @@ class Cont2: # 진행바 컨테이너
         self.progressbar['value'] = value
         self.progress_label.config(text=f"진행률: {value}%")
 
-# Usage example:
-  # Update progress to 50%
-
-class Cont3: # 리스트 뷰 컨테이너
-    def __init__(self,window):
-        self.listviewframe=Frame(window)
-        self.listviewframe.pack(fill=X, anchor=N)
-
-        self.list_view = tk.Listbox(self.listviewframe, width=40, height=45)  # 크기 조절은 필요에 따라 수정
-        self.list_view.pack(padx=5, pady=3, anchor=tk.NW, side=tk.LEFT)
-
-        self.list_view = tk.Listbox(self.listviewframe, width=180, height=45)  # 크기 조절은 필요에 따라 수정
-        self.list_view.pack(padx=5, pady=3, anchor=tk.NW, side=tk.LEFT)
-        
-        
+#checkbox GUI 
 class Checklist:
     auto = 0
     manual = 0
     def __init__(self, window):
-
-
-    
+        
         Checklist_LargeFrame = tk.Frame(window, bg = 'white')
         Checklist_LargeFrame.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.LEFT)
         # Create a frame to hold the CheckboxTreeview and scrollbar
@@ -244,19 +237,93 @@ class Checklist:
         self.tree.configure(yscrollcommand=scrollbar.set)
         self.tree2.configure(yscrollcommand=scrollbar2.set)
         title_label.config(text=f"Auto TC : # 선택개수 / {self.auto}개")
-        title_label2.config(text=f"Man TC : # 선택개수 / {self.manual}개")       
+        title_label2.config(text=f"Man TC : # 선택개수 / {self.manual}개")      
 
-        def get_checked_bind():   
+        def get_checked_bind():
+            # Get checked items from the CheckboxTreeviews
             get_checked = self.tree.get_checked()
             get_checked2 = self.tree2.get_checked()
-            print(len(get_checked))
-            print(len(get_checked2))
-            title_label.config(text=f"Auto TC : # {len(get_checked)}개 / {self.auto}개")
-            title_label2.config(text=f"Maunal TC : # {len(get_checked2)}개 / {self.manual}개")  
-        
+
+            # Filter items with level 2
+            level_2_checked = [item for item in get_checked if self.tree.parent(item) != ""]
+            level_2_checked2 = [item for item in get_checked2 if self.tree2.parent(item) != ""]
+
+            # Print and update labels with the count of level 2 checked items
+            print(len(level_2_checked))
+            print(len(level_2_checked2))
+
+            title_label.config(text=f"Auto TC : # {len(level_2_checked)}개 / {self.auto}개")
+            title_label2.config(text=f"Manual TC : # {len(level_2_checked2)}개 / {self.manual}개")
+
         button = tk.Button(frame2, text="Click Me", command=get_checked_bind)
         button.pack()
 
+# ...           # Attach right-click event to show context menu for tree
+        self.tree.bind("<Button-3>", self.show_context_menu_tree)
+        self.tree2.bind("<Button-3>", self.show_context_menu_tree2)
+
+        # Create context menu for tree
+        self.context_menu_tree = tk.Menu(window, tearoff=0)
+        self.context_menu_tree.add_command(label="View", command=self.context_menu_action1)
+
+        self.context_menu_tree2 = tk.Menu(window, tearoff=0)
+        self.context_menu_tree2.add_command(label="View", command=self.context_menu_action2)
+
+
+    def show_context_menu_tree(self, event):
+        # Display the context menu for tree at the cursor's location
+        item_under_cursor = self.tree.identify_row(event.y)
+        if item_under_cursor:
+            self.tree.selection_set(item_under_cursor)
+            self.context_menu_tree.post(event.x_root, event.y_root)
+
+    def show_context_menu_tree2(self, event):
+        # Display the context menu for tree2 at the cursor's location
+        item_under_cursor = self.tree2.identify_row(event.y)
+        if item_under_cursor:
+            self.tree2.selection_set(item_under_cursor)
+            self.context_menu_tree2.post(event.x_root, event.y_root)
+
+    def context_menu_action1(self):
+        selected_item = self.tree.selection()
+        if selected_item:
+            item_name = self.tree.item(selected_item[0], 'text')
+            with open('F:\\tkinter\\test.json') as file:
+                data = json.load(file)
+
+                # 특정 TC Number에 해당하는 데이터 찾기
+                target_tc_number = f"{item_name}"
+                found_data = next((item for item in data if item["TC Number"] == target_tc_number), None)
+
+                # 해당 데이터가 존재하면 Command와 Criterion 가져오기
+                if found_data:
+                    commands_text = "\n".join(found_data.get("Command", []))
+                    criterion_text = "\n".join(found_data.get("Criterion", []))
+                    
+                else:
+                    print(f"No data found for {target_tc_number}")
+
+            top = Toplevel(window)
+            top.geometry("1400x500")
+            top.title("Child Window")
+            SubFrame = tk.Frame(top, bg='yellow')
+            SubFrame.pack(fill='both', expand=True, anchor=tk.NW, side=tk.LEFT)
+            criterion = tk.Text(SubFrame, bg="silver", )
+            command = tk.Text(SubFrame, bg="silver")
+            criterion.pack(padx=5, pady=5, fill='both', anchor=tk.NW, side=tk.LEFT, expand=True)
+            command.pack(padx=5, pady=5, fill='both', anchor=tk.NW, side=tk.LEFT)
+            criterion.insert(tk.END,criterion_text)
+            command.insert(tk.END,commands_text)
+
+
+    def context_menu_action2(self):
+        selected_item = self.tree2.selection()
+        if selected_item:
+            item_name = self.tree2.item(selected_item[0], 'text')
+            print(f"Name: {item_name}")
+
+
+    #checkbox node insert
     def add_node(self):
         with open('F:\\tkinter\\test.json') as file:
             datas = json.load(file)
@@ -314,52 +381,118 @@ class Checklist:
                         self.tree2.insert(f"{Category_list[j]}_{i}", "end", f"{Category_list[j]}_{i}_{z}", text=sublist[k]["TC Number"])
                         z += 1
 
+#textview GUI 
 
 class Textview:
-    
     def __init__(self, window):
-        global arr
-        arr = {}
-
         self.largeframe = tk.Frame(window, bg='white')
         self.largeframe.pack(padx=5, pady=5, fill='both', expand=True, anchor=tk.NW, side=tk.LEFT)
 
         self.textframe = tk.Frame(self.largeframe, height=600, bg='white')
         self.textframe.pack(padx=5, pady=5, fill='x', expand=True, anchor=tk.NW, side=tk.TOP)
-        self.textframe.pack_propagate(False) 
+        self.textframe.pack_propagate(False)
+
+        # self.textview = tk.Text(self.textframe, bg="silver", state=tk.DISABLED)
+        # self.textview.pack(padx=5, pady=5, fill='both', anchor=tk.NW, side=tk.LEFT, expand=True)
+
+        # # Add scrollbar to textview1
+        # vbar1 = tk.Scrollbar(self.textframe, orient='vertical', command=self.textview.yview)
+        # vbar1.pack(side="right", fill='y')
+        # self.textview.configure(yscrollcommand=vbar1.set)
+
+        # # Change state to NORMAL, insert text, then change back to DISABLED
+        # self.textview.config(state=tk.NORMAL)
+        # self.textview.insert(tk.END, " ")
+        # self.textview.config(state=tk.DISABLED)
 
         self.textview = tk.Text(self.textframe, bg="silver", state=tk.DISABLED)
         self.textview.pack(padx=5, pady=5, fill='both', anchor=tk.NW, side=tk.LEFT, expand=True)
+
+        self.textview.bind('<Control-f>', self.search_text)
+        self.textview.bind('<Down>', self.next_occurrence)  # Bind Down arrow key
+        self.textview.configure(font=("Courier", 10))
 
         # Add scrollbar to textview1
         vbar1 = tk.Scrollbar(self.textframe, orient='vertical', command=self.textview.yview)
         vbar1.pack(side="right", fill='y')
         self.textview.configure(yscrollcommand=vbar1.set)
 
-        # Change state to NORMAL, insert text, then change back to DISABLED
-        self.textview.config(state=tk.NORMAL)
-        self.textview.insert(tk.END, " ")
-        self.textview.config(state=tk.DISABLED)
+        try:
+            self.serial_port = serial.Serial('COM22', baudrate=115200, timeout=1)  # 5초 timeout으로 변경
 
-        self.textview.bind('<Control-f>', self.search_text)
-        self.textview.configure(font=("Courier", 10))
+        except serial.SerialException as e:
+            print(f"Error initializing serial port: {e}")
+            self.serial_port = None
 
         self.textframe2 = tk.Frame(self.largeframe, height=50, bg='white')
         self.textframe2.pack(padx=5, pady=5, fill='x', expand=True, anchor=tk.NW, side=tk.BOTTOM)
 
-        self.textview2 = tk.Text(self.textframe2, height=30, bg="silver")
-        self.textview2.pack(padx=5, pady=5, fill='x', anchor=tk.SW, side=tk.LEFT, expand=True)
+        self.input_entry = ttk.Entry(self.textframe2, font=('Courier', 12), width=100)
+        self.input_entry.pack(pady=10)
 
-        # Add scrollbar to textview2
-        vbar2 = tk.Scrollbar(self.textframe2, orient='vertical', command=self.textview2.yview)
-        vbar2.pack(side="right", fill='y')
-        self.textview2.configure(yscrollcommand=vbar2.set)
+        send_button = ttk.Button(self.textframe2, text="Send", command=self.send_command)
+        send_button.pack()
 
-        self.textview2.configure(font=("Courier", 10))
-    
+    def send_command(self):
+        if self.serial_port:
+            command = self.input_entry.get() + '\n'
+            self.input_entry.delete(0, tk.END)
+            self.serial_port.write(command.encode())
+            print(f"Sent: {command}")
+
+    def read_serial(self):
+        while True:
+            if self.serial_port:
+                try:
+                    serial_output = self.serial_port.readline().decode('utf-8', errors='replace').strip()
+                    if serial_output:
+                        self.show_output(f"{serial_output}\n")
+                except UnicodeDecodeError as e:
+                    print(f"Error decoding serial data: {e}")
+
+    def show_output(self, text):
+        self.textview.config(state=tk.NORMAL)
+        self.textview.insert(tk.END, text)
+        self.textview.yview(tk.END)
+        self.textview.config(state=tk.DISABLED)
+
+   
+
+        # # Add scrollbar to textview2
+        # vbar2 = tk.Scrollbar(self.textframe2, orient='vertical', command=self.textview2.yview)
+        # vbar2.pack(side="right", fill='y')
+        # self.textview2.configure(yscrollcommand=vbar2.set)
+
+        # self.textview2.configure(font=("Courier", 10))
+
+        # # Bind a function to handle textview2 input
+        # self.textview2.bind('<Return>', self.update_textview)
+
+        # self.search_results = []
+        # self.current_search_index = 0
+
+    # def update_textview(self, event):
+    #     # Get the text from textview2
+    #     new_text = self.textview2.get("1.0", tk.END)
+
+    #     self.textview2.delete("1.0", tk.END)  # Clear existing text
+
+    #     # Remove the trailing newline character
+    #     new_text = new_text.strip()
+
+    #     # Insert the text into textview1
+    #     self.textview.config(state=tk.NORMAL)
+    #     if new_text == "clear":
+    #         self.textview.delete("1.0", tk.END)
+    #     else:
+    #         self.textview.insert(tk.END, new_text + '\n')
+    #     self.textview.config(state=tk.DISABLED)
+
+    # Search text function
     def search_text(self, event):
         search_term = simpledialog.askstring("Search", "Enter text to search")
         if search_term:
+            self.search_results = []  # Clear previous search results
             start = "1.0"
             while True:
                 start = self.textview.search(search_term, start, stopindex=tk.END)
@@ -367,11 +500,36 @@ class Textview:
                     break
                 end = f"{start}+{len(search_term)}c"
                 self.textview.tag_add("search", start, end)
-                self.textview.tag_config("search", background="yellow")
+                self.search_results.append(start)
                 start = end
 
+            if self.search_results:
+                self.current_search_index = 0
+                self.show_next_search_result()
 
-class Cont4: #캔버스 컨테이너
+    # Show next search result
+    def show_next_search_result(self):
+        if self.search_results:
+            index = self.current_search_index % len(self.search_results)
+            self.textview.tag_remove("search", "1.0", tk.END)
+            self.textview.tag_add("search", self.search_results[index], f"{self.search_results[index]}+{len(self.search_results[index])}c")
+            self.textview.tag_config("search", background="yellow")
+            self.textview.see(self.search_results[index])
+            self.current_search_index += 1
+
+    # Color reset function
+    def reset_search_color(self, start, end):
+        self.textview.tag_remove("search", start, end)
+        self.textview.tag_config("search", background="")
+
+    # Move to the next occurrence on Down arrow key press
+    def next_occurrence(self, event):
+        if self.search_results:
+            self.show_next_search_result()
+
+
+#캔버스 컨테이너
+class Cont4: 
     def __init__(self,window):
 
         canvas = tk.Canvas(window,width=2, height= 70, bg="silver")
@@ -406,10 +564,11 @@ container3 = Cont2(window)
 container3.update_progress(80)
 container6 = Checklist(window)
 container7 = Textview(window)
+read_thread = threading.Thread(target=container7.read_serial, daemon=True)
+read_thread.start()
 container5 = Cont4(window)
 
 
 # 윈도우 실행
 window.mainloop()
-
 
