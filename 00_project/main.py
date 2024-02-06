@@ -110,10 +110,6 @@ def on_open_excel():
     print(f"JSON 파일이 성공적으로 저장되었습니다: {json_file_path}")
 
     add_node(container6)
-#     add_node_callback()
-
-# def add_node_callback():
-#     container6.add_node()   
 
 def add_node(con):
 
@@ -351,7 +347,8 @@ class Checklist:
         selected_item = self.tree.selection()
         if selected_item:
             item_name = self.tree.item(selected_item[0], 'text')
-            with open('F:\\tkinter\\test.json') as file:
+            print(f"Name: {item_name}")
+            with open('F:\\tkinter\\00_project\\TestSequence.json') as file:
                 data = json.load(file)
 
                 # 특정 TC Number에 해당하는 데이터 찾기
@@ -360,7 +357,7 @@ class Checklist:
 
                 # 해당 데이터가 존재하면 Command와 Criterion 가져오기
                 if found_data:
-                    commands_text = "\n".join(found_data.get("Command", []))
+                    commands_text = "\n".join(found_data.get("ToolSequence", []))
                     criterion_text = "\n".join(found_data.get("Criterion", []))
                     
                 else:
@@ -378,16 +375,11 @@ class Checklist:
             criterion.insert(tk.END,criterion_text)
             command.insert(tk.END,commands_text)
 
-
     def context_menu_action2(self):
         selected_item = self.tree2.selection()
         if selected_item:
             item_name = self.tree2.item(selected_item[0], 'text')
             print(f"Name: {item_name}")
-
-
-    #checkbox node insert
-
 
 #textview GUI 
 
