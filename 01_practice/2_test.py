@@ -1,32 +1,31 @@
-
 import tkinter as tk
+from tkinter import ttk
 
+def on_right_click(event):
+    # 컨텍스트 메뉴를 표시
+    context_menu.post(event.x_root, event.y_root)
 
-class PageCanvas1(tk.Toplevel):
-    def __init__(self, parent):
-        global arr # why use global? set it as an attribute?
-        global users # same as above?
-        arr = {}
-        tk.Toplevel.__init__(self, parent)
-        self.title('Canvas')
-        self.geometry('400x600')
-        canvas = tk.Canvas(self, bg='white', scrollregion=(0, 0, 400, 20000))
-        canvas.pack(fill='both', expand=True)
+def paste_from_clipboard():
+    # 클립보드에서 내용 읽기
+    clipboard_content = root.clipboard_get()
+    
+    # 읽은 내용을 엔트리에 삽입
+    input_entry.insert(tk.END, clipboard_content)
 
-        vbar = tk.Scrollbar(canvas, orient='vertical')
-        vbar.pack(side='right', fill='y')
-        vbar.config(command=canvas.yview)
-        canvas.config(yscrollcommand=vbar.set)
-        canvas.create_text(5, 0, anchor='nw', text="Choose users: ")
-        # we need a container widget to put into the canvas
-        f = tk.Frame(canvas)
-        # you need to create a window into the canvas for the widget to scroll
-        canvas.create_window((200, 0), window=f, anchor="n")
-        for i in range(0, 1000):
-            arr[i] = tk.IntVar()
-            # widget must be packed into the container, not the canvas
-            tk.Checkbutton(f, text=str(i), variable=arr[i]).pack()#.grid(row=i, sticky=W)
+root = tk.Tk()
 
+textframe2 = ttk.Frame(root)
+textframe2.pack()
 
-app = PageCanvas1(None)
-app.mainloop()
+# 엔트리 위젯 생성
+input_entry = ttk.Entry(textframe2, font=('Courier', 12), width=100)
+input_entry.pack(pady=10)
+
+# 엔트리 위젯에 우클릭 이벤트에 대한 핸들러 추가
+input_entry.bind("<Button-3>", on_right_click)
+
+# 컨텍스트 메뉴 생성
+context_menu = tk.Menu(root, tearoff=0)
+context_menu.add_command(label="붙여넣기", command=paste_from_clipboard)
+
+root.mainloop()

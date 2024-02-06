@@ -41,18 +41,13 @@ def on_stop_tc():
     # TODO: Stop TC 동작 구현
     pass
 
-def on_su():
-    # TODO: SU 동작 구현
-    pass
+def on_su(con):
+    con.serial_port.write(('su' + '\r').encode())
 
-# root 구현 해야함 아직 미완
-def on_root(Textview):
-    def send_command(self):
-        if self.serial_port:
-            command = 'root\n'
-            self.input_entry.delete(0, tk.END)
-            self.serial_port.write(command.encode())
-            print(f"Sent: {command}")
+
+# root 동작 구현
+def on_root(con):
+    con.serial_port.write(('root' + '\r').encode())
 
 def on_shift_f2():
     # TODO: Shift+F2 동작 구현
@@ -164,10 +159,10 @@ class Cont1:
         self.layout = tk.Label(self.buttonframe)
         self.layout.pack(padx=10 ,anchor=tk.NW, side=tk.LEFT)
 
-        self.su_button = tk.Button(self.buttonframe, text="SU", command=on_su, width=15, height=3)
+        self.su_button = tk.Button(self.buttonframe, text="SU", command=lambda: on_su(container7), width=15, height=3)
         self.su_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
-        self.root_button = tk.Button(self.buttonframe, text="Root", command=on_root, width=15, height=3)
+        self.root_button = tk.Button(self.buttonframe, text="Root", command=lambda: on_root(container7), width=15, height=3)
         self.root_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
         self.shift_f2_button = tk.Button(self.buttonframe, text="Shift+F2", command=on_shift_f2, width=15, height=3)
@@ -258,7 +253,7 @@ class Checklist:
         button = tk.Button(frame2, text="Click Me", command=get_checked_bind)
         button.pack()
 
-# ...           # Attach right-click event to show context menu for tree
+        # Attach right-click event to show context menu for tree
         self.tree.bind("<Button-3>", self.show_context_menu_tree)
         self.tree2.bind("<Button-3>", self.show_context_menu_tree2)
 
@@ -430,15 +425,48 @@ class Textview:
         self.input_entry = ttk.Entry(self.textframe2, font=('Courier', 12), width=100)
         self.input_entry.pack(pady=10)
 
-        send_button = ttk.Button(self.textframe2, text="Send", command=self.send_command)
-        send_button.pack()
+        def on_right_click(event):
+            # 컨텍스트 메뉴를 표시
+            context_menu.post(event.x_root, event.y_root)
 
-    def send_command(self):
-        if self.serial_port:
-            command = self.input_entry.get()
-            self.input_entry.delete(0, tk.END)
-            self.serial_port.write(command.encode())
-            print(f"Sent: {command}")
+        def paste_from_clipboard():
+            # 클립보드에서 내용 읽기
+            clipboard_content = window.clipboard_get()
+
+            # 읽은 내용을 엔트리에 삽입
+            self.input_entry.insert(tk.END, clipboard_content)
+            self.serial_port.write(clipboard_content.encode())
+            # self.serial_port.write('\r'.encode())
+
+
+
+        # 엔트리 위젯에 우클릭 이벤트에 대한 핸들러 추가
+        self.input_entry.bind("<Button-3>", on_right_click)
+
+        # 컨텍스트 메뉴 생성
+        context_menu = tk.Menu(window, tearoff=0)
+        context_menu.add_command(label="붙여넣기", command=paste_from_clipboard)
+        
+        # send_button.pack()
+        def on_key(event):
+            # 이벤트 핸들러 함수
+            print(f'Key pressed: {event.char}')
+            if (event.char == '\b'):
+                self.serial_port.write('\b'.encode())
+            elif event.char == '\r':                
+                self.input_entry.delete(0, tk.END)
+                self.serial_port.write('\r'.encode())
+            else:
+                self.serial_port.write(event.char.encode())
+
+        self.input_entry.bind('<Key>', on_key)
+
+    # def send_command(self):
+    #     if self.serial_port:
+    #         command = self.input_entry.get()
+    #         self.input_entry.delete(0, tk.END)
+    #         self.serial_port.write(command.encode())
+    #         print(f"Sent: {command}")
 
     def read_serial(self):
         while True:
@@ -452,9 +480,16 @@ class Textview:
 
     def show_output(self, text):
         self.textview.config(state=tk.NORMAL)
-        self.textview.insert(tk.END, text)
-        self.textview.yview(tk.END)
+        if text == "\b":
+            # 백스페이스가 입력되면 마지막 글자를 지움
+            current_text = self.textview.get("1.0", tk.END)
+            if current_text.strip():  # 텍스트가 비어있지 않은 경우에만
+                self.textview.delete("end-2c", tk.END)
+        else:
+            self.textview.insert(tk.END, text)
+            self.textview.yview(tk.END)
         self.textview.config(state=tk.DISABLED)
+
 
    
 
