@@ -6,12 +6,11 @@ from tkinter import Frame, X, N
 from tkinter import simpledialog
 from ttkwidgets import CheckboxTreeview
 import json
-import openpyxl
 from collections import OrderedDict
 from tkinter import filedialog
 import serial.tools.list_ports
-import serial
 import threading
+import openpyxl
 
 def on_search_port(): 
     ports = serial.tools.list_ports.comports()
@@ -56,54 +55,108 @@ def on_shift_f2():
 def on_shift_f3():
     # TODO: Shift+F3 동작 구현
     pass
+def choised_radiobutton(con):
+    selected_value = con.radio_var.get()  # 현재 선택된 버튼의 value 값을 가져옴
+
+    if selected_value == 1:
+        selected_button = "Bearmetal_Linux"
+    elif selected_value == 2:
+        selected_button = "Bearmetal_Android"
+    elif selected_value == 3:
+        selected_button = "Linux_Android_VM"
+    else:
+        selected_button = "No selection"
+
+    return selected_button
 
 def on_open_excel():
+
     file_path = filedialog.askopenfilename()
     excel_file_path = file_path
 
     wb = openpyxl.load_workbook(excel_file_path)
-    sheet = wb['Validation Result']
+    sheet = wb[choised_radiobutton(container1)]
 
     data_list = []
 
-    for rownum in range(6, 223):
+    for rownum in range(6, 70):
         data = OrderedDict()
         column_value = [cell.value for cell in sheet[rownum]]
         data['Number'] = column_value[0]
         data['TC Number'] = column_value[1]
         data['Category'] = column_value[2]
-        data['Linux'] = column_value[9]
-        data['Android'] = column_value[10]
-        data['LinuxAndroid'] = column_value[11]
-        data['Mode'] = column_value[25]
-        Command = column_value[7]
-        Criterion = column_value[5]
+        data['BL'] = column_value[10]
+        data['BA'] = column_value[11]
+        data['LA'] = column_value[12]
+        data['Automatic'] = column_value[14]
+        ToolSequence = column_value[15]
 
-        if Command:
-            Command = Command.split('\n')
+        if ToolSequence:
+            ToolSequence = ToolSequence.split('\n')
         else:
-            Command = []
+            ToolSequence = []
 
-        if Criterion:
-            Criterion = Criterion.split('\n')
-        else:
-            Criterion = []
-        
-        data['Command'] = Command
-        data['Criterion'] = Criterion
+        data['ToolSequence'] = ToolSequence
 
         data_list.append(data)
 
-    json_file_path = 'F:\\tkinter\\test.json'
+    for i in range(len(data_list)):
+        print(data_list[i])
+
+    json_file_path = 'F:\\tkinter\\00_project\\test.json'
     with open(json_file_path, 'w', encoding='utf-8') as json_file:
-        json.dump(data_list, json_file, indent=4)
+        json.dump(data_list, json_file, indent=4, ensure_ascii=False)
 
     print(f"JSON 파일이 성공적으로 저장되었습니다: {json_file_path}")
 
-    add_node_callback()
+    add_node(container6)
+#     add_node_callback()
 
-def add_node_callback():
-    container6.add_node()   
+# def add_node_callback():
+#     container6.add_node()   
+
+def add_node(con):
+
+    #node delete
+    for child in con.tree.get_children():
+        con.tree.delete(child)
+    for child in con.tree2.get_children():
+        con.tree2.delete(child)
+
+    #node insert
+    with open('F:\\tkinter\\00_project\\TestSequence.json') as file:
+        datas = json.load(file)
+    parent_id = ""
+    
+    chosen_radio_value = choised_radiobutton(container1)  # 불필요한 호출 제거
+    if chosen_radio_value == "Bearmetal_Linux":
+        bsp_id = "Linux"
+    elif chosen_radio_value == "Bearmetal_Android":
+        bsp_id = "Android"
+    elif chosen_radio_value == "Linux_Android_VM":
+        bsp_id = "LinuxAndroid"
+        
+    # tree node insert
+    con.tree.insert(parent_id, "end", bsp_id, text=f"{bsp_id}")
+    con.tree2.insert(parent_id, "end", bsp_id, text=f"{bsp_id}")
+
+    # 20240129 여기부터 sub node 구현
+    Category_list = list(set([item["Category"] for item in datas]))
+    print(Category_list)
+    
+    for i in range(0, len(Category_list)):
+        con.tree.insert(bsp_id, "end", f"{Category_list[i]}", text=f"{Category_list[i]}")
+        con.tree2.insert(bsp_id, "end", f"{Category_list[i]}", text=f"{Category_list[i]}")
+        
+        sublist = [item for item in datas if item["Category"] == Category_list[i] and item["Automatic"] == "O"]
+        for j in range(0, len(sublist)):
+            con.tree.insert(f"{Category_list[i]}", "end", f"{Category_list[i]}_{j}", text=f"{sublist[j]["TC Number"]}")
+
+        sublist2 = [item for item in datas if item["Category"] == Category_list[i] and item["Automatic"] == "X"]
+        for j in range(0, len(sublist2)):  
+            con.tree2.insert(f"{Category_list[i]}", "end", f"{Category_list[i]}_{j}", text=f"{sublist2[j]["TC Number"]}")
+
+
 
 #hover color change function
 def on_enter(widget):
@@ -119,62 +172,77 @@ window.title("V920 SADK Verification Program")
 # 윈도우 크기 설정
 window.geometry("1650x900+30+30")
 # 상단 텍스트 추가
-title_frame = tk.Frame(window)
+title_frame = tk.Frame(window,bg='black')
 title_frame.pack(fill=X, anchor=N)
-title_label1 = tk.Label(title_frame, text="V920 SADK Verification Program", font=("Calibri", 16, "bold"))
-title_label2 = tk.Label(title_label1, text="Ver.0.0.1", font=("Helvetica", 10,))
-title_label1.pack(pady=12 ,fill=X)
+title_label1 = tk.Label(title_frame, text="V920 SADK Verification Program", font=("Calibri", 16, "bold"), bg='black', fg='white')
+title_label2 = tk.Label(title_label1, text="Ver.0.0.1", font=("Helvetica", 10,),bg='black', fg='white')
+title_label1.pack(fill=X)
 title_label2.pack(side=tk.RIGHT)
 
 #button GUI 
 class Cont1:
     def __init__(self, window):
-        self.buttonframe = Frame(window)
+        self.buttonframe = Frame(window, bg='red')
         self.buttonframe.pack(fill=X, anchor=N)
 
         self.combo = ttk.Combobox(self.buttonframe,width=30, values=on_search_port(), state="readonly", style="TCombobox")
         self.combo.pack(padx=10, pady=18, anchor=tk.NW, side=tk.LEFT)
 
-        self.search_port_button = tk.Button(self.buttonframe, text="Search Port", command=on_search_port, width=15, height=3)
+        self.search_port_button = tk.Button(self.buttonframe, text="Search Port", command=on_search_port, width=15, height=4)
         self.search_port_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
         # hover 색상변경 기능
         self.search_port_button.bind("<Enter>", lambda event, widget=self.search_port_button: on_enter(widget))
         self.search_port_button.bind("<Leave>", lambda event, widget=self.search_port_button: on_leave(widget))
 
-        self.open_button = tk.Button(self.buttonframe, text="Open", command=on_open, width=15, height=3)
+        self.open_button = tk.Button(self.buttonframe, text="Open", command=on_open, width=15, height=4)
         self.open_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
-        self.close_button = tk.Button(self.buttonframe, text="Close", command=on_close, width=15, height=3)
+        self.close_button = tk.Button(self.buttonframe, text="Close", command=on_close, width=15, height=4)
         self.close_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
-        self.layout = tk.Label(self.buttonframe)
-        self.layout.pack(padx=10 ,anchor=tk.NW, side=tk.LEFT)
+        # self.layout = tk.Label(self.buttonframe)
+        # self.layout.pack(padx=10 ,anchor=tk.NW, side=tk.LEFT)
 
-        self.start_tc_button = tk.Button(self.buttonframe, text="Start TC", command=on_start_tc, width=15, height=3)
+        self.start_tc_button = tk.Button(self.buttonframe, text="Start TC", command=on_start_tc, width=15, height=4)
         self.start_tc_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
-        self.stop_tc_button = tk.Button(self.buttonframe, text="Stop TC", command=on_stop_tc, width=15, height=3)
+        self.stop_tc_button = tk.Button(self.buttonframe, text="Stop TC", command=on_stop_tc, width=15, height=4)
         self.stop_tc_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
-        self.layout = tk.Label(self.buttonframe)
-        self.layout.pack(padx=10 ,anchor=tk.NW, side=tk.LEFT)
+        # self.layout = tk.Label(self.buttonframe)
+        # self.layout.pack(padx=10 ,anchor=tk.NW, side=tk.LEFT)
 
-        self.su_button = tk.Button(self.buttonframe, text="SU", command=lambda: on_su(container7), width=15, height=3)
+        self.su_button = tk.Button(self.buttonframe, text="SU", command=lambda: on_su(container7), width=8, height=4)
         self.su_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
-        self.root_button = tk.Button(self.buttonframe, text="Root", command=lambda: on_root(container7), width=15, height=3)
+        self.root_button = tk.Button(self.buttonframe, text="Root", command=lambda: on_root(container7), width=8, height=4)
         self.root_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
-        self.shift_f2_button = tk.Button(self.buttonframe, text="Shift+F2", command=on_shift_f2, width=15, height=3)
+        self.shift_f2_button = tk.Button(self.buttonframe, text="Shift+F2", command=on_shift_f2, width=15, height=4)
         self.shift_f2_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
-        self.shift_f3_button = tk.Button(self.buttonframe, text="Shift+F3", command=on_shift_f3, width=15, height=3)
+        self.shift_f3_button = tk.Button(self.buttonframe, text="Shift+F3", command=on_shift_f3, width=15, height=4)
         self.shift_f3_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
-        self.layout = tk.Label(self.buttonframe)
-        self.layout.pack(padx=15 ,anchor=tk.NW, side=tk.LEFT)
+        # self.layout = tk.Label(self.buttonframe)
+        # self.layout.pack(padx=15 ,anchor=tk.NW, side=tk.LEFT)
 
-        self.open_excel_button = tk.Button(self.buttonframe, text="Open Excel", command=on_open_excel, width=15, height=3)
+        self.smallframe = Frame(self.buttonframe)
+        self.smallframe.pack(anchor=tk.NW, side=tk.LEFT)
+
+        #BSP radio button
+        self.radio_var = tk.IntVar()
+        self.bl_button = Radiobutton(self.smallframe, text="BL", value=1, variable=self.radio_var)
+        self.ba_button = Radiobutton(self.smallframe, text="BA", value=2, variable=self.radio_var)
+        self.la_button = Radiobutton(self.smallframe, text="LA", value=3, variable=self.radio_var)
+
+        self.bl_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.TOP)
+        self.ba_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.TOP)
+        self.la_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.TOP)
+
+        
+
+        self.open_excel_button = tk.Button(self.buttonframe, text="Open Excel", command=on_open_excel, width=15, height=4)
         self.open_excel_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
         self.exit_button = tk.Button(self.buttonframe, text="Exit", command=window.quit, width=5, height=3, bg='red', fg='white',font=("Helvetica", 8, "bold"))
@@ -319,62 +387,7 @@ class Checklist:
 
 
     #checkbox node insert
-    def add_node(self):
-        with open('F:\\tkinter\\test.json') as file:
-            datas = json.load(file)
 
-        parent_id = ""
-        Linux = str(0)
-        Android = str(1)
-        LA = str(2)
-        BSP = [Linux, Android, LA]
-        #tree node insert
-        self.tree.insert(parent_id, "end", Linux, text='Linux')
-        self.tree.insert(parent_id, "end", Android, text='Android')
-        self.tree.insert(parent_id, "end", LA, text='LinuxAndroid')
-        self.tree2.insert(parent_id, "end", Linux, text='Linux')
-        self.tree2.insert(parent_id, "end", Android, text='Android')
-        self.tree2.insert(parent_id, "end", LA, text='LinuxAndroid')
-
-        #20240129 여기부터 sub node 구현
-        Category_list = list(set([item["Category"] for item in datas]))
-        print(Category_list)
-        z = 0
-        for i in range(0, len(BSP)):
-            for j in range(0, len(Category_list)):
-                self.tree.insert(BSP[i], "end", f"{Category_list[j]}_{i}", text=Category_list[j])
-                self.tree2.insert(BSP[i], "end", f"{Category_list[j]}_{i}", text=Category_list[j])
-                if i == 0:
-                    sublist = [item for item in datas if item["Category"] == Category_list[j] and item["Linux"] == "O" and item["Mode"] == "auto"]
-                    for k in range(0, len(sublist)):
-                        self.tree.insert(f"{Category_list[j]}_{i}", "end", f"{Category_list[j]}_{i}_{z}", text=sublist[k]["TC Number"])
-                        z += 1
-                elif i == 1:
-                    sublist = [item for item in datas if item["Category"] == Category_list[j] and item["Android"] == "O" and item["Mode"] == "auto"]
-                    for k in range(0, len(sublist)):
-                        self.tree.insert(f"{Category_list[j]}_{i}", "end", f"{Category_list[j]}_{i}_{z}", text=sublist[k]["TC Number"])
-                        z += 1
-                elif i == 2:
-                    sublist = [item for item in datas if item["Category"] == Category_list[j] and item["LinuxAndroid"] == "O" and item["Mode"] == "auto"]
-                    for k in range(0, len(sublist)):
-                        self.tree.insert(f"{Category_list[j]}_{i}", "end", f"{Category_list[j]}_{i}_{z}", text=sublist[k]["TC Number"])
-                        z += 1
-                
-                if i == 0:
-                    sublist = [item for item in datas if item["Category"] == Category_list[j] and item["Linux"] == "O" and item["Mode"] == "manual"]
-                    for k in range(0, len(sublist)):
-                        self.tree2.insert(f"{Category_list[j]}_{i}", "end", f"{Category_list[j]}_{i}_{z}", text=sublist[k]["TC Number"])
-                        z += 1
-                elif i == 1:   
-                    sublist = [item for item in datas if item["Category"] == Category_list[j] and item["Android"] == "O" and item["Mode"] == "manual"]
-                    for k in range(0, len(sublist)):
-                        self.tree2.insert(f"{Category_list[j]}_{i}", "end", f"{Category_list[j]}_{i}_{z}", text=sublist[k]["TC Number"])
-                        z += 1
-                elif i == 2:
-                    sublist = [item for item in datas if item["Category"] == Category_list[j] and item["LinuxAndroid"] == "O" and item["Mode"] == "manual"]
-                    for k in range(0, len(sublist)):
-                        self.tree2.insert(f"{Category_list[j]}_{i}", "end", f"{Category_list[j]}_{i}_{z}", text=sublist[k]["TC Number"])
-                        z += 1
 
 #textview GUI 
 
@@ -601,7 +614,7 @@ container6 = Checklist(window)
 container7 = Textview(window)
 read_thread = threading.Thread(target=container7.read_serial, daemon=True)
 read_thread.start()
-container5 = Cont4(window)
+# container5 = Cont4(window)
 
 
 # 윈도우 실행

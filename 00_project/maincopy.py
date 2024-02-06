@@ -571,4 +571,3 @@ container5 = Cont4(window)
 
 # 윈도우 실행
 window.mainloop()
-
