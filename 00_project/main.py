@@ -524,11 +524,14 @@ class Textview:
 
     def read_serial(self):
         while True:
+            print('hi')
+            print(self.serial_port)
             if self.serial_port:
                 try:
                     serial_output = self.serial_port.readline().decode('utf-8', errors='replace').strip()
                     if serial_output:
                         self.show_output(f"{serial_output}\n")
+                        print(self.serial_port)
                 except UnicodeDecodeError as e:
                     print(f"Error decoding serial data: {e}")
 
