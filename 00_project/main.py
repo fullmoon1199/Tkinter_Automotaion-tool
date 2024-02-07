@@ -12,15 +12,17 @@ import serial.tools.list_ports
 import threading
 import openpyxl
 
-def on_search_port(): 
+def on_search_port(combo):
     ports = serial.tools.list_ports.comports()
-    available_ports = []
-    for p in ports:
-        available_ports.append(p.description)
-    return available_ports
+    available_ports = [p.description for p in ports]
+    combo['values'] = available_ports
+
+def update_combobox():
+    on_search_port(container1.combo)
 
 def on_open():
     selected_port = container1.combo.get()
+    print(selected_port)
     if selected_port:       
         try:
             container1.serial_port = serial.Serial(selected_port, baudrate=115200, timeout=1)
@@ -33,9 +35,29 @@ def on_close():
     pass
 
 def on_start_tc():
-    # TODO: Start TC 동작 구현
-    pass
+    get_checked_ids = container6.tree.get_checked()  # 체크된 아이템의 ID를 가져옴
+    checked_item_names = []  # 체크된 아이템의 이름을 저장할 리스트
 
+    # 각 체크된 아이템의 ID를 순회하면서 이름을 가져와서 리스트에 추가
+    for item_id in get_checked_ids:
+        item_text = container6.tree.item(item_id, "text")  # ID로부터 아이템의 텍스트를 가져옴
+        checked_item_names.append(item_text)  # 가져온 텍스트를 리스트에 추가
+
+    print(checked_item_names) 
+
+def separate_commands(data):
+    hash_commands = []
+    hash_criterion = []
+
+    # ToolSequence에서 명령어들을 읽어와서 '#' 또는 '^'로 시작하는 경우에 따라 리스트에 추가
+    for command in data["ToolSequence"]:
+        if command.startswith("#"):
+            hash_commands.append(command)
+        elif command.startswith("^"):
+            hash_criterion.append(command)
+
+
+    
 def on_stop_tc():
     # TODO: Stop TC 동작 구현
     pass
@@ -113,44 +135,57 @@ def on_open_excel():
 
 def add_node(con):
 
-    #node delete
+    # Node delete
     for child in con.tree.get_children():
         con.tree.delete(child)
     for child in con.tree2.get_children():
         con.tree2.delete(child)
 
-    #node insert
+    # Node insert
     with open('F:\\tkinter\\00_project\\TestSequence.json') as file:
         datas = json.load(file)
     parent_id = ""
-    
-    chosen_radio_value = choised_radiobutton(container1)  # 불필요한 호출 제거
+
+    chosen_radio_value = choised_radiobutton(container1)  # Unnecessary function call removed
     if chosen_radio_value == "Bearmetal_Linux":
         bsp_id = "Linux"
     elif chosen_radio_value == "Bearmetal_Android":
         bsp_id = "Android"
     elif chosen_radio_value == "Linux_Android_VM":
         bsp_id = "LinuxAndroid"
-        
-    # tree node insert
+
+    # Tree node insert
     con.tree.insert(parent_id, "end", bsp_id, text=f"{bsp_id}")
     con.tree2.insert(parent_id, "end", bsp_id, text=f"{bsp_id}")
 
-    # 20240129 여기부터 sub node 구현
+    # Sub node implementation
     Category_list = list(set([item["Category"] for item in datas]))
     print(Category_list)
-    
-    for i in range(0, len(Category_list)):
-        con.tree.insert(bsp_id, "end", f"{Category_list[i]}", text=f"{Category_list[i]}")
-        con.tree2.insert(bsp_id, "end", f"{Category_list[i]}", text=f"{Category_list[i]}")
-        
-        sublist = [item for item in datas if item["Category"] == Category_list[i] and item["Automatic"] == "O"]
-        for j in range(0, len(sublist)):
-            con.tree.insert(f"{Category_list[i]}", "end", f"{Category_list[i]}_{j}", text=f"{sublist[j]["TC Number"]}")
 
-        sublist2 = [item for item in datas if item["Category"] == Category_list[i] and item["Automatic"] == "X"]
-        for j in range(0, len(sublist2)):  
-            con.tree2.insert(f"{Category_list[i]}", "end", f"{Category_list[i]}_{j}", text=f"{sublist2[j]["TC Number"]}")
+    for category in Category_list:
+        sublist = [item for item in datas if item["Category"] == category]
+        sublist_O = [item for item in sublist if item["Automatic"] == "O"]
+        sublist_X = [item for item in sublist if item["Automatic"] == "X"]
+
+        # Insert Category node
+        tree_node = con.tree.insert(bsp_id, "end", f"{category}", text=f"{category}")
+        tree2_node = con.tree2.insert(bsp_id, "end", f"{category}", text=f"{category}")
+
+        # Insert sublist for 'O' Automatic
+        for j, item in enumerate(sublist_O):
+            con.tree.insert(tree_node, "end", f"{category}_{j}", text=f"{item['TC Number']}")
+        
+        # Insert sublist for 'X' Automatic
+        for j, item in enumerate(sublist_X):
+            con.tree2.insert(tree2_node, "end", f"{category}_{j}", text=f"{item['TC Number']}")
+
+    # Delete Category node if it has no children
+    for category in Category_list:
+        # Check if the category has children
+        if not con.tree.get_children(category):
+            con.tree.delete(category)
+        if not con.tree2.get_children(category):
+            con.tree2.delete(category)
 
 
 
@@ -181,10 +216,10 @@ class Cont1:
         self.buttonframe = Frame(window, bg='red')
         self.buttonframe.pack(fill=X, anchor=N)
 
-        self.combo = ttk.Combobox(self.buttonframe,width=30, values=on_search_port(), state="readonly", style="TCombobox")
+        self.combo = ttk.Combobox(self.buttonframe, width=30, state="readonly", style="TCombobox")
         self.combo.pack(padx=10, pady=18, anchor=tk.NW, side=tk.LEFT)
 
-        self.search_port_button = tk.Button(self.buttonframe, text="Search Port", command=on_search_port, width=15, height=4)
+        self.search_port_button = tk.Button(self.buttonframe, text="Search Port", command=update_combobox, width=15, height=4)
         self.search_port_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
         # hover 색상변경 기능
         self.search_port_button.bind("<Enter>", lambda event, widget=self.search_port_button: on_enter(widget))
@@ -351,17 +386,31 @@ class Checklist:
             with open('F:\\tkinter\\00_project\\TestSequence.json') as file:
                 data = json.load(file)
 
-                # 특정 TC Number에 해당하는 데이터 찾기
                 target_tc_number = f"{item_name}"
                 found_data = next((item for item in data if item["TC Number"] == target_tc_number), None)
 
-                # 해당 데이터가 존재하면 Command와 Criterion 가져오기
-                if found_data:
-                    commands_text = "\n".join(found_data.get("ToolSequence", []))
-                    criterion_text = "\n".join(found_data.get("Criterion", []))
+                commands_text = []
+                criterion_text = []
+
+                # ToolSequence에서 명령어들을 읽어와서 '#' 또는 '^'로 시작하는 경우에 따라 리스트에 추가
+                for command in found_data["ToolSequence"]:
+                    if command.startswith("#"):
+                        commands_text.append(command)
+                    elif command.startswith("^"):
+                        criterion_text.append(command)
+                # 특정 TC Number에 해당하는 데이터 찾기
+
+
+                # # 해당 데이터가 존재하면 Command와 Criterion 가져오기
+                # if found_data:
+                #     commands_text = "\n".join(found_data.get("ToolSequence", []))
+                #     criterion_text = "\n".join(found_data.get("Criterion", []))
                     
-                else:
-                    print(f"No data found for {target_tc_number}")
+                # else:
+                #     print(f"No data found for {target_tc_number}")
+
+
+
 
             top = Toplevel(window)
             top.geometry("1400x500")
