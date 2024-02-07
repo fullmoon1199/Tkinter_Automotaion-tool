@@ -77,6 +77,21 @@ def on_start_tc():
         checked_item_names.append(item_text)  # 가져온 텍스트를 리스트에 추가
 
     print(checked_item_names) 
+  #240207 여기서부터 시작
+    with open('F:\\tkinter\\00_project\\TestSequence.json') as file:
+        data = json.load(file)
+        for item_name in checked_item_names:
+            target_tc_number = f"{item_name}"
+            found_data = next((item for item in data if item["TC Number"] == target_tc_number), None)
+            commands_text = []
+            criterion_text = []
+            # ToolSequence에서 명령어들을 읽어와서 '#' 또는 '^'로 시작하는 경우에 따라 리스트에 추가
+            for command in found_data["ToolSequence"]: 
+                if command.startswith("#"):
+                    commands_text.append(command)
+                elif command.startswith("^"):
+                    criterion_text.append(command)
+
 
 def separate_commands(data):
     hash_commands = []
@@ -88,6 +103,7 @@ def separate_commands(data):
             hash_commands.append(command)
         elif command.startswith("^"):
             hash_criterion.append(command)
+            hash_criterion.append("\n")
 
 
     
@@ -426,21 +442,11 @@ class Checklist:
                 criterion_text = []
 
                 # ToolSequence에서 명령어들을 읽어와서 '#' 또는 '^'로 시작하는 경우에 따라 리스트에 추가
-                for command in found_data["ToolSequence"]:
+                for command in found_data["ToolSequence"]: 
                     if command.startswith("#"):
                         commands_text.append(command)
                     elif command.startswith("^"):
                         criterion_text.append(command)
-                # 특정 TC Number에 해당하는 데이터 찾기
-
-
-                # # 해당 데이터가 존재하면 Command와 Criterion 가져오기
-                # if found_data:
-                #     commands_text = "\n".join(found_data.get("ToolSequence", []))
-                #     criterion_text = "\n".join(found_data.get("Criterion", []))
-                    
-                # else:
-                #     print(f"No data found for {target_tc_number}")
 
 
 
