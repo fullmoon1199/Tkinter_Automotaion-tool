@@ -12,23 +12,56 @@ import serial.tools.list_ports
 import threading
 import openpyxl
 
+def check_open_ports():
+    open_ports = []
+    for port in serial.tools.list_ports.comports():
+        try:
+            # 시리얼 포트를 시도하여 열린 경우 open_ports 리스트에 추가합니다.
+            serial_port = serial.Serial(port.device)
+            serial_port.close()
+            open_ports.append(port.device)
+        except serial.SerialException:
+            pass  # 포트가 열리지 않은 경우 예외가 발생하므로 그냥 넘어갑니다.
+    return open_ports
+
 def on_search_port(combo):
     ports = serial.tools.list_ports.comports()
+    port_device_mapping = {p.device: p.description for p in ports}  # 포트 번호와 디바이스 이름 매핑
+    print("\nPort-Device mapping:", port_device_mapping)  # 포트-디바이스 매핑 출력
     available_ports = [p.description for p in ports]
-    combo['values'] = available_ports
+    combo['values'] = available_ports  # 콤보박스에 사용 가능한 포트 목록 설정
 
 def update_combobox():
     on_search_port(container1.combo)
 
 def on_open():
-    selected_port = container1.combo.get()
-    print(selected_port)
-    if selected_port:       
+    selected_port_name = container1.combo.get()  # 선택된 포트 이름 가져오기
+    ports = serial.tools.list_ports.comports()
+    port_device_mapping = {p.device: p.description for p in ports}  # 포트 번호와 디바이스 이름 매핑
+
+    # 선택된 포트 이름과 매핑된 포트 번호 찾기
+    global serial_port
+    for port, device_name in port_device_mapping.items():
+        if device_name == selected_port_name:
+            serial_port = port
+            break
+
+    if serial_port is not None:
+        print("Selected port:", serial_port)
+    else:
+        print("Selected port not found.")
+    if serial_port:  # 선택된 포트가 있는지 확인
         try:
-            container1.serial_port = serial.Serial(selected_port, baudrate=115200, timeout=1)
-            print(f"Serial port {selected_port} opened successfully.")
-        except Exception as e:
-            print(f"Failed to open serial port {selected_port}. Error: {e}")
+            serial_port = serial.Serial(serial_port, baudrate=115200, timeout=1)  # 선택된 포트 열기
+            print(f"Serial port {serial_port} opened successfully.")
+            # 시리얼 통신 작업 수행
+        except serial.SerialException as e:
+            print(f"Error initializing serial port: {e}")
+            serial_port = None
+
+    read_thread = threading.Thread(target=container7.read_serial, daemon=True)
+    read_thread.start()
+
    
 def on_close():
     # TODO: Close 동작 구현
@@ -63,12 +96,12 @@ def on_stop_tc():
     pass
 
 def on_su(con):
-    con.serial_port.write(('su' + '\r').encode())
+    serial_port.write(('su' + '\r').encode())
 
 
 # root 동작 구현
 def on_root(con):
-    con.serial_port.write(('root' + '\r').encode())
+    serial_port.write(('root' + '\r').encode())
 
 def on_shift_f2():
     # TODO: Shift+F2 동작 구현
@@ -441,19 +474,6 @@ class Textview:
         self.textframe.pack(padx=5, pady=5, fill='x', expand=True, anchor=tk.NW, side=tk.TOP)
         self.textframe.pack_propagate(False)
 
-        # self.textview = tk.Text(self.textframe, bg="silver", state=tk.DISABLED)
-        # self.textview.pack(padx=5, pady=5, fill='both', anchor=tk.NW, side=tk.LEFT, expand=True)
-
-        # # Add scrollbar to textview1
-        # vbar1 = tk.Scrollbar(self.textframe, orient='vertical', command=self.textview.yview)
-        # vbar1.pack(side="right", fill='y')
-        # self.textview.configure(yscrollcommand=vbar1.set)
-
-        # # Change state to NORMAL, insert text, then change back to DISABLED
-        # self.textview.config(state=tk.NORMAL)
-        # self.textview.insert(tk.END, " ")
-        # self.textview.config(state=tk.DISABLED)
-
         self.textview = tk.Text(self.textframe, bg="silver", state=tk.DISABLED)
         self.textview.pack(padx=5, pady=5, fill='both', anchor=tk.NW, side=tk.LEFT, expand=True)
 
@@ -466,18 +486,20 @@ class Textview:
         vbar1.pack(side="right", fill='y')
         self.textview.configure(yscrollcommand=vbar1.set)
 
-        try:
-            self.serial_port = serial.Serial('COM22', baudrate=115200, timeout=1)  # 5초 timeout으로 변경
-
-        except serial.SerialException as e:
-            print(f"Error initializing serial port: {e}")
-            self.serial_port = None
-
         self.textframe2 = tk.Frame(self.largeframe, height=50, bg='white')
         self.textframe2.pack(padx=5, pady=5, fill='x', expand=True, anchor=tk.NW, side=tk.BOTTOM)
 
         self.input_entry = ttk.Entry(self.textframe2, font=('Courier', 12), width=100)
         self.input_entry.pack(pady=10)
+
+        # try:
+        #     self.serial_port = serial.Serial('COM22', baudrate=115200, timeout=1)  # 5초 timeout으로 변경
+        #     print(f"Serial port {self.serial_port} opened successfully.")
+        #     self.serial_port.close()
+
+        # except serial.SerialException as e:
+        #     print(f"Error initializing serial port: {e}")
+        #     self.serial_port = None
 
         def on_right_click(event):
             # 컨텍스트 메뉴를 표시
@@ -489,10 +511,7 @@ class Textview:
 
             # 읽은 내용을 엔트리에 삽입
             self.input_entry.insert(tk.END, clipboard_content)
-            self.serial_port.write(clipboard_content.encode())
-            # self.serial_port.write('\r'.encode())
-
-
+            serial_port.write(clipboard_content.encode())
 
         # 엔트리 위젯에 우클릭 이벤트에 대한 핸들러 추가
         self.input_entry.bind("<Button-3>", on_right_click)
@@ -506,32 +525,25 @@ class Textview:
             # 이벤트 핸들러 함수
             print(f'Key pressed: {event.char}')
             if (event.char == '\b'):
-                self.serial_port.write('\b'.encode())
+                serial_port.write('\b'.encode())
             elif event.char == '\r':                
                 self.input_entry.delete(0, tk.END)
-                self.serial_port.write('\r'.encode())
+                serial_port.write('\r'.encode())
             else:
-                self.serial_port.write(event.char.encode())
+                serial_port.write(event.char.encode())
 
         self.input_entry.bind('<Key>', on_key)
 
-    # def send_command(self):
-    #     if self.serial_port:
-    #         command = self.input_entry.get()
-    #         self.input_entry.delete(0, tk.END)
-    #         self.serial_port.write(command.encode())
-    #         print(f"Sent: {command}")
-
     def read_serial(self):
-        while True:
-            print('hi')
-            print(self.serial_port)
-            if self.serial_port:
+        if serial_port:  # 시리얼 포트가 열렸는지 확인
+            while True:
+                print(serial_port)
+                print(type(serial_port))
                 try:
-                    serial_output = self.serial_port.readline().decode('utf-8', errors='replace').strip()
+                    serial_output = serial_port.readline().decode('utf-8', errors='replace').strip()
                     if serial_output:
                         self.show_output(f"{serial_output}\n")
-                        print(self.serial_port)
+
                 except UnicodeDecodeError as e:
                     print(f"Error decoding serial data: {e}")
 
@@ -546,39 +558,6 @@ class Textview:
             self.textview.insert(tk.END, text)
             self.textview.yview(tk.END)
         self.textview.config(state=tk.DISABLED)
-
-
-   
-
-        # # Add scrollbar to textview2
-        # vbar2 = tk.Scrollbar(self.textframe2, orient='vertical', command=self.textview2.yview)
-        # vbar2.pack(side="right", fill='y')
-        # self.textview2.configure(yscrollcommand=vbar2.set)
-
-        # self.textview2.configure(font=("Courier", 10))
-
-        # # Bind a function to handle textview2 input
-        # self.textview2.bind('<Return>', self.update_textview)
-
-        # self.search_results = []
-        # self.current_search_index = 0
-
-    # def update_textview(self, event):
-    #     # Get the text from textview2
-    #     new_text = self.textview2.get("1.0", tk.END)
-
-    #     self.textview2.delete("1.0", tk.END)  # Clear existing text
-
-    #     # Remove the trailing newline character
-    #     new_text = new_text.strip()
-
-    #     # Insert the text into textview1
-    #     self.textview.config(state=tk.NORMAL)
-    #     if new_text == "clear":
-    #         self.textview.delete("1.0", tk.END)
-    #     else:
-    #         self.textview.insert(tk.END, new_text + '\n')
-    #     self.textview.config(state=tk.DISABLED)
 
     # Search text function
     def search_text(self, event):
@@ -656,8 +635,7 @@ container3 = Cont2(window)
 container3.update_progress(80)
 container6 = Checklist(window)
 container7 = Textview(window)
-read_thread = threading.Thread(target=container7.read_serial, daemon=True)
-read_thread.start()
+
 # container5 = Cont4(window)
 
 
