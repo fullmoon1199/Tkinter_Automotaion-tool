@@ -12,6 +12,11 @@ import serial.tools.list_ports
 import threading
 import openpyxl
 
+# def pass_func(response):
+#     response = response.
+    
+    
+
 def check_open_ports():
     open_ports = []
     for port in serial.tools.list_ports.comports():
@@ -52,7 +57,7 @@ def on_open():
         print("Selected port not found.")
     if serial_port:  # 선택된 포트가 있는지 확인
         try:
-            serial_port = serial.Serial(serial_port, baudrate=115200, timeout=1)  # 선택된 포트 열기
+            serial_port = serial.Serial(serial_port, baudrate=115200)  # 선택된 포트 열기
             print(f"Serial port {serial_port} opened successfully.")
             # 시리얼 통신 작업 수행
         except serial.SerialException as e:
@@ -83,15 +88,15 @@ def on_start_tc():
         for item_name in checked_item_names:
             target_tc_number = f"{item_name}"
             found_data = next((item for item in data if item["TC Number"] == target_tc_number), None)
-            commands_text = []
-            criterion_text = []
             # ToolSequence에서 명령어들을 읽어와서 '#' 또는 '^'로 시작하는 경우에 따라 리스트에 추가
+            # print(type(found_data))
             for command in found_data["ToolSequence"]: 
                 if command.startswith("#"):
-                    commands_text.append(command)
+                    content = command.split(' ', 1)[-1]
+                    serial_port.write(content.encode())
+                    serial_port.write('\r'.encode())               
                 elif command.startswith("^"):
-                    criterion_text.append(command)
-
+                    print(command)
 
 def separate_commands(data):
     hash_commands = []
@@ -120,12 +125,13 @@ def on_root(con):
     serial_port.write(('root' + '\r').encode())
 
 def on_shift_f2():
-    # TODO: Shift+F2 동작 구현
-    pass
+    serial_port.write(b" [24~")
+    serial_port.write('\r'.encode("utf-8"))  
 
 def on_shift_f3():
-    # TODO: Shift+F3 동작 구현
-    pass
+    serial_port.write(b" [25~")
+    serial_port.write('\r'.encode("utf-8")) 
+
 def choised_radiobutton(con):
     selected_value = con.radio_var.get()  # 현재 선택된 버튼의 value 값을 가져옴
 
@@ -150,17 +156,20 @@ def on_open_excel():
 
     data_list = []
 
-    for rownum in range(6, 70):
-        data = OrderedDict()
-        column_value = [cell.value for cell in sheet[rownum]]
-        data['Number'] = column_value[0]
-        data['TC Number'] = column_value[1]
-        data['Category'] = column_value[2]
-        data['BL'] = column_value[10]
-        data['BA'] = column_value[11]
-        data['LA'] = column_value[12]
-        data['Automatic'] = column_value[14]
-        ToolSequence = column_value[15]
+    for rownum in range(6, 100):
+        if not sheet[rownum][0].value:
+            break
+        else:
+            data = OrderedDict()
+            column_value = [cell.value for cell in sheet[rownum]]
+            data['Number'] = column_value[0]
+            data['TC Number'] = column_value[1]
+            data['Category'] = column_value[2]
+            data['BL'] = column_value[10]
+            data['BA'] = column_value[11]
+            data['LA'] = column_value[12]
+            data['Automatic'] = column_value[14]
+            ToolSequence = column_value[15]
 
         if ToolSequence:
             ToolSequence = ToolSequence.split('\n')
@@ -174,7 +183,7 @@ def on_open_excel():
     for i in range(len(data_list)):
         print(data_list[i])
 
-    json_file_path = 'F:\\tkinter\\00_project\\test.json'
+    json_file_path = 'F:\\tkinter\\00_project\\TestSequence.json'
     with open(json_file_path, 'w', encoding='utf-8') as json_file:
         json.dump(data_list, json_file, indent=4, ensure_ascii=False)
 
@@ -265,7 +274,7 @@ class Cont1:
         self.buttonframe = Frame(window, bg='red')
         self.buttonframe.pack(fill=X, anchor=N)
 
-        self.combo = ttk.Combobox(self.buttonframe, width=30, state="readonly", style="TCombobox")
+        self.combo = ttk.Combobox(self.buttonframe, width=60, state="readonly", style="TCombobox")
         self.combo.pack(padx=10, pady=18, anchor=tk.NW, side=tk.LEFT)
 
         self.search_port_button = tk.Button(self.buttonframe, text="Search Port", command=update_combobox, width=15, height=4)
@@ -331,7 +340,7 @@ class Cont1:
 # progress bar GUI  
 class Cont2: 
     def __init__(self, window):
-        self.progressframe = Frame(window)
+        self.progressframe = Frame(window, bg='yellow')
         self.progressframe.pack(fill=X, anchor=N)
 
         self.progressbar = ttk.Progressbar(self.progressframe, maximum=100, length=1500)
@@ -350,7 +359,7 @@ class Checklist:
     manual = 0
     def __init__(self, window):
         
-        Checklist_LargeFrame = tk.Frame(window, bg = 'white')
+        Checklist_LargeFrame = tk.Frame(window, bg = 'blue')
         Checklist_LargeFrame.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.LEFT)
         # Create a frame to hold the CheckboxTreeview and scrollbar
         frame = tk.Frame(Checklist_LargeFrame, bg='white')
@@ -448,9 +457,6 @@ class Checklist:
                     elif command.startswith("^"):
                         criterion_text.append(command)
 
-
-
-
             top = Toplevel(window)
             top.geometry("1400x500")
             top.title("Child Window")
@@ -473,11 +479,11 @@ class Checklist:
 
 class Textview:
     def __init__(self, window):
-        self.largeframe = tk.Frame(window, bg='white')
+        self.largeframe = tk.Frame(window, bg='green')
         self.largeframe.pack(padx=5, pady=5, fill='both', expand=True, anchor=tk.NW, side=tk.LEFT)
 
-        self.textframe = tk.Frame(self.largeframe, height=600, bg='white')
-        self.textframe.pack(padx=5, pady=5, fill='x', expand=True, anchor=tk.NW, side=tk.TOP)
+        self.textframe = tk.Frame(self.largeframe, height=600, bg='red')
+        self.textframe.pack(padx=5, pady=5, fill='both', expand=True, anchor=tk.NW, side=tk.TOP)
         self.textframe.pack_propagate(False)
 
         self.textview = tk.Text(self.textframe, bg="silver", state=tk.DISABLED)
@@ -492,8 +498,8 @@ class Textview:
         vbar1.pack(side="right", fill='y')
         self.textview.configure(yscrollcommand=vbar1.set)
 
-        self.textframe2 = tk.Frame(self.largeframe, height=50, bg='white')
-        self.textframe2.pack(padx=5, pady=5, fill='x', expand=True, anchor=tk.NW, side=tk.BOTTOM)
+        self.textframe2 = tk.Frame(self.largeframe, bg='purple')
+        self.textframe2.pack(padx=5, pady=5, fill='x', expand=True, anchor=tk.NW, side=tk.TOP)
 
         self.input_entry = ttk.Entry(self.textframe2, font=('Courier', 12), width=100)
         self.input_entry.pack(pady=10)
@@ -552,7 +558,7 @@ class Textview:
 
                 except UnicodeDecodeError as e:
                     print(f"Error decoding serial data: {e}")
-
+    
     def show_output(self, text):
         self.textview.config(state=tk.NORMAL)
         if text == "\b":
@@ -636,7 +642,7 @@ class space:
         self.label.pack(padx=5, anchor=tk.NW, side=tk.LEFT)
 
 container1 = Cont1(window)
-container2 = space(window)
+# container2 = space(window)
 container3 = Cont2(window)
 container3.update_progress(80)
 container6 = Checklist(window)
