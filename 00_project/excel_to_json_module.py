@@ -2,12 +2,10 @@ import openpyxl
 from collections import OrderedDict
 import json
 from tkinter import filedialog
-from maincopy import choised_radiobutton
 def excel_to_json():
 
     file_path = filedialog.askopenfilename()
     excel_file_path = file_path
-    choised_radiobutton.set(excel_file_path)
 
     wb = openpyxl.load_workbook(excel_file_path)
     sheet = wb['Bearmetal_Linux']

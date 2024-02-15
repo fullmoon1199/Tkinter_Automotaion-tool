@@ -11,17 +11,17 @@ from tkinter import filedialog
 import serial.tools.list_ports
 import threading
 import openpyxl
-
+    
 def check_open_ports():
     open_ports = []
     for port in serial.tools.list_ports.comports():
         try:
-            # 시리얼 포트를 시도하여 열린 경우 open_ports 리스트에 추가합니다.
+            # 시리얼 포트를 시도하여 열린 경우 open_ports 리스트에 추가
             serial_port = serial.Serial(port.device)
             serial_port.close()
             open_ports.append(port.device)
-        except serial.SerialException:
-            pass  # 포트가 열리지 않은 경우 예외가 발생하므로 그냥 넘어갑니다.
+        except serial.SerialException:# 예외처리
+            pass
     return open_ports
 
 def on_search_port(combo):
@@ -52,7 +52,7 @@ def on_open():
         print("Selected port not found.")
     if serial_port:  # 선택된 포트가 있는지 확인
         try:
-            serial_port = serial.Serial(serial_port, baudrate=115200, timeout=1)  # 선택된 포트 열기
+            serial_port = serial.Serial(serial_port, baudrate=115200, timeout = 1)  # 선택된 포트 열기
             print(f"Serial port {serial_port} opened successfully.")
             # 시리얼 통신 작업 수행
         except serial.SerialException as e:
@@ -67,6 +67,34 @@ def on_close():
     # TODO: Close 동작 구현
     pass
 
+# def on_start_tc():
+#     get_checked_ids = container6.tree.get_checked()  # 체크된 아이템의 ID를 가져옴
+#     checked_item_names = []  # 체크된 아이템의 이름을 저장할 리스트
+
+#     # 각 체크된 아이템의 ID를 순회하면서 이름을 가져와서 리스트에 추가
+#     for item_id in get_checked_ids:
+#         item_text = container6.tree.item(item_id, "text")  # ID로부터 아이템의 텍스트를 가져옴
+#         checked_item_names.append(item_text)  # 가져온 텍스트를 리스트에 추가
+
+#     print(checked_item_names) 
+#   #240207 여기서부터 시작
+#     with open('F:\\tkinter\\00_project\\TestSequence.json') as file:
+#         data = json.load(file)
+#         for item_name in checked_item_names:
+#             target_tc_number = f"{item_name}"
+#             found_data = next((item for item in data if item["TC Number"] == target_tc_number), None)
+#             # ToolSequence에서 명령어들을 읽어와서 '#' 또는 '^'로 시작하는 경우에 따라 리스트에 추가
+#             # print(type(found_data))
+#             for command in found_data["ToolSequence"]: 
+#                 if command.startswith("#"):
+#                     content = command.split(' ', 1)[-1]
+#                     serial_port.write(content.encode())
+#                     serial_port.write('\r'.encode())               
+#                 elif command.startswith("^"):
+#                     print(command)
+
+response_from_board = NONE
+
 def on_start_tc():
     get_checked_ids = container6.tree.get_checked()  # 체크된 아이템의 ID를 가져옴
     checked_item_names = []  # 체크된 아이템의 이름을 저장할 리스트
@@ -77,6 +105,35 @@ def on_start_tc():
         checked_item_names.append(item_text)  # 가져온 텍스트를 리스트에 추가
 
     print(checked_item_names) 
+    # 여기서부터 시작
+    with open('F:\\tkinter\\00_project\\TestSequence.json') as file:
+        data = json.load(file)
+        for item_name in checked_item_names:
+            target_tc_number = f"{item_name}"
+            found_data = next((item for item in data if item["TC Number"] == target_tc_number), None)
+            # ToolSequence에서 명령어들을 읽어와서 '#' 또는 '^'로 시작하는 경우에 따라 리스트에 추가
+            # print(type(found_data))
+            for command in found_data["ToolSequence"]: 
+                if command.startswith("#"):
+                    command_func(command)
+                elif command.startswith("^"):
+                    # ^로 시작하는 문자열에 대한 처리
+                    pass_func(command, response_from_board)
+
+def command_func(command):
+    content = command.split(' ', 1)[-1]
+    serial_port.write(content.encode())
+    serial_port.write('\r'.encode()) 
+
+def pass_func(command, response):
+    if command == response:
+        print("Pass")
+    else:
+        print(command)
+        print(response)
+        print("Fail")
+
+
 
 def separate_commands(data):
     hash_commands = []
@@ -86,12 +143,8 @@ def separate_commands(data):
     for command in data["ToolSequence"]:
         if command.startswith("#"):
             hash_commands.append(command)
-            hash_commands.append("\n")
         elif command.startswith("^"):
             hash_criterion.append(command)
-            hash_criterion.append("\n")
-
-
     
 def on_stop_tc():
     # TODO: Stop TC 동작 구현
@@ -100,18 +153,18 @@ def on_stop_tc():
 def on_su(con):
     serial_port.write(('su' + '\r').encode())
 
-
 # root 동작 구현
 def on_root(con):
     serial_port.write(('root' + '\r').encode())
 
 def on_shift_f2():
-    # TODO: Shift+F2 동작 구현
-    pass
+    serial_port.write(b" [24~")
+    serial_port.write('\r'.encode("utf-8"))  
 
 def on_shift_f3():
-    # TODO: Shift+F3 동작 구현
-    pass
+    serial_port.write(b" [25~")
+    serial_port.write('\r'.encode("utf-8")) 
+
 def choised_radiobutton(con):
     selected_value = con.radio_var.get()  # 현재 선택된 버튼의 value 값을 가져옴
 
@@ -136,17 +189,20 @@ def on_open_excel():
 
     data_list = []
 
-    for rownum in range(6, 70):
-        data = OrderedDict()
-        column_value = [cell.value for cell in sheet[rownum]]
-        data['Number'] = column_value[0]
-        data['TC Number'] = column_value[1]
-        data['Category'] = column_value[2]
-        data['BL'] = column_value[10]
-        data['BA'] = column_value[11]
-        data['LA'] = column_value[12]
-        data['Automatic'] = column_value[14]
-        ToolSequence = column_value[15]
+    for rownum in range(6, 100):
+        if not sheet[rownum][0].value:
+            break
+        else:
+            data = OrderedDict()
+            column_value = [cell.value for cell in sheet[rownum]]
+            data['Number'] = column_value[0]
+            data['TC Number'] = column_value[1]
+            data['Category'] = column_value[2]
+            data['BL'] = column_value[10]
+            data['BA'] = column_value[11]
+            data['LA'] = column_value[12]
+            data['Automatic'] = column_value[14]
+            ToolSequence = column_value[15]
 
         if ToolSequence:
             ToolSequence = ToolSequence.split('\n')
@@ -160,7 +216,7 @@ def on_open_excel():
     for i in range(len(data_list)):
         print(data_list[i])
 
-    json_file_path = 'F:\\tkinter\\00_project\\test.json'
+    json_file_path = 'F:\\tkinter\\00_project\\TestSequence.json'
     with open(json_file_path, 'w', encoding='utf-8') as json_file:
         json.dump(data_list, json_file, indent=4, ensure_ascii=False)
 
@@ -251,7 +307,7 @@ class Cont1:
         self.buttonframe = Frame(window, bg='red')
         self.buttonframe.pack(fill=X, anchor=N)
 
-        self.combo = ttk.Combobox(self.buttonframe, width=30, state="readonly", style="TCombobox")
+        self.combo = ttk.Combobox(self.buttonframe, width=60, state="readonly", style="TCombobox")
         self.combo.pack(padx=10, pady=18, anchor=tk.NW, side=tk.LEFT)
 
         self.search_port_button = tk.Button(self.buttonframe, text="Search Port", command=update_combobox, width=15, height=4)
@@ -317,7 +373,7 @@ class Cont1:
 # progress bar GUI  
 class Cont2: 
     def __init__(self, window):
-        self.progressframe = Frame(window)
+        self.progressframe = Frame(window, bg='yellow')
         self.progressframe.pack(fill=X, anchor=N)
 
         self.progressbar = ttk.Progressbar(self.progressframe, maximum=100, length=1500)
@@ -336,7 +392,7 @@ class Checklist:
     manual = 0
     def __init__(self, window):
         
-        Checklist_LargeFrame = tk.Frame(window, bg = 'white')
+        Checklist_LargeFrame = tk.Frame(window, bg = 'blue')
         Checklist_LargeFrame.pack(padx=5, pady=5, fill='y', anchor=tk.NW, side=tk.LEFT)
         # Create a frame to hold the CheckboxTreeview and scrollbar
         frame = tk.Frame(Checklist_LargeFrame, bg='white')
@@ -428,24 +484,11 @@ class Checklist:
                 criterion_text = []
 
                 # ToolSequence에서 명령어들을 읽어와서 '#' 또는 '^'로 시작하는 경우에 따라 리스트에 추가
-                for command in found_data["ToolSequence"]:
+                for command in found_data["ToolSequence"]: 
                     if command.startswith("#"):
                         commands_text.append(command)
                     elif command.startswith("^"):
                         criterion_text.append(command)
-                # 특정 TC Number에 해당하는 데이터 찾기
-
-
-                # # 해당 데이터가 존재하면 Command와 Criterion 가져오기
-                # if found_data:
-                #     commands_text = "\n".join(found_data.get("ToolSequence", []))
-                #     criterion_text = "\n".join(found_data.get("Criterion", []))
-                    
-                # else:
-                #     print(f"No data found for {target_tc_number}")
-
-
-
 
             top = Toplevel(window)
             top.geometry("1400x500")
@@ -469,11 +512,12 @@ class Checklist:
 
 class Textview:
     def __init__(self, window):
-        self.largeframe = tk.Frame(window, bg='white')
+        
+        self.largeframe = tk.Frame(window, bg='green')
         self.largeframe.pack(padx=5, pady=5, fill='both', expand=True, anchor=tk.NW, side=tk.LEFT)
 
-        self.textframe = tk.Frame(self.largeframe, height=600, bg='white')
-        self.textframe.pack(padx=5, pady=5, fill='x', expand=True, anchor=tk.NW, side=tk.TOP)
+        self.textframe = tk.Frame(self.largeframe, height=600, bg='red')
+        self.textframe.pack(padx=5, pady=5, fill='both', expand=True, anchor=tk.NW, side=tk.TOP)
         self.textframe.pack_propagate(False)
 
         self.textview = tk.Text(self.textframe, bg="silver", state=tk.DISABLED)
@@ -488,8 +532,8 @@ class Textview:
         vbar1.pack(side="right", fill='y')
         self.textview.configure(yscrollcommand=vbar1.set)
 
-        self.textframe2 = tk.Frame(self.largeframe, height=50, bg='white')
-        self.textframe2.pack(padx=5, pady=5, fill='x', expand=True, anchor=tk.NW, side=tk.BOTTOM)
+        self.textframe2 = tk.Frame(self.largeframe, bg='purple')
+        self.textframe2.pack(padx=5, pady=5, fill='x', expand=True, anchor=tk.NW, side=tk.TOP)
 
         self.input_entry = ttk.Entry(self.textframe2, font=('Courier', 12), width=100)
         self.input_entry.pack(pady=10)
@@ -539,16 +583,17 @@ class Textview:
     def read_serial(self):
         if serial_port:  # 시리얼 포트가 열렸는지 확인
             while True:
-                print(serial_port)
-                print(type(serial_port))
                 try:
                     serial_output = serial_port.readline().decode('utf-8', errors='replace').strip()
                     if serial_output:
                         self.show_output(f"{serial_output}\n")
+                        global response_from_board
+                        response_from_board = serial_output
+                        print(f"output = {serial_output}")
 
                 except UnicodeDecodeError as e:
                     print(f"Error decoding serial data: {e}")
-
+    
     def show_output(self, text):
         self.textview.config(state=tk.NORMAL)
         if text == "\b":
@@ -559,6 +604,7 @@ class Textview:
         else:
             self.textview.insert(tk.END, text)
             self.textview.yview(tk.END)
+            
         self.textview.config(state=tk.DISABLED)
 
     # Search text function
@@ -632,7 +678,7 @@ class space:
         self.label.pack(padx=5, anchor=tk.NW, side=tk.LEFT)
 
 container1 = Cont1(window)
-container2 = space(window)
+# container2 = space(window)
 container3 = Cont2(window)
 container3.update_progress(80)
 container6 = Checklist(window)

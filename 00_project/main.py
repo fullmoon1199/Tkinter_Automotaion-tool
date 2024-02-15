@@ -12,8 +12,9 @@ import serial.tools.list_ports
 import threading
 import openpyxl
 
-# def pass_func(response):
-#     response = response.
+def pass_func(response,hello):
+    response = response
+    hello = hello
     
     
 
@@ -21,12 +22,12 @@ def check_open_ports():
     open_ports = []
     for port in serial.tools.list_ports.comports():
         try:
-            # 시리얼 포트를 시도하여 열린 경우 open_ports 리스트에 추가합니다.
+            # 시리얼 포트를 시도하여 열린 경우 open_ports 리스트에 추가
             serial_port = serial.Serial(port.device)
             serial_port.close()
             open_ports.append(port.device)
-        except serial.SerialException:
-            pass  # 포트가 열리지 않은 경우 예외가 발생하므로 그냥 넘어갑니다.
+        except serial.SerialException:# 예외처리
+            pass
     return open_ports
 
 def on_search_port(combo):
@@ -108,9 +109,6 @@ def separate_commands(data):
             hash_commands.append(command)
         elif command.startswith("^"):
             hash_criterion.append(command)
-            hash_criterion.append("\n")
-
-
     
 def on_stop_tc():
     # TODO: Stop TC 동작 구현
@@ -118,7 +116,6 @@ def on_stop_tc():
 
 def on_su(con):
     serial_port.write(('su' + '\r').encode())
-
 
 # root 동작 구현
 def on_root(con):
@@ -543,14 +540,13 @@ class Textview:
                 serial_port.write('\r'.encode())
             else:
                 serial_port.write(event.char.encode())
+                
 
         self.input_entry.bind('<Key>', on_key)
 
     def read_serial(self):
         if serial_port:  # 시리얼 포트가 열렸는지 확인
             while True:
-                print(serial_port)
-                print(type(serial_port))
                 try:
                     serial_output = serial_port.readline().decode('utf-8', errors='replace').strip()
                     if serial_output:
