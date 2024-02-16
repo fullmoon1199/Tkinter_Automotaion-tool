@@ -12,12 +12,6 @@ import serial.tools.list_ports
 import threading
 import openpyxl
 
-def pass_func(response,hello):
-    response = response
-    hello = hello
-    
-    
-
 def check_open_ports():
     open_ports = []
     for port in serial.tools.list_ports.comports():
@@ -72,6 +66,8 @@ def on_open():
 def on_close():
     # TODO: Close 동작 구현
     pass
+tc_log = []
+status = 0
 
 def on_start_tc():
     get_checked_ids = container6.tree.get_checked()  # 체크된 아이템의 ID를 가져옴
@@ -86,18 +82,23 @@ def on_start_tc():
   #240207 여기서부터 시작
     with open('F:\\tkinter\\00_project\\TestSequence.json') as file:
         data = json.load(file)
+        #여기가 tc마다 한번씩 돌아서 체크된 tc개수만큼 돔
         for item_name in checked_item_names:
             target_tc_number = f"{item_name}"
+            #TC Number에 해당하는 데이터들을 모두 가져와서 found_data에 저장함 found_data는 tc마다 한번씩 도는것 같음
             found_data = next((item for item in data if item["TC Number"] == target_tc_number), None)
             # ToolSequence에서 명령어들을 읽어와서 '#' 또는 '^'로 시작하는 경우에 따라 리스트에 추가
-            # print(type(found_data))
+            global tc_log
+            global status
+            status = 1
+            #found_data에서 ToolSequence
             for command in found_data["ToolSequence"]: 
                 if command.startswith("#"):
-                    content = command.split(' ', 1)[-1]
-                    serial_port.write(content.encode())
-                    serial_port.write('\r'.encode())               
-                elif command.startswith("^"):
-                    print(command)
+                    command_func(command)
+            tc_log = []
+            print("count")
+
+            #여기에 pass_func돌리면 될 듯
 
 def separate_commands(data):
     hash_commands = []
@@ -473,7 +474,7 @@ class Checklist:
             print(f"Name: {item_name}")
 
 #textview GUI 
-
+response = NONE
 class Textview:
     def __init__(self, window):
         self.largeframe = tk.Frame(window, bg='green')
@@ -546,12 +547,16 @@ class Textview:
 
     def read_serial(self):
         if serial_port:  # 시리얼 포트가 열렸는지 확인
+            global status
             while True:
                 try:
                     serial_output = serial_port.readline().decode('utf-8', errors='replace').strip()
+                
                     if serial_output:
                         self.show_output(f"{serial_output}\n")
-
+                        if status == 1:  
+                            tc_log.append(serial_output)
+                        
                 except UnicodeDecodeError as e:
                     print(f"Error decoding serial data: {e}")
     
@@ -606,6 +611,14 @@ class Textview:
         if self.search_results:
             self.show_next_search_result()
 
+def command_func(command):
+    content = command.split(' ', 1)[-1]
+    serial_port.write(content.encode())
+    serial_port.write('\r'.encode())
+
+def pass_func(command):
+    pass
+    
 
 #캔버스 컨테이너
 class Cont4: 
