@@ -52,7 +52,7 @@ def on_open():
         print("Selected port not found.")
     if serial_port:  # 선택된 포트가 있는지 확인
         try:
-            serial_port = serial.Serial(serial_port, baudrate=115200)  # 선택된 포트 열기
+            serial_port = serial.Serial(serial_port, baudrate=115200, timeout=1)  # 선택된 포트 열기
             print(f"Serial port {serial_port} opened successfully.")
             # 시리얼 통신 작업 수행
         except serial.SerialException as e:
@@ -80,7 +80,7 @@ def on_start_tc():
 
     print(checked_item_names) 
   #240207 여기서부터 시작
-    with open('F:\\tkinter\\00_project\\TestSequence.json') as file:
+    with open('./TestSequence.json') as file:
         data = json.load(file)
         #여기가 tc마다 한번씩 돌아서 체크된 tc개수만큼 돔
         for item_name in checked_item_names:
@@ -95,9 +95,8 @@ def on_start_tc():
             for command in found_data["ToolSequence"]: 
                 if command.startswith("#"):
                     command_func(command)
-            tc_log = []
             print("count")
-
+                # print(f"tc_log = {tc_log}")
             #여기에 pass_func돌리면 될 듯
 
 def separate_commands(data):
@@ -130,8 +129,9 @@ def on_shift_f3():
     serial_port.write(b" [25~")
     serial_port.write('\r'.encode("utf-8")) 
 
+# BSP radio button
 def choised_radiobutton(con):
-    selected_value = con.radio_var.get()  # 현재 선택된 버튼의 value 값을 가져옴
+    selected_value = con.radio_var.get()  
 
     if selected_value == 1:
         selected_button = "Bearmetal_Linux"
@@ -181,7 +181,7 @@ def on_open_excel():
     for i in range(len(data_list)):
         print(data_list[i])
 
-    json_file_path = 'F:\\tkinter\\00_project\\TestSequence.json'
+    json_file_path = './TestSequence.json'
     with open(json_file_path, 'w', encoding='utf-8') as json_file:
         json.dump(data_list, json_file, indent=4, ensure_ascii=False)
 
@@ -189,6 +189,7 @@ def on_open_excel():
 
     add_node(container6)
 
+# treeview add_node 
 def add_node(con):
 
     # Node delete
@@ -198,7 +199,7 @@ def add_node(con):
         con.tree2.delete(child)
 
     # Node insert
-    with open('F:\\tkinter\\00_project\\TestSequence.json') as file:
+    with open('TestSequence.json') as file:
         datas = json.load(file)
     parent_id = ""
 
@@ -252,13 +253,13 @@ def on_leave(widget):
     widget.config(bg='white')
 
 
-# Tkinter 윈도우 생성
+# Tkinter window
 window = tk.Tk()
 window.title("V920 SADK Verification Program")
 
-# 윈도우 크기 설정
+# window size
 window.geometry("1650x900+30+30")
-# 상단 텍스트 추가
+# insert top label 
 title_frame = tk.Frame(window,bg='black')
 title_frame.pack(fill=X, anchor=N)
 title_label1 = tk.Label(title_frame, text="V920 SADK Verification Program", font=("Calibri", 16, "bold"), bg='black', fg='white')
@@ -277,7 +278,7 @@ class Cont1:
 
         self.search_port_button = tk.Button(self.buttonframe, text="Search Port", command=update_combobox, width=15, height=4)
         self.search_port_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
-        # hover 색상변경 기능
+        # hover color
         self.search_port_button.bind("<Enter>", lambda event, widget=self.search_port_button: on_enter(widget))
         self.search_port_button.bind("<Leave>", lambda event, widget=self.search_port_button: on_leave(widget))
 
@@ -523,10 +524,9 @@ class Textview:
             self.input_entry.insert(tk.END, clipboard_content)
             serial_port.write(clipboard_content.encode())
 
-        # 엔트리 위젯에 우클릭 이벤트에 대한 핸들러 추가
+        # entry widget right click event
         self.input_entry.bind("<Button-3>", on_right_click)
 
-        # 컨텍스트 메뉴 생성
         context_menu = tk.Menu(window, tearoff=0)
         context_menu.add_command(label="붙여넣기", command=paste_from_clipboard)
         
@@ -615,9 +615,6 @@ def command_func(command):
     content = command.split(' ', 1)[-1]
     serial_port.write(content.encode())
     serial_port.write('\r'.encode())
-
-def pass_func(command):
-    pass
     
 
 #캔버스 컨테이너

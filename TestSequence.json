@@ -1,0 +1,942 @@
+[
+    {
+        "Number": 1,
+        "TC Number": "BA-BOOT-LK-0001",
+        "Category": "Boot",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 2,
+        "TC Number": "BA-BOOT-AND-0002",
+        "Category": "Boot",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 3,
+        "TC Number": "BA-INSYS-AND-0001",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 4,
+        "TC Number": "BA-INSYS-AND-0002",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 5,
+        "TC Number": "BA-INSYS-AND-0003",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 6,
+        "TC Number": "BA-INSYS-AND-0004",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 7,
+        "TC Number": "BA-INSYS-AND-0005",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 8,
+        "TC Number": "BA-INSYS-AND-0006",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 9,
+        "TC Number": "BA-INSYS-AND-0007",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 10,
+        "TC Number": "BA-INSYS-AND-0008",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 11,
+        "TC Number": "BA-INSYS-AND-0009",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 12,
+        "TC Number": "BA-INSYS-AND-0010",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 13,
+        "TC Number": "BA-INSYS-AND-0011",
+        "Category": "Internal System",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 14,
+        "TC Number": "BA-EXIN-AND-0001",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 15,
+        "TC Number": "BA-EXIN-AND-0002",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 16,
+        "TC Number": "BA-EXIN-AND-0003",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 17,
+        "TC Number": "BA-EXIN-AND-0004",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 18,
+        "TC Number": "BA-EXIN-AND-0005",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 19,
+        "TC Number": "BA-EXIN-AND-0006",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 20,
+        "TC Number": "BA-EXIN-AND-0007",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": " X",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 21,
+        "TC Number": "BA-EXIN-AND-0008",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 22,
+        "TC Number": "BA-EXIN-AND-0009",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 23,
+        "TC Number": "BA-EXIN-AND-0010",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 24,
+        "TC Number": "BA-EXIN-AND-0011",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 25,
+        "TC Number": "BA-EXIN-AND-0012",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 26,
+        "TC Number": "BA-EXIN-AND-0013",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 27,
+        "TC Number": "BA-EXIN-AND-0014",
+        "Category": "External Interface",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 28,
+        "TC Number": "BA-GRA-AND-0001",
+        "Category": "Graphic",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 29,
+        "TC Number": "BA-VID-AND-0001",
+        "Category": "Video",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 30,
+        "TC Number": "BA-VID-AND-0002",
+        "Category": "Video",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 31,
+        "TC Number": "BA-AUD-AND-0001",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 32,
+        "TC Number": "BA-AUD-AND-0002",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 33,
+        "TC Number": "BA-AUD-AND-0003",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 34,
+        "TC Number": "BA-AUD-AND-0004",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 35,
+        "TC Number": "BA-AUD-AND-0005",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 36,
+        "TC Number": "BA-AUD-AND-0006",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 37,
+        "TC Number": "BA-AUD-AND-0007",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 38,
+        "TC Number": "BA-AUD-AND-0008",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 39,
+        "TC Number": "BA-AUD-AND-0009",
+        "Category": "Audio",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 40,
+        "TC Number": "BA-CAM-AND-0001",
+        "Category": "Camera",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 41,
+        "TC Number": "BA-NPU-AND-0001",
+        "Category": "NPU",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 42,
+        "TC Number": "BA-SEC-AND-0001",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 43,
+        "TC Number": "BA-SEC-AND-0002",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 44,
+        "TC Number": "BA-SEC-AND-0003",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 45,
+        "TC Number": "BA-SEC-LK-0004",
+        "Category": "Security",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 46,
+        "TC Number": "BA-SEC-LK-0005",
+        "Category": "Security",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 47,
+        "TC Number": "BA-SEC-AND-0006",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 48,
+        "TC Number": "BA-SEC-AND-0007",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 49,
+        "TC Number": "BA-SEC-AND-0008",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 50,
+        "TC Number": "BA-SEC-AND-0009",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 51,
+        "TC Number": "BA-SEC-AND-0010",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 52,
+        "TC Number": "BA-SEC-AND-0011",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 53,
+        "TC Number": "BA-SEC-AND-0012",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 54,
+        "TC Number": "BA-SEC-AND-0013",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 55,
+        "TC Number": "BA-SEC-AND-0014",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 56,
+        "TC Number": "BA-SEC-LK-0015",
+        "Category": "Security",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 57,
+        "TC Number": "BA-SEC-LK-0016",
+        "Category": "Security",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 58,
+        "TC Number": "BA-SEC-AND-0017",
+        "Category": "Security",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 59,
+        "TC Number": "BA-SFI-AND-0017",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 60,
+        "TC Number": "BA-SFI-AND-0018",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 61,
+        "TC Number": "BA-SFI-AND-0019",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 62,
+        "TC Number": "BA-SFI-AND-0020",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 63,
+        "TC Number": "BA-SFI-AND-0021",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 64,
+        "TC Number": "BA-SFI-AND-0022",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 65,
+        "TC Number": "BA-SFI-AND-0023",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 66,
+        "TC Number": "BA-SFI-AND-0024",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 67,
+        "TC Number": "BA-SFI-AND-0025",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 68,
+        "TC Number": "BA-SFI-AND-0026",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 69,
+        "TC Number": "BA-SFI-AND-0027",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 70,
+        "TC Number": "BA-SFI-AND-0028",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 71,
+        "TC Number": "BA-SFI-AND-0029",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 72,
+        "TC Number": "BA-SFI-AND-0030",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 73,
+        "TC Number": "BA-SFI-AND-0031",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 74,
+        "TC Number": "BA-SFI-AND-0032",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 75,
+        "TC Number": "BA-SFI-AND-0033",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 76,
+        "TC Number": "BA-SFI-AND-0034",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 77,
+        "TC Number": "BA-SFI-AND-0035",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 78,
+        "TC Number": "BA-SFI-AND-0036",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 79,
+        "TC Number": "BA-SFI-AND-0037",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 80,
+        "TC Number": "BA-SFI-AND-0038",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 81,
+        "TC Number": "BA-SFI-AND-0039",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 82,
+        "TC Number": "BA-SFI-AND-0040",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 83,
+        "TC Number": "BA-SFI-AND-0041",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "X",
+        "ToolSequence": []
+    },
+    {
+        "Number": 84,
+        "TC Number": "BA-SFI-AND-0042",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 85,
+        "TC Number": "BA-SFI-AND-0043",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 86,
+        "TC Number": "BA-SFI-AND-0044",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 87,
+        "TC Number": "BA-SFI-AND-0045",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 88,
+        "TC Number": "BA-SFI-AND-0046",
+        "Category": "SFI Solution",
+        "BL": "O",
+        "BA": "O",
+        "LA": "O",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 89,
+        "TC Number": "BA-SFI-AND-0047",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 90,
+        "TC Number": "BA-SFI-AND-0048",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 91,
+        "TC Number": "BA-SFI-AND-0049",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 92,
+        "TC Number": "BA-SFI-AND-0050",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 93,
+        "TC Number": "BA-SFI-AND-0051",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    },
+    {
+        "Number": 94,
+        "TC Number": "BA-SFI-AND-0052",
+        "Category": "SFI Solution",
+        "BL": "X",
+        "BA": "O",
+        "LA": "X",
+        "Automatic": "O",
+        "ToolSequence": []
+    }
+]
