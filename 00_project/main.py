@@ -11,6 +11,7 @@ from tkinter import filedialog
 import serial.tools.list_ports
 import threading
 import openpyxl
+import time
 
 def check_open_ports():
     open_ports = []
@@ -93,9 +94,10 @@ def on_start_tc():
             status = 1
             #found_data에서 ToolSequence
             for command in found_data["ToolSequence"]: 
-                if command.startswith("#"):
+                if command.startswith("#") or command.startswith("$"):
                     command_func(command)
-            print("count")
+                    print("hello world")
+            serial_port.write("hello world \r".encode())
                 # print(f"tc_log = {tc_log}")
             #여기에 pass_func돌리면 될 듯
 
@@ -453,8 +455,10 @@ class Checklist:
                 for command in found_data["ToolSequence"]: 
                     if command.startswith("#"):
                         commands_text.append(command)
+                        commands_text.append("\n")
                     elif command.startswith("^"):
                         criterion_text.append(command)
+                        criterion_text.append("\n")
 
             top = Toplevel(window)
             top.geometry("1400x500")
