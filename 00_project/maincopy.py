@@ -11,7 +11,8 @@ from tkinter import filedialog
 import serial.tools.list_ports
 import threading
 import openpyxl
-    
+import time
+
 def check_open_ports():
     open_ports = []
     for port in serial.tools.list_ports.comports():
@@ -38,6 +39,8 @@ def on_open():
     selected_port_name = container1.combo.get()  # 선택된 포트 이름 가져오기
     ports = serial.tools.list_ports.comports()
     port_device_mapping = {p.device: p.description for p in ports}  # 포트 번호와 디바이스 이름 매핑
+    print(type(port_device_mapping))
+    print("\nPort-Device mapping:", port_device_mapping)  # 포트-디바이스 매핑 출력
 
     # 선택된 포트 이름과 매핑된 포트 번호 찾기
     global serial_port
@@ -52,7 +55,7 @@ def on_open():
         print("Selected port not found.")
     if serial_port:  # 선택된 포트가 있는지 확인
         try:
-            serial_port = serial.Serial(serial_port, baudrate=115200, timeout = 1)  # 선택된 포트 열기
+            serial_port = serial.Serial(serial_port, baudrate=115200, timeout=1)  # 선택된 포트 열기
             print(f"Serial port {serial_port} opened successfully.")
             # 시리얼 통신 작업 수행
         except serial.SerialException as e:
@@ -66,34 +69,8 @@ def on_open():
 def on_close():
     # TODO: Close 동작 구현
     pass
-
-# def on_start_tc():
-#     get_checked_ids = container6.tree.get_checked()  # 체크된 아이템의 ID를 가져옴
-#     checked_item_names = []  # 체크된 아이템의 이름을 저장할 리스트
-
-#     # 각 체크된 아이템의 ID를 순회하면서 이름을 가져와서 리스트에 추가
-#     for item_id in get_checked_ids:
-#         item_text = container6.tree.item(item_id, "text")  # ID로부터 아이템의 텍스트를 가져옴
-#         checked_item_names.append(item_text)  # 가져온 텍스트를 리스트에 추가
-
-#     print(checked_item_names) 
-#   #240207 여기서부터 시작
-#     with open('F:\\tkinter\\00_project\\TestSequence.json') as file:
-#         data = json.load(file)
-#         for item_name in checked_item_names:
-#             target_tc_number = f"{item_name}"
-#             found_data = next((item for item in data if item["TC Number"] == target_tc_number), None)
-#             # ToolSequence에서 명령어들을 읽어와서 '#' 또는 '^'로 시작하는 경우에 따라 리스트에 추가
-#             # print(type(found_data))
-#             for command in found_data["ToolSequence"]: 
-#                 if command.startswith("#"):
-#                     content = command.split(' ', 1)[-1]
-#                     serial_port.write(content.encode())
-#                     serial_port.write('\r'.encode())               
-#                 elif command.startswith("^"):
-#                     print(command)
-
-response_from_board = NONE
+tc_log = []
+status = 0
 
 def on_start_tc():
     get_checked_ids = container6.tree.get_checked()  # 체크된 아이템의 ID를 가져옴
@@ -105,35 +82,26 @@ def on_start_tc():
         checked_item_names.append(item_text)  # 가져온 텍스트를 리스트에 추가
 
     print(checked_item_names) 
-    # 여기서부터 시작
-    with open('F:\\tkinter\\00_project\\TestSequence.json') as file:
+  #240207 여기서부터 시작
+    with open('./TestSequence.json') as file:
         data = json.load(file)
+        #여기가 tc마다 한번씩 돌아서 체크된 tc개수만큼 돔
         for item_name in checked_item_names:
             target_tc_number = f"{item_name}"
+            #TC Number에 해당하는 데이터들을 모두 가져와서 found_data에 저장함 found_data는 tc마다 한번씩 도는것 같음
             found_data = next((item for item in data if item["TC Number"] == target_tc_number), None)
             # ToolSequence에서 명령어들을 읽어와서 '#' 또는 '^'로 시작하는 경우에 따라 리스트에 추가
-            # print(type(found_data))
+            global tc_log
+            global status
+            status = 1
+            #found_data에서 ToolSequence
             for command in found_data["ToolSequence"]: 
-                if command.startswith("#"):
+                if command.startswith("#") or command.startswith("$"):
                     command_func(command)
-                elif command.startswith("^"):
-                    # ^로 시작하는 문자열에 대한 처리
-                    pass_func(command, response_from_board)
-
-def command_func(command):
-    content = command.split(' ', 1)[-1]
-    serial_port.write(content.encode())
-    serial_port.write('\r'.encode()) 
-
-def pass_func(command, response):
-    if command == response:
-        print("Pass")
-    else:
-        print(command)
-        print(response)
-        print("Fail")
-
-
+                    print("hello world")
+            serial_port.write("hello world \r".encode())
+                # print(f"tc_log = {tc_log}")
+            #여기에 pass_func돌리면 될 듯
 
 def separate_commands(data):
     hash_commands = []
@@ -160,13 +128,16 @@ def on_root(con):
 def on_shift_f2():
     serial_port.write(b" [24~")
     serial_port.write('\r'.encode("utf-8"))  
+    #serial_port.write(b" \x1b[24~\r") 두줄을 합친것
 
 def on_shift_f3():
     serial_port.write(b" [25~")
-    serial_port.write('\r'.encode("utf-8")) 
+    serial_port.write('\r'.encode("utf-8"))
+    #serial_port.write(b" \x1b[25~\r") 두줄을 합친것 
 
+# BSP radio button
 def choised_radiobutton(con):
-    selected_value = con.radio_var.get()  # 현재 선택된 버튼의 value 값을 가져옴
+    selected_value = con.radio_var.get()  
 
     if selected_value == 1:
         selected_button = "Bearmetal_Linux"
@@ -216,7 +187,7 @@ def on_open_excel():
     for i in range(len(data_list)):
         print(data_list[i])
 
-    json_file_path = 'F:\\tkinter\\00_project\\TestSequence.json'
+    json_file_path = './TestSequence.json'
     with open(json_file_path, 'w', encoding='utf-8') as json_file:
         json.dump(data_list, json_file, indent=4, ensure_ascii=False)
 
@@ -224,6 +195,7 @@ def on_open_excel():
 
     add_node(container6)
 
+# treeview add_node 
 def add_node(con):
 
     # Node delete
@@ -233,7 +205,7 @@ def add_node(con):
         con.tree2.delete(child)
 
     # Node insert
-    with open('F:\\tkinter\\00_project\\TestSequence.json') as file:
+    with open('TestSequence.json') as file:
         datas = json.load(file)
     parent_id = ""
 
@@ -286,20 +258,34 @@ def on_enter(widget):
 def on_leave(widget):
     widget.config(bg='white')
 
+# **************************************************GUI==-**************************************************
 
-# Tkinter 윈도우 생성
-window = tk.Tk()
-window.title("V920 SADK Verification Program")
+class myapp:
+    def __init__(self, window):
 
-# 윈도우 크기 설정
-window.geometry("1650x900+30+30")
-# 상단 텍스트 추가
-title_frame = tk.Frame(window,bg='black')
-title_frame.pack(fill=X, anchor=N)
-title_label1 = tk.Label(title_frame, text="V920 SADK Verification Program", font=("Calibri", 16, "bold"), bg='black', fg='white')
-title_label2 = tk.Label(title_label1, text="Ver.0.0.1", font=("Helvetica", 10,),bg='black', fg='white')
-title_label1.pack(fill=X)
-title_label2.pack(side=tk.RIGHT)
+        window = tk.Tk()
+        window.title("V920 SADK Verification Program")
+
+        # window size
+        window.geometry("1650x900+30+30")
+
+        self.title = Title_name(window)
+        self.container1 = Cont1(window)
+        self.container2 = Cont2(window)
+        self.container6 = Checklist(window)
+        self.container7 = Textview(window)
+
+        window.mainloop()
+
+# insert top label 
+class Title_name:
+    def __init__(self, window):
+        self.title_frame = tk.Frame(window,bg='black')
+        self.title_frame.pack(fill=X, anchor=N)
+        self.title_label1 = tk.Label(self.title_frame, text="V920 SADK Verification Program", font=("Calibri", 16, "bold"), bg='black', fg='white')
+        self.title_label2 = tk.Label(self.title_label1, text="Ver.0.0.1", font=("Helvetica", 10,),bg='black', fg='white')
+        self.title_label1.pack(fill=X)
+        self.title_label2.pack(side=tk.RIGHT)
 
 #button GUI 
 class Cont1:
@@ -312,7 +298,7 @@ class Cont1:
 
         self.search_port_button = tk.Button(self.buttonframe, text="Search Port", command=update_combobox, width=15, height=4)
         self.search_port_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
-        # hover 색상변경 기능
+        # hover color
         self.search_port_button.bind("<Enter>", lambda event, widget=self.search_port_button: on_enter(widget))
         self.search_port_button.bind("<Leave>", lambda event, widget=self.search_port_button: on_leave(widget))
 
@@ -487,8 +473,10 @@ class Checklist:
                 for command in found_data["ToolSequence"]: 
                     if command.startswith("#"):
                         commands_text.append(command)
+                        commands_text.append("\n")
                     elif command.startswith("^"):
                         criterion_text.append(command)
+                        criterion_text.append("\n")
 
             top = Toplevel(window)
             top.geometry("1400x500")
@@ -509,10 +497,9 @@ class Checklist:
             print(f"Name: {item_name}")
 
 #textview GUI 
-
+response = NONE
 class Textview:
     def __init__(self, window):
-        
         self.largeframe = tk.Frame(window, bg='green')
         self.largeframe.pack(padx=5, pady=5, fill='both', expand=True, anchor=tk.NW, side=tk.LEFT)
 
@@ -559,10 +546,9 @@ class Textview:
             self.input_entry.insert(tk.END, clipboard_content)
             serial_port.write(clipboard_content.encode())
 
-        # 엔트리 위젯에 우클릭 이벤트에 대한 핸들러 추가
+        # entry widget right click event
         self.input_entry.bind("<Button-3>", on_right_click)
 
-        # 컨텍스트 메뉴 생성
         context_menu = tk.Menu(window, tearoff=0)
         context_menu.add_command(label="붙여넣기", command=paste_from_clipboard)
         
@@ -577,20 +563,22 @@ class Textview:
                 serial_port.write('\r'.encode())
             else:
                 serial_port.write(event.char.encode())
+                
 
         self.input_entry.bind('<Key>', on_key)
 
     def read_serial(self):
         if serial_port:  # 시리얼 포트가 열렸는지 확인
+            global status
             while True:
                 try:
                     serial_output = serial_port.readline().decode('utf-8', errors='replace').strip()
+                
                     if serial_output:
                         self.show_output(f"{serial_output}\n")
-                        global response_from_board
-                        response_from_board = serial_output
-                        print(f"output = {serial_output}")
-
+                        if status == 1:  
+                            tc_log.append(serial_output)
+                        
                 except UnicodeDecodeError as e:
                     print(f"Error decoding serial data: {e}")
     
@@ -604,7 +592,6 @@ class Textview:
         else:
             self.textview.insert(tk.END, text)
             self.textview.yview(tk.END)
-            
         self.textview.config(state=tk.DISABLED)
 
     # Search text function
@@ -646,6 +633,11 @@ class Textview:
         if self.search_results:
             self.show_next_search_result()
 
+def command_func(command):
+    content = command.split(' ', 1)[-1]
+    serial_port.write(content.encode())
+    serial_port.write('\r'.encode())
+    
 
 #캔버스 컨테이너
 class Cont4: 
@@ -677,16 +669,11 @@ class space:
         self.label = tk.Label(self.spaceframe)
         self.label.pack(padx=5, anchor=tk.NW, side=tk.LEFT)
 
-container1 = Cont1(window)
-# container2 = space(window)
-container3 = Cont2(window)
-container3.update_progress(80)
-container6 = Checklist(window)
-container7 = Textview(window)
 
-# container5 = Cont4(window)
+if __name__ == "__main__":
+    window = tk.Tk()
+    window.title("Example")
 
-
-# 윈도우 실행
-window.mainloop()
+    app = myapp(window)
+    app.run()
 

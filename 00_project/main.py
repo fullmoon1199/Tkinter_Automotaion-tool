@@ -39,6 +39,8 @@ def on_open():
     selected_port_name = container1.combo.get()  # 선택된 포트 이름 가져오기
     ports = serial.tools.list_ports.comports()
     port_device_mapping = {p.device: p.description for p in ports}  # 포트 번호와 디바이스 이름 매핑
+    print(type(port_device_mapping))
+    print("\nPort-Device mapping:", port_device_mapping)  # 포트-디바이스 매핑 출력
 
     # 선택된 포트 이름과 매핑된 포트 번호 찾기
     global serial_port
@@ -126,10 +128,12 @@ def on_root(con):
 def on_shift_f2():
     serial_port.write(b" [24~")
     serial_port.write('\r'.encode("utf-8"))  
+    #serial_port.write(b" \x1b[24~\r") 두줄을 합친것
 
 def on_shift_f3():
     serial_port.write(b" [25~")
-    serial_port.write('\r'.encode("utf-8")) 
+    serial_port.write('\r'.encode("utf-8"))
+    #serial_port.write(b" \x1b[25~\r") 두줄을 합친것 
 
 # BSP radio button
 def choised_radiobutton(con):
@@ -254,6 +258,7 @@ def on_enter(widget):
 def on_leave(widget):
     widget.config(bg='white')
 
+# **************************************************GUI==-**************************************************
 
 # Tkinter window
 window = tk.Tk()
@@ -652,7 +657,6 @@ class space:
         self.label.pack(padx=5, anchor=tk.NW, side=tk.LEFT)
 
 container1 = Cont1(window)
-# container2 = space(window)
 container3 = Cont2(window)
 container3.update_progress(80)
 container6 = Checklist(window)
