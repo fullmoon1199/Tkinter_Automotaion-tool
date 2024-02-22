@@ -12,25 +12,34 @@ import serial.tools.list_ports
 import threading
 import openpyxl
 import time
+import re
+
+# ANSI escape sequence remove function
+def process_escape_sequences(text):
+    escape_sequence = re.compile(r'\x1b\[[0-9;?]*[A-Za-z]')
+    # Replace escape sequences with an empty string to remove them
+    processed_text = escape_sequence.sub('', text)
+
+    return processed_text
 
 def check_open_ports():
     open_ports = []
     for port in serial.tools.list_ports.comports():
         try:
-            # 시리얼 포트를 시도하여 열린 경우 open_ports 리스트에 추가
+            # If the serial port is successfully opened, add it to the open_ports list
             serial_port = serial.Serial(port.device)
             serial_port.close()
             open_ports.append(port.device)
-        except serial.SerialException:# 예외처리
+        except serial.SerialException:
             pass
     return open_ports
 
 def on_search_port(combo):
     ports = serial.tools.list_ports.comports()
-    port_device_mapping = {p.device: p.description for p in ports}  # 포트 번호와 디바이스 이름 매핑
-    print("\nPort-Device mapping:", port_device_mapping)  # 포트-디바이스 매핑 출력
+    port_device_mapping = {p.device: p.description for p in ports}  # Mapping port numbers to device names
+    print("\nPort-Device mapping:", port_device_mapping)  # Print port-device mapping
     available_ports = [p.description for p in ports]
-    combo['values'] = available_ports  # 콤보박스에 사용 가능한 포트 목록 설정
+    combo['values'] = available_ports  # Set the combo box values to the available ports list
 
 def update_combobox():
     on_search_port(container1.combo)
@@ -258,21 +267,17 @@ def on_enter(widget):
 def on_leave(widget):
     widget.config(bg='white')
 
-# **************************************************GUI==-**************************************************
+# **************************************************G**************************************************
 
-# Tkinter window
-window = tk.Tk()
-window.title("V920 SADK Verification Program")
-
-# window size
-window.geometry("1650x900+30+30")
-# insert top label 
-title_frame = tk.Frame(window,bg='black')
-title_frame.pack(fill=X, anchor=N)
-title_label1 = tk.Label(title_frame, text="V920 SADK Verification Program", font=("Calibri", 16, "bold"), bg='black', fg='white')
-title_label2 = tk.Label(title_label1, text="Ver.0.0.1", font=("Helvetica", 10,),bg='black', fg='white')
-title_label1.pack(fill=X)
-title_label2.pack(side=tk.RIGHT)
+class HomeTitle:
+    def __init__(self, window) :
+        # insert top label 
+        title_frame = tk.Frame(window,bg='black')
+        title_frame.pack(fill=X, anchor=N)
+        title_label1 = tk.Label(title_frame, text="V920 SADK Verification Program", font=("Calibri", 16, "bold"), bg='black', fg='white')
+        title_label2 = tk.Label(title_label1, text="Ver.0.0.1", font=("Helvetica", 10,),bg='black', fg='white')
+        title_label1.pack(fill=X)
+        title_label2.pack(side=tk.RIGHT)
 
 #button GUI 
 class Cont1:
@@ -554,13 +559,16 @@ class Textview:
 
         self.input_entry.bind('<Key>', on_key)
 
+
+
     def read_serial(self):
         if serial_port:  # 시리얼 포트가 열렸는지 확인
             global status
             while True:
                 try:
-                    serial_output = serial_port.readline().decode('utf-8', errors='replace').strip()
-                
+                    encoded_serial_output = serial_port.readline().strip().decode("utf-8")
+                    # regular expression to remove ANSI escape sequences
+                    serial_output = process_escape_sequences(encoded_serial_output)
                     if serial_output:
                         self.show_output(f"{serial_output}\n")
                         if status == 1:  
@@ -577,7 +585,11 @@ class Textview:
             if current_text.strip():  # 텍스트가 비어있지 않은 경우에만
                 self.textview.delete("end-2c", tk.END)
         else:
-            self.textview.insert(tk.END, text)
+            color_order = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"]
+            current_text = self.textview.get("1.0", tk.END)
+            current_color_index = len(current_text.split()) % len(color_order)
+            color = color_order[current_color_index]
+            self.textview.insert(tk.END, text, color)
             self.textview.yview(tk.END)
         self.textview.config(state=tk.DISABLED)
 
@@ -656,15 +668,19 @@ class space:
         self.label = tk.Label(self.spaceframe)
         self.label.pack(padx=5, anchor=tk.NW, side=tk.LEFT)
 
-container1 = Cont1(window)
-container3 = Cont2(window)
-container3.update_progress(80)
-container6 = Checklist(window)
-container7 = Textview(window)
+if __name__ == "__main__":
+    # Create the main window
+    window = tk.Tk()
+    window.title("V920 SADK Verification Program")
+    # window size
+    window.geometry("1650x900+30+30")
 
-# container5 = Cont4(window)
+    # Create the instances of the class
+    container0 = HomeTitle(window)
+    container1 = Cont1(window)
+    container3 = Cont2(window)
+    container3.update_progress(80)
+    container6 = Checklist(window)
+    container7 = Textview(window)
 
-
-# 윈도우 실행
-window.mainloop()
-
+    window.mainloop()
