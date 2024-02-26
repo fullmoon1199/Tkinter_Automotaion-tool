@@ -26,10 +26,10 @@
 # button1 = tk.Button(root, command=hi, text="Hover me!")
 # button1.pack(pady=20)
 
-# description_window = None  # 전역 변수로 선언
-# enter_timer_id = None  # 전역 변수로 선언
+# description_window = None  # Global variable declaration
+# enter_timer_id = None  # Global variable declaration
 
-# # 마우스가 위에 올라왔을 때와 나갔을 때의 이벤트 바인딩
+# # Event binding for when the mouse enters and leaves the button
 # button1.bind("<Enter>", on_enter)
 # button1.bind("<Leave>", on_leave)
 
@@ -37,18 +37,18 @@
 import tkinter as tk
 
 def on_enter(event):
-    # 1초 후에 작은 창을 생성하도록 스케줄링
+    # Schedule the creation of the description window after 1 second
     root.after(500, create_description_window)
 
 def create_description_window():
-    # 작은 창 생성
+    # Create a small window
     description_window = tk.Toplevel(root)
     description_window.geometry('150x50+500+500')
     description_label = tk.Label(description_window, text="This is a button")
     description_label.pack()
 
 def on_leave(event):
-    # 마우스가 버튼에서 벗어날 때 작은 창을 닫음
+    # Close the small window when the mouse leaves the button
     for widget in root.winfo_children():
         if isinstance(widget, tk.Toplevel):
             widget.destroy()
@@ -59,7 +59,7 @@ root.title("Mouse Hover Example")
 button1 = tk.Button(root, text="Hover me!")
 button1.pack(pady=20)
 
-# 마우스가 위에 올라왔을 때와 나갔을 때의 이벤트 바인딩
+# Event binding for when the mouse enters and leaves the button
 button1.bind("<Enter>", on_enter)
 button1.bind("<Leave>", on_leave)
 

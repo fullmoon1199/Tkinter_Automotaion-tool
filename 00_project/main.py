@@ -8,11 +8,12 @@ from ttkwidgets import CheckboxTreeview
 import json
 from collections import OrderedDict
 from tkinter import filedialog
-import serial.tools.list_ports
 import threading
 import openpyxl
-import time
 import re
+import time
+from eventhandler import on_search_port
+from eventhandler import serial_open
 
 # ANSI escape sequence remove function
 def process_escape_sequences(text):
@@ -22,6 +23,7 @@ def process_escape_sequences(text):
 
     return processed_text
 
+# ruturn open port
 def check_open_ports():
     open_ports = []
     for port in serial.tools.list_ports.comports():
@@ -34,53 +36,39 @@ def check_open_ports():
             pass
     return open_ports
 
-def on_search_port(combo):
-    ports = serial.tools.list_ports.comports()
-    port_device_mapping = {p.device: p.description for p in ports}  # Mapping port numbers to device names
-    print("\nPort-Device mapping:", port_device_mapping)  # Print port-device mapping
-    available_ports = [p.description for p in ports]
-    combo['values'] = available_ports  # Set the combo box values to the available ports list
+
+def on_open(): 
+    global serial_port
+    serial_port = serial_open(container1)
+    start_serial_read_thread()
 
 def update_combobox():
     on_search_port(container1.combo)
 
-def on_open():
-    selected_port_name = container1.combo.get()  # 선택된 포트 이름 가져오기
-    ports = serial.tools.list_ports.comports()
-    port_device_mapping = {p.device: p.description for p in ports}  # 포트 번호와 디바이스 이름 매핑
-    print(type(port_device_mapping))
-    print("\nPort-Device mapping:", port_device_mapping)  # 포트-디바이스 매핑 출력
 
-    # 선택된 포트 이름과 매핑된 포트 번호 찾기
-    global serial_port
-    for port, device_name in port_device_mapping.items():
-        if device_name == selected_port_name:
-            serial_port = port
-            break
+stop_thread = False
 
-    if serial_port is not None:
-        print("Selected port:", serial_port)
-    else:
-        print("Selected port not found.")
-    if serial_port:  # 선택된 포트가 있는지 확인
-        try:
-            serial_port = serial.Serial(serial_port, baudrate=115200, timeout=1)  # 선택된 포트 열기
-            print(f"Serial port {serial_port} opened successfully.")
-            # 시리얼 통신 작업 수행
-        except serial.SerialException as e:
-            print(f"Error initializing serial port: {e}")
-            serial_port = None
+def start_serial_read_thread():
+    global stop_thread
+    serial_read_thread = threading.Thread(target=container7.read_serial)
+    serial_read_thread.daemon = True
+    serial_read_thread.start()
 
-    read_thread = threading.Thread(target=container7.read_serial, daemon=True)
-    read_thread.start()
-
+def stop_serial_read_thread():
+    global stop_thread
+    stop_thread = True
    
 def on_close():
-    # TODO: Close 동작 구현
-    pass
+    stop_serial_read_thread()
+    global serial_port
+    if serial_port is not None:
+        serial_port.close()  # Close the serial port if it is open
+        print("Serial port closed.")
+    else:
+        print("No serial port open.")
+
 tc_log = []
 status = 0
-
 def on_start_tc():
     get_checked_ids = container6.tree.get_checked()  # 체크된 아이템의 ID를 가져옴
     checked_item_names = []  # 체크된 아이템의 이름을 저장할 리스트
@@ -91,7 +79,7 @@ def on_start_tc():
         checked_item_names.append(item_text)  # 가져온 텍스트를 리스트에 추가
 
     print(checked_item_names) 
-  #240207 여기서부터 시작
+  # JSON 파일에서 TC 데이터를 읽어와서 체크된 TC에 대한 명령어를 실행
     with open('./TestSequence.json') as file:
         data = json.load(file)
         #여기가 tc마다 한번씩 돌아서 체크된 tc개수만큼 돔
@@ -107,10 +95,7 @@ def on_start_tc():
             for command in found_data["ToolSequence"]: 
                 if command.startswith("#") or command.startswith("$"):
                     command_func(command)
-                    print("hello world")
-            serial_port.write("hello world \r".encode())
-                # print(f"tc_log = {tc_log}")
-            #여기에 pass_func돌리면 될 듯
+                    
 
 def separate_commands(data):
     hash_commands = []
@@ -259,15 +244,12 @@ def add_node(con):
         if not con.tree2.get_children(category):
             con.tree2.delete(category)
 
-
-
 #hover color change function
 def on_enter(widget):
     widget.config(bg='lightblue')
 def on_leave(widget):
     widget.config(bg='white')
 
-# **************************************************G**************************************************
 
 class HomeTitle:
     def __init__(self, window) :
@@ -448,11 +430,13 @@ class Checklist:
             self.context_menu_tree2.post(event.x_root, event.y_root)
 
     def context_menu_action1(self):
+        # Get the selected item from the tree
         selected_item = self.tree.selection()
         if selected_item:
             item_name = self.tree.item(selected_item[0], 'text')
             print(f"Name: {item_name}")
-            with open('F:\\tkinter\\00_project\\TestSequence.json') as file:
+            # Read the JSON file and get the commands and criterion for the selected item
+            with open('F:\\tkinter\\TestSequence.json') as file:
                 data = json.load(file)
 
                 target_tc_number = f"{item_name}"
@@ -460,8 +444,8 @@ class Checklist:
 
                 commands_text = []
                 criterion_text = []
-
-                # ToolSequence에서 명령어들을 읽어와서 '#' 또는 '^'로 시작하는 경우에 따라 리스트에 추가
+                
+                # read the commands and criterion from the found data
                 for command in found_data["ToolSequence"]: 
                     if command.startswith("#"):
                         commands_text.append(command)
@@ -469,7 +453,7 @@ class Checklist:
                     elif command.startswith("^"):
                         criterion_text.append(command)
                         criterion_text.append("\n")
-
+            # Create a sub window to display the criterion and commands
             top = Toplevel(window)
             top.geometry("1400x500")
             top.title("Child Window")
@@ -567,13 +551,13 @@ class Textview:
             while True:
                 try:
                     encoded_serial_output = serial_port.readline().strip().decode("utf-8")
+                
                     # regular expression to remove ANSI escape sequences
                     serial_output = process_escape_sequences(encoded_serial_output)
                     if serial_output:
                         self.show_output(f"{serial_output}\n")
                         if status == 1:  
                             tc_log.append(serial_output)
-                        
                 except UnicodeDecodeError as e:
                     print(f"Error decoding serial data: {e}")
     
