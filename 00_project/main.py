@@ -501,15 +501,6 @@ class Textview:
         self.input_entry = ttk.Entry(self.textframe2, font=('Courier', 12), width=100)
         self.input_entry.pack(pady=10)
 
-        # try:
-        #     self.serial_port = serial.Serial('COM22', baudrate=115200, timeout=1)  # 5초 timeout으로 변경
-        #     print(f"Serial port {self.serial_port} opened successfully.")
-        #     self.serial_port.close()
-
-        # except serial.SerialException as e:
-        #     print(f"Error initializing serial port: {e}")
-        #     self.serial_port = None
-
         def on_right_click(event):
             # 컨텍스트 메뉴를 표시
             context_menu.post(event.x_root, event.y_root)

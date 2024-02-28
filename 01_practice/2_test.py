@@ -1,17 +1,52 @@
-import tkinter as tk
+import ttkwidgets as tw
+import tkinter as tk 
 
-def change_text_color(event):
-    colors = ["red", "orange", "yellow", "green", "blue", "indigo", "violet"]  # 색상 리스트
-    line_num = int(event.widget.index("insert").split(".")[0])  # 현재 라인 인덱스
-    current_color = colors[line_num % len(colors)]  # 현재 라인 인덱스에 따른 색상 선택
-    text.tag_config(f"line_color_{line_num}", foreground=current_color)  # 해당 라인 태그 설정
-    text.tag_add(f"line_color_{line_num}", f"{line_num}.0", f"{line_num}.end")  # 태그 적용 범위 설정
+class CheckboxTreeview(tw.CheckboxTreeview):
+    def __init__(self, master=None, **kw):
+        tw.CheckboxTreeview.__init__(self, master, **kw)
+        # disabled tag to mar disabled items
+        self.label=tk.Label(root, text=len(self.get_checked()), width=5, height=2)
+        self.label.pack()
+
+    def _box_click(self, event):                                       # 박스를 체크하거나 해제하였을때 체크된 박스 개수 출력
+        """Check or uncheck box when clicked."""
+        x, y, widget = event.x, event.y, event.widget
+        elem = widget.identify("element", x, y)
+        if "image" in elem:
+            # a box was clicked
+            item = self.identify_row(y)
+            if self.tag_has("disabled", item):
+                return  # do nothing when disabled
+            if self.tag_has("unchecked", item) or self.tag_has("tristate", item):
+                self._check_ancestor(item)
+                self._check_descendant(item)                
+                self.label.configure(text=len(self.get_checked()))
+            elif self.tag_has("checked"):
+                self._uncheck_descendant(item)
+                self._uncheck_ancestor(item)
+                self.label.configure(text=len(self.get_checked()))
 
 root = tk.Tk()
 
-text = tk.Text(root)
-text.pack()
+tree = CheckboxTreeview(root)
+tree.pack()
 
-text.bind("<Return>", change_text_color)  # 줄바꿈 이벤트에 색상 변경 함수 연결
+tree.insert("", "end", "LinyxAndroid", text="LinyxAndroid")                                            # 체크박스 추가
+tree.insert("LinyxAndroid", "end", "Internal System", text="Internal System")
+tree.insert("LinyxAndroid", "end", "Externel Interface",  text="Externel Interface")
+
+tree.insert("Internal System", "end", "LA-0001", text="LA-0001")
+tree.insert("Internal System", "end", "LA-0002", text="LA-0002")
+tree.insert("Internal System", "end", "LA-0003", text="LA-0003")
+tree.insert("Internal System", "end", "LA-0004", text="LA-0004")
+tree.insert("Internal System", "end", "LA-0005", text="LA-0005")
+
+tree.insert("Externel Interface", "end", "LA-0006", text="LA-0006")
+tree.insert("Externel Interface", "end", "LA-0007", text="LA-0007")
+tree.insert("Externel Interface", "end", "LA-0008", text="LA-0008")
+tree.insert("Externel Interface", "end", "LA-0009", text="LA-0009")
+
+root.geometry("280x300")
+root.resizable(True, True)
 
 root.mainloop()

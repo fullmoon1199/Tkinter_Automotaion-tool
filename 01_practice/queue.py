@@ -25,7 +25,6 @@ class window:
         self.master.title("Queue")
         self.master.geometry("300x500")
         self.master.resizable(False, False)
-        self.master.config(bg="lightgray")
 
         self.queue = ListQueue()
 
