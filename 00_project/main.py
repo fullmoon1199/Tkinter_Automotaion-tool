@@ -282,9 +282,6 @@ class Cont1:
         self.close_button = tk.Button(self.buttonframe, text="Close", command=on_close, width=15, height=4)
         self.close_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
-        # self.layout = tk.Label(self.buttonframe)
-        # self.layout.pack(padx=10 ,anchor=tk.NW, side=tk.LEFT)
-
         self.start_tc_button = tk.Button(self.buttonframe, text="Start TC", command=on_start_tc, width=15, height=4)
         self.start_tc_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
