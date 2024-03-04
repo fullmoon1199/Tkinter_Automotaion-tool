@@ -54,8 +54,8 @@ root = tk.Tk()
 root.title("Text Search Example")
 
 # Create widgets
-my_var = tk.StringVar()
-find_entry = tk.Entry(root, textvariable=my_var, width=30)
+# my_var = tk.StringVar()
+find_entry = tk.Entry(root, width=30)
 search_button = tk.Button(root, text="Search", command=lambda: get_text(my_var, 0, 0))
 next_button = tk.Button(root, text="Next", command=next_match)
 results_text = Text(root, wrap="word", height=10, width=40)
@@ -65,13 +65,13 @@ total_label = tk.Label(root, text="0:0")
 end_search_label = tk.Label(root, text="", anchor='w')
 
 # Grid layout
-find_entry.grid(row=0, column=0, padx=10, pady=5)
-search_button.grid(row=0, column=1, padx=5, pady=5)
-next_button.grid(row=0, column=2, padx=5, pady=5)
-results_text.grid(row=1, column=0, columnspan=3, padx=10, pady=5)
-scrollbar.grid(row=1, column=3, sticky="ns", pady=5)
-total_label.grid(row=2, column=0, columnspan=2, padx=10, pady=5)
-end_search_label.grid(row=2, column=2, columnspan=2, padx=10, pady=5)
+find_entry.pack(padx=10, pady=5)
+search_button.pack(padx=5, pady=5)
+next_button.pack(padx=5, pady=5)
+results_text.pack(padx=10, pady=5, fill = "both", expand = True)
+scrollbar.pack(pady=5)
+total_label.pack(padx=10, pady=5)
+end_search_label.pack(padx=10, pady=5)
 
 # Start the Tkinter event loop
 root.mainloop()
