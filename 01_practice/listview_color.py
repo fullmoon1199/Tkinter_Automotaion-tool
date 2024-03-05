@@ -6,11 +6,13 @@ from ttkwidgets import CheckboxTreeview
 # 체크박스 내의 코드가 색상이 변경될 수 있음을 보여주는 코드 입니다. (완성된 코드는 아닙니다.)
 # 원하는 박스를 선택한 뒤 pass버튼(pass 판정이 났다는 가정)을 누르면
 # 선택된 박스들의 색상이 초록색으로 변경됩니다. 
+def one_fuction():
+    tree.tag_add("LA-0008", "fail")
+    tree.tag_add("LA-0009", "pass")
 
 def changebutton():
-    tree.tag_add("LA-0008", "pass") 
-    tree.tag_add("LA-0009", "fail")
-
+    tree.tag_add("LA-0001", "pass")
+    tree.tag_add("LA-0002", "pass")
 class CheckboxTreeview(tw.CheckboxTreeview):
    
     def __init__(self, master=None, **kw):
@@ -22,6 +24,9 @@ class CheckboxTreeview(tw.CheckboxTreeview):
 root = tk.Tk()
 tree = CheckboxTreeview(root)
 tree.pack()
+
+button_one = Button(root, text="one", command = one_fuction)
+button_one.pack()
 
 change_tag = Button(root, text="change", command = changebutton)
 change_tag.pack()

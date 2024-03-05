@@ -11,9 +11,10 @@ from tkinter import filedialog
 import threading
 import openpyxl
 import re
-import time
 from eventhandler import on_search_port
 from eventhandler import serial_open
+
+
 
 # ANSI escape sequence remove function
 def process_escape_sequences(text):

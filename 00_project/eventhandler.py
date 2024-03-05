@@ -20,7 +20,7 @@ def serial_open(con):
         print("Selected port not found.")
     if serial_port:  # 선택된 포트가 있는지 확인
         try:
-            serial_port = serial.Serial(serial_port, baudrate=115200, timeout=1)  # 선택된 포트 열기
+            serial_port = serial.Serial(serial_port, baudrate=115200)  # 선택된 포트 열기
             print(f"Serial port {serial_port} opened successfully.")
             # 시리얼 통신 작업 수행
         except serial.SerialException as e:
