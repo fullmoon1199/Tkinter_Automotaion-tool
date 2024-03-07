@@ -21,7 +21,7 @@ def get_color_from_escape_sequence(text):
     # 색상 코드가 없으면 기본값을 반환합니다.
     return 'default'
 
-# 테스트용 바이트 문자열
+# 테스트용 바이트 문자열 
 test_string = "adasd asd asd asd asdsadb'[\x1b[0;34m  OK  \x1b[0m] Reached target \x1b[0;39mSwap\x1b[0m.'"
 
 # 함수를 호출하여 색상을 얻습니다.

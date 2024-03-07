@@ -11,6 +11,8 @@ def save_to_file():
             status_label.config(text=f"File saved: {file_path}")
         except Exception as e:
             status_label.config(text=f"Error saving file: {str(e)}")
+    else :
+        status_label.config(text="Save cancelled.") 
 
 root = tk.Tk()
 root.title("Text Editor")
