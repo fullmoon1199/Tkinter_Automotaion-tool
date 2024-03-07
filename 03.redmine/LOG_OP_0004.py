@@ -81,12 +81,15 @@ def process_and_display(text):
         txt.insert(tk.END, text[start_index:], "color_change")
 
 def change_color():
-    colored_text = "b'[\x1b[0;32m  OK  \x1b[0m] Created\x1b[0m] slice \x1b[0;1;39mUser and Session Slice\x1b[0m.'b'[\x1b[0;32m  OK  \x1b[0m] Created\x1b[0m] slice \x1b[0;1;39mUser and Session Slice\x1b[0mqweqeqwewqe.'"
+    colored_text = "b'ssdf sdfsd sdfs sdf sdf sdf sdfdfsfsdf Starting \x1b[0;1;39mCreate list of st\xe2\x80\xa6odes for the current kernel\x1b[0m...'"
 
     txt.tag_config("color_change", foreground="red")
     process_and_display(colored_text)
+    print(colored_text)
 
 color = tk.Button(root, text="Change color", command=change_color)
 color.pack()
 
-root.mainloop()
+root.mainloop() 
+
+

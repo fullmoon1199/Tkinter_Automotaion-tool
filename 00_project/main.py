@@ -539,7 +539,7 @@ class Textview:
             global status
             while True:
                 try:
-                    encoded_serial_output = serial_port.readline().strip().decode("utf-8")
+                    encoded_serial_output = serial_port.readline().decode("utf-8")
                 
                     # regular expression to remove ANSI escape sequences
                     serial_output = process_escape_sequences(encoded_serial_output)

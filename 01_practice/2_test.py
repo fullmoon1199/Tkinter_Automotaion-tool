@@ -1,35 +1,30 @@
 import re
 
-def extract_color_codes(text):
-    # 정규 표현식을 사용하여 ANSI 이스케이프 시퀀스에서 숫자 부분을 추출합니다.
-    color_codes = re.findall(b'\x1b\[\d+;\d+m', text)
-    extracted_numbers = []
+def get_color_from_escape_sequence(text):
+    # ANSI 이스케이프 시퀀스에서 색상 코드를 추출합니다.
+    color_codes = re.findall(r'\x1b\[0;(\d+)m', text)
+    print(color_codes)
     for code in color_codes:
-        # 숫자 부분만 추출하여 리스트에 추가합니다.
-        numbers = re.findall(b'\d+', code)
-        extracted_numbers.extend(map(int, numbers))
-    return extracted_numbers
+        # 색상 코드에 따라 색상을 반환합니다.
+        if code == '30':
+            return 'black'
+        elif code == '31':
+            return 'red'
+        elif code == '32':
+            return 'green'
+        elif code == '33':
+            return 'yellow'
+        elif code == '34':
+            return 'blue'
+        elif code == '39':
+            return 'default'
+    # 색상 코드가 없으면 기본값을 반환합니다.
+    return 'default'
 
-def return_value_based_on_number(number):
-    # 각 숫자에 따라 다른 값을 반환합니다.
-    if number == 0:
-        return "Reset"
-    elif number >= 30 and number <= 39:
-        return "Foreground Color"
-    elif number >= 40 and number <= 49:
-        return "Background Color"
-    else:
-        return "Unknown"
+# 테스트용 바이트 문자열
+test_string = "adasd asd asd asd asdsadb'[\x1b[0;34m  OK  \x1b[0m] Reached target \x1b[0;39mSwap\x1b[0m.'"
 
-def analyze_color_codes(text):
-    color_codes = extract_color_codes(text)
-    analyzed_results = [return_value_based_on_number(num) for num in color_codes]
-    return analyzed_results
+# 함수를 호출하여 색상을 얻습니다.
+color = get_color_from_escape_sequence(test_string)
+print("Color:", color)  # 색상을 출력합니다.
 
-# 테스트용 문자열
-test_string = "b'[\x1b[0;32m  OK  \x1b[0m] Started \x1b[0;1;39mSystem Logging Service\x1b[0m.'"
-
-# 이스케이프 시퀀스에서 추출한 숫자들과 해당하는 리턴값들을 출력합니다.
-color_codes = analyze_color_codes(test_string)
-for code, result in zip(extract_color_codes(test_string), color_codes):
-    print(f"Code: {code}, Result: {result}")
