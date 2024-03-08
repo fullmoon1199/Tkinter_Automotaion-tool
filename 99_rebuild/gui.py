@@ -22,29 +22,23 @@ class Window_Title:
         self.close_button = tk.Button(self.buttonframe, text="Close", command=wtf.on_close, width=15, height=4)
         self.close_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
-        self.start_tc_button = tk.Button(self.buttonframe, text="Start TC", command=on_start_tc, width=15, height=4)
+        self.start_tc_button = tk.Button(self.buttonframe, text="Start TC", command=wtf.on_start_tc, width=15, height=4)
         self.start_tc_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
-        self.stop_tc_button = tk.Button(self.buttonframe, text="Stop TC", command=on_stop_tc, width=15, height=4)
+        self.stop_tc_button = tk.Button(self.buttonframe, text="Stop TC", command=wtf.on_stop_tc, width=15, height=4)
         self.stop_tc_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
-        # self.layout = tk.Label(self.buttonframe)
-        # self.layout.pack(padx=10 ,anchor=tk.NW, side=tk.LEFT)
-
-        self.su_button = tk.Button(self.buttonframe, text="SU", command=lambda: on_su(container7), width=8, height=4)
+        self.su_button = tk.Button(self.buttonframe, text="SU", command=lambda: wtf.on_su(container7), width=8, height=4)
         self.su_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
-        self.root_button = tk.Button(self.buttonframe, text="Root", command=lambda: on_root(container7), width=8, height=4)
+        self.root_button = tk.Button(self.buttonframe, text="Root", command=lambda: wtf.on_root(container7), width=8, height=4)
         self.root_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
-        self.shift_f2_button = tk.Button(self.buttonframe, text="Shift+F2", command=on_shift_f2, width=15, height=4)
+        self.shift_f2_button = tk.Button(self.buttonframe, text="Shift+F2", command=wtf.on_shift_f2, width=15, height=4)
         self.shift_f2_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
-        self.shift_f3_button = tk.Button(self.buttonframe, text="Shift+F3", command=on_shift_f3, width=15, height=4)
+        self.shift_f3_button = tk.Button(self.buttonframe, text="Shift+F3", command=wtf.on_shift_f3, width=15, height=4)
         self.shift_f3_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
-
-        # self.layout = tk.Label(self.buttonframe)
-        # self.layout.pack(padx=15 ,anchor=tk.NW, side=tk.LEFT)
 
         self.smallframe = Frame(self.buttonframe)
         self.smallframe.pack(anchor=tk.NW, side=tk.LEFT)
@@ -61,7 +55,7 @@ class Window_Title:
 
         
 
-        self.open_excel_button = tk.Button(self.buttonframe, text="Open Excel", command=on_open_excel, width=15, height=4)
+        self.open_excel_button = tk.Button(self.buttonframe, text="Open Excel", command=wtf.n_open_excel, width=15, height=4)
         self.open_excel_button.pack(padx=5, pady=0, anchor=tk.NW, side=tk.LEFT)
 
         self.exit_button = tk.Button(self.buttonframe, text="Exit", command=window.quit, width=5, height=3, bg='red', fg='white',font=("Helvetica", 8, "bold"))

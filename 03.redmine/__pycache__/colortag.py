@@ -29,7 +29,7 @@ def print_color():
     return color
 
 # 테스트용 바이트 문자열
-test_string = "b'[\x1b[0;34m  OK  \x1b[0m] Reached target \x1b[0;1;39mLocal File Systems\x1b[0m.'"
+test_string = "b'[\x1b[0;31m  OK  \x1b[0m] Reached target \x1b[0;1;39mLocal File Systems\x1b[0m.'"
 
 # 함수를 호출하여 색상을 얻습니다.
 color = get_color_from_escape_sequence(test_string)
