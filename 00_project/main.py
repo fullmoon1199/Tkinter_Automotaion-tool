@@ -646,7 +646,7 @@ if __name__ == "__main__":
     window = tk.Tk()
     window.title("V920 SADK Verification Program")
     # window size
-    window.geometry("1650x900+30+30")
+    window.geometry("1730x900+30+30")
 
     # Create the instances of the class
     container0 = HomeTitle(window)
